@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#000000</color>
+    <color name="colorMainPrimary">#18272f</color>
+    <color name="colorSecondPrimary">#9c27b0</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#59db9c</color>
+
+    <color name="menuLineColor">#66ffffff</color>
+    <color name="bottomMenuColor">#002236</color>
+    <color name="buttonColor">#80647680</color>
+    <color name="searchColor">#647680</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="newLeadsColor">#eeeeee</color>
+    <color name="searchButtonColor">#cccccc</color>
+    <color name="whiteSemiTransparent">#80000000</color>
+    <color name="black">#FF000000</color>
+    <color name="grey">#FF939393</color>
+    <color name="greyText">#FFD8D8D8</color>
+    <color name="whiteTransparent">#40FFFFFF</color>
+    <color name="facebookColor">#FF3C5A9A</color>
+    <color name="facebookColorClick">#FF3C1AFF</color>
+    <color name="twitterColor">#FF2DAAE1</color>
+    <color name="loginColor">#FF75F3B6</color>
+    <color name="registerHost">#c9c9c9</color>
+    <color name="materialYellow">#fcff00</color>
+    <color name="materialYellowAdditional">#ffcc00</color>
+
+    <color name="mainBackground">#f9f9f9</color>
+    <color name="eventColor">#8059DB9C</color>
+
+    <!-- swipe to refresh color -->
+    <color name="materialRed">#ffe74c3c</color>
+    <color name="materialBlue">#ff3498db</color>
+    <color name="materialGreen">#ff2ecc71</color>
+    <color name="materialOrange">#fff39c12</color>
+
+    <color name="GradientStrokeBorder">
+        <item name="android:startColor">#002236</item>
+        <item name="android:endColor">#00FFFF</item>
+        <item name="android:angle">145</item>
+    </color>
+</resources>

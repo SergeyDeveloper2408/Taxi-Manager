@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/loginRelativeLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/taxi_bg">
+
+    <!--<TextView-->
+        <!--android:id="@+id/textView"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="@dimen/marginTopSmall"-->
+        <!--android:textColor="@color/materialYellowAdditional"-->
+        <!--android:textSize="@dimen/textSizeMiddleLarge"-->
+        <!--android:text="@string/app_name"-->
+        <!--android:fontFamily="sans-serif"-->
+        <!--android:letterSpacing="0.14"-->
+        <!--android:textAllCaps="true"/>-->
+
+    <LinearLayout
+        android:id="@+id/buttonLoginLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/spinner_background_width"
+        android:orientation="vertical">
+        <Button
+            android:id="@+id/loginButton"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/loginButtonHeight"
+
+            android:layout_marginStart="@dimen/marginStart"
+            android:layout_marginEnd="@dimen/marginEnd"
+            android:text="@string/main_screen_login_enter"
+            android:textSize="@dimen/textSize"
+            android:textColor="@color/black"
+            android:fontFamily="sans-serif"
+            android:letterSpacing="0.24"
+            android:textAllCaps="true"
+            android:paddingStart="@dimen/padding"
+            android:paddingEnd="@dimen/padding"
+            android:gravity="center"
+            android:background="@drawable/login_button_background"/>
+        <Button
+            android:id="@+id/registerButton"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/loginButtonHeight"
+            android:layout_marginTop="@dimen/marginTopMiddle"
+            android:layout_marginStart="@dimen/marginStart"
+            android:layout_marginEnd="@dimen/marginEnd"
+            android:text="@string/main_screen_register_enter"
+            android:textSize="@dimen/textSize"
+            android:textColor="@color/black"
+            android:fontFamily="sans-serif"
+            android:letterSpacing="0.24"
+            android:textAllCaps="true"
+            android:paddingStart="@dimen/padding"
+            android:paddingEnd="@dimen/padding"
+            android:gravity="center"
+            android:background="@drawable/login_button_background"/>
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/textViewHelp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/marginBottom"
+        android:fontFamily="sans-serif"
+        android:letterSpacing="0.14"
+        android:text="@string/main_screen_all_right_reserved"
+        android:textColor="@color/materialYellow" />
+
+</RelativeLayout>

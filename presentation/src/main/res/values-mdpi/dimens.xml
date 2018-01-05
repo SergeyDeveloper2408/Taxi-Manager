@@ -1,0 +1,83 @@
+<resources>
+
+    <!-- Text size -->
+    <dimen name="textSize">13sp</dimen>
+    <dimen name="textSizeSmall">11sp</dimen>
+    <dimen name="textSizeNormal">20sp</dimen>
+    <dimen name="textSizeSmallMiddle">10sp</dimen>
+    <dimen name="textSizeMiddleSmall">9sp</dimen>
+    <dimen name="textSizeLarge">35sp</dimen>
+    <dimen name="textSizeMiddleLarge">25sp</dimen>
+
+    <!-- element size -->
+    <dimen name="separateLoginLineWidth">60dp</dimen>
+    <dimen name="separateLoginLineHeight">2dp</dimen>
+    <dimen name="loginButtonHeight">20dp</dimen>
+    <dimen name="previewTransparentElementHeight">50dp</dimen>
+    <dimen name="previewCircleIndicatorRadius">5dp</dimen>
+    <dimen name="deletePhotoSize">18dp</dimen>
+    <dimen name="onlineStatusSize">10dp</dimen>
+    <dimen name="attachPhotoSize">38dp</dimen>
+    <dimen name="anotherButtonHeight">20dp</dimen>
+    <dimen name="starsImageHeight">25dp</dimen>
+    <dimen name="profileHeight">140dp</dimen>
+    <dimen name="eventHeight">170dp</dimen>
+    <dimen name="eventWight">335dp</dimen>
+    <dimen name="popupMenuWidthTwo">355dp</dimen>
+    <dimen name="popupMenuWidthThree">355dp</dimen>
+    <dimen name="attachImageSize">13dp</dimen>
+    <dimen name="profilePhotoSize">90dp</dimen>
+    <dimen name="addPhotoSize">130dp</dimen>
+    <dimen name="addEvent">240dp</dimen>
+    <dimen name="spinner_background_width">250dp</dimen>
+    <dimen name="qrHeight">200dp</dimen>
+    <dimen name="transparentImageHeight">30dp</dimen>
+    <dimen name="headerHeight">48dp</dimen>
+    <dimen name="headerViewHeight">20dp</dimen>
+    <dimen name="headerViewRowGap">17dp</dimen>
+    <dimen name="editTextChatRadius">20dp</dimen>
+    <dimen name="editTextChatHeight">40dp</dimen>
+    <dimen name="photoMediaSize">90dp</dimen>
+    <dimen name="ratingBarMarginStart">130dp</dimen>
+    <dimen name="cancelButtonMarginTop">10dp</dimen>
+    <dimen name="moreMenuWidth">60dp</dimen>
+    <dimen name="popupMenuWidth">260dp</dimen>
+    <dimen name="shadowLayoutHeight">80dp</dimen>
+    <dimen name="shadowLayoutColumnHeight">40dp</dimen>
+    <dimen name="buttonWidth">175dp</dimen>
+    <dimen name="viewWidth">150dp</dimen>
+
+    <!-- main margins -->
+    <dimen name="marginTop">5dp</dimen>
+    <dimen name="marginTopLarge">10dp</dimen>
+    <dimen name="marginTopSmall">5dp</dimen>
+    <dimen name="marginTopVerySmall">1dp</dimen>
+    <dimen name="marginTopMiddleLarge">33dp</dimen>
+    <dimen name="marginTopVeryLarge">18dp</dimen>
+    <dimen name="marginTopLargeLarge">20dp</dimen>
+    <dimen name="marginTopMiddle">3dp</dimen>
+    <dimen name="marginBottom">15dp</dimen>
+    <dimen name="marginBottomLarge">25dp</dimen>
+    <dimen name="marginBottomSmall">5dp</dimen>
+    <dimen name="marginBottomMiddle">10dp</dimen>
+    <dimen name="marginBottomDoneButton">9dp</dimen>
+    <dimen name="marginStart">15dp</dimen>
+    <dimen name="marginStartLarge">25dp</dimen>
+    <dimen name="marginStartVeryLarge">15dp</dimen>
+    <dimen name="marginStartSmall">5dp</dimen>
+    <dimen name="marginStartMiddle">10dp</dimen>
+    <dimen name="marginEnd">15dp</dimen>
+    <dimen name="marginEndLarge">25dp</dimen>
+    <dimen name="marginEndSmall">5dp</dimen>
+    <dimen name="marginEndMiddle">2dp</dimen>
+
+    <!-- main padding -->
+    <dimen name="paddingLarge">20dp</dimen>
+    <dimen name="padding">10dp</dimen>
+    <dimen name="paddingSmall">5dp</dimen>
+    <dimen name="paddingSmallSmall">2dp</dimen>
+
+    <!-- corner radius -->
+
+
+</resources>

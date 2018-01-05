@@ -1,0 +1,94 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/materialYellowAdditional"
+    tools:context="com.sergeydeveloper7.taximanager.view.fragments.RegisterFragment">
+
+    <TextView
+        android:id="@+id/chooseYourRoleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/marginTop"
+        android:textColor="@color/colorMainPrimary"
+        android:fontFamily="sans-serif"
+        android:letterSpacing="0.14"
+        android:textSize="@dimen/textSizeNormal"
+        android:text="@string/register_screen_choose_role" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/chooseYourRoleTextView"
+        android:layout_marginTop="@dimen/marginTop"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorMainPrimary"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/customerIconImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/marginTopLargeLarge"
+                android:src="@drawable/ic_customer_icon" />
+
+            <TextView
+                android:id="@+id/customerSmallDescriptionTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/marginTopLarge"
+                android:textColor="@color/materialYellowAdditional"
+                android:textSize="@dimen/textSizeMiddleLarge"
+                android:layout_below="@+id/customerIconImageView"
+                android:text="@string/register_screen_role_customer" />
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/materialYellowAdditional"
+                android:layout_marginStart="@dimen/marginStart"
+                android:layout_marginEnd="@dimen/marginEnd"
+                android:layout_alignParentBottom="true"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorMainPrimary"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_weight="1">
+            <ImageView
+                android:id="@+id/driverIconImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/marginTopVeryLarge"
+                android:src="@drawable/ic_car_hatchback" />
+
+            <TextView
+                android:id="@+id/driverSmallDescriptionTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/materialYellowAdditional"
+                android:layout_marginTop="@dimen/buttonWidth"
+                android:textSize="@dimen/textSizeMiddleLarge"
+                android:text="@string/register_screen_role_driver" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
