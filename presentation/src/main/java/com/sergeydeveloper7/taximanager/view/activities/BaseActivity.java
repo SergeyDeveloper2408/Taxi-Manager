@@ -11,8 +11,7 @@ import javax.inject.Inject;
 
 public class BaseActivity extends AppCompatActivity {
 
-    @Inject
-    Navigator navigator;
+    @Inject Navigator      navigator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

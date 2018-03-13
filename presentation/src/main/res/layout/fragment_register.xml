@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/marginTop"
+        android:layout_marginTop="@dimen/marginNormal"
         android:textColor="@color/colorMainPrimary"
         android:fontFamily="sans-serif"
         android:letterSpacing="0.14"
@@ -19,16 +19,25 @@
         android:text="@string/register_screen_choose_role" />
 
     <LinearLayout
+        android:id="@+id/containerRoleLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/chooseYourRoleTextView"
-        android:layout_marginTop="@dimen/marginTop"
+        android:layout_marginTop="@dimen/marginNormal"
+        android:background="@color/colorMainPrimary"
         android:orientation="vertical">
 
-        <RelativeLayout
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/registerFieldsRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorMainPrimary"
+            android:visibility="gone"/>
+
+        <RelativeLayout
+            android:id="@+id/customerRoleRelativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/clickable_background"
             android:clickable="true"
             android:focusable="true"
             android:layout_weight="1">
@@ -38,7 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/marginTopLargeLarge"
+                android:layout_marginTop="@dimen/registerScreenMarginTopImage"
                 android:src="@drawable/ic_customer_icon" />
 
             <TextView
@@ -46,35 +55,34 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/marginTopLarge"
+                android:layout_marginTop="@dimen/marginNormal"
                 android:textColor="@color/materialYellowAdditional"
-                android:textSize="@dimen/textSizeMiddleLarge"
+                android:textSize="@dimen/textSizeMiddle"
                 android:layout_below="@+id/customerIconImageView"
                 android:text="@string/register_screen_role_customer" />
-
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/materialYellowAdditional"
-                android:layout_marginStart="@dimen/marginStart"
-                android:layout_marginEnd="@dimen/marginEnd"
                 android:layout_alignParentBottom="true"/>
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/driverRoleRelativeLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorMainPrimary"
+            android:background="@drawable/clickable_background"
             android:clickable="true"
             android:focusable="true"
             android:layout_weight="1">
+
             <ImageView
                 android:id="@+id/driverIconImageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/marginTopVeryLarge"
+                android:layout_marginTop="@dimen/mainScreenEditTextHeight"
                 android:src="@drawable/ic_car_hatchback" />
 
             <TextView
@@ -82,13 +90,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/registerScreenMarginTopText"
                 android:textColor="@color/materialYellowAdditional"
-                android:layout_marginTop="@dimen/buttonWidth"
-                android:textSize="@dimen/textSizeMiddleLarge"
+                android:textSize="@dimen/textSizeMiddle"
                 android:text="@string/register_screen_role_driver" />
 
         </RelativeLayout>
 
     </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/registerProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"/>
 
 </RelativeLayout>

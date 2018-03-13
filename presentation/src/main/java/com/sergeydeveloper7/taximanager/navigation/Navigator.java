@@ -18,8 +18,7 @@ import javax.inject.Singleton;
 public class Navigator {
 
     @Inject
-    public Navigator() {
-    }
+    Navigator() {}
 
     public void startFragmentWithBackStack(Context context, Fragment fragment, String tag){
         final FragmentTransaction fragmentTransaction = ((Activity)context).getFragmentManager().beginTransaction();

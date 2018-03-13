@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+    android:background="@android:color/transparent">
+
+    <View
+        android:id="@+id/separatorStart"
+        android:layout_width="@dimen/mainScreenEditTextHeight"
+        android:layout_height="2dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="@dimen/marginNormal"
+        android:layout_marginTop="@dimen/marginNormal"
+        android:layout_toStartOf="@+id/registerFieldLabel"
+        android:background="@color/materialYellowAdditional" />
+
+    <TextView
+        android:id="@+id/registerFieldLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="@dimen/marginNormal"
+        android:layout_marginTop="@dimen/marginSmall"
+        android:layout_marginBottom="@dimen/marginNormal"
+        android:fontFamily="sans-serif-medium"
+        android:textStyle="normal"
+        android:textColor="@color/materialYellowAdditional"
+        android:letterSpacing="0.14"
+        android:textSize="@dimen/textSizeMiddle"
+        android:text="@string/main_screen_email_address" />
+
+    <View
+        android:id="@+id/separatorEnd"
+        android:layout_width="@dimen/mainScreenEditTextHeight"
+        android:layout_height="2dp"
+        android:layout_toEndOf="@+id/registerFieldLabel"
+        android:layout_marginStart="@dimen/marginNormal"
+        android:layout_marginTop="@dimen/marginNormal"
+        android:layout_marginEnd="@dimen/marginNormal"
+        android:layout_alignParentEnd="true"
+        android:background="@color/materialYellowAdditional" />
+
+</RelativeLayout>

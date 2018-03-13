@@ -5,6 +5,7 @@ import android.content.Context;
 import com.sergeydeveloper7.taximanager.di.modules.ApplicationModule;
 import com.sergeydeveloper7.taximanager.view.activities.BaseActivity;
 import com.sergeydeveloper7.taximanager.view.fragments.MainScreenFragment;
+import com.sergeydeveloper7.taximanager.view.fragments.RegisterFragment;
 
 import javax.inject.Singleton;
 
@@ -19,5 +20,6 @@ import dagger.Component;
 public interface ApplicationComponent {
     void inject(BaseActivity baseActivity);
     void inject(MainScreenFragment mainScreenFragment);
+    void inject(RegisterFragment registerFragment);
     Context context();
 }

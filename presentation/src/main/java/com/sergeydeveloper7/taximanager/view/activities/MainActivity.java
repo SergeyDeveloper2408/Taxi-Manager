@@ -12,15 +12,18 @@ import android.widget.LinearLayout;
 
 import com.sergeydeveloper7.taximanager.R;
 import com.sergeydeveloper7.taximanager.utils.Const;
-import com.sergeydeveloper7.taximanager.view.fragments.RegisterFragment;
+import com.sergeydeveloper7.taximanager.view.fragments.MainScreenFragment;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
-    private Toolbar             toolbar;
-    private AppBarLayout        appBarLayout;
-    private ActionBar           mActionBar;
-    private LinearLayout        container;
+    @BindView(R.id.toolbarMain) Toolbar      toolbar;
+    @BindView(R.id.mainAppBar)  AppBarLayout appBarLayout;
+    @BindView(R.id.container)   LinearLayout container;
+    private ActionBar mActionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,13 +31,11 @@ public class MainActivity extends BaseActivity {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        container = findViewById(R.id.container);
-        toolbar = findViewById(R.id.toolbarMain);
-        appBarLayout = findViewById(R.id.mainAppBar);
+        ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         mActionBar = getSupportActionBar();
         toolbar.setVisibility(View.GONE);
-        this.navigator.startFragmentNoBackStack(this, new RegisterFragment(), Const.MAIN_SCREEN_FRAGMENT_ID);
+        this.navigator.startFragmentNoBackStack(this, new MainScreenFragment(), Const.MAIN_SCREEN_FRAGMENT_ID);
     }
 
     @Override

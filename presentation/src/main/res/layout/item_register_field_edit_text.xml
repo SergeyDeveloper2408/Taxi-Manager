@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent">
+
+    <TextView
+        android:id="@+id/registerFieldLabelTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginNormal"
+        android:layout_below="@+id/emailAddressEditText"
+        android:layout_marginTop="@dimen/marginSmall"
+        android:fontFamily="sans-serif"
+        android:textStyle="normal"
+        android:letterSpacing="0.14"
+        android:textAllCaps="true"
+        android:textColor="@color/materialYellowAdditional"
+        android:textSize="@dimen/textSizeSmaller"
+        android:text="@string/main_screen_email_address" />
+
+    <EditText
+        android:id="@+id/registerFieldEnterInformationEditText"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/mainScreenEditTextHeight"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="@dimen/marginNormal"
+        android:layout_marginStart="@dimen/marginNormal"
+        android:layout_marginTop="@dimen/marginSmall"
+        android:layout_marginBottom="@dimen/marginNormal"
+        android:layout_below="@+id/registerFieldLabelTextView"
+        android:background="@drawable/rounded_background"
+        android:ems="10"
+        android:textColorHint="@color/searchColor"
+        android:hint="@string/email_hint"
+        android:inputType="textEmailAddress"
+        android:paddingEnd="@dimen/paddingNormal"
+        android:paddingStart="@dimen/paddingNormal"
+        android:textColor="@color/materialYellowAdditional"
+        android:fontFamily="sans-serif"
+        android:textStyle="normal"
+        android:letterSpacing="0.11"
+        android:textSize="@dimen/textSizeMiddle" />
+
+</RelativeLayout>

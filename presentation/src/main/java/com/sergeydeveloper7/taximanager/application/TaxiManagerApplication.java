@@ -2,9 +2,11 @@ package com.sergeydeveloper7.taximanager.application;
 
 import android.support.multidex.MultiDexApplication;
 
+import com.sergeydeveloper7.data.Initializer;
 import com.sergeydeveloper7.taximanager.di.components.ApplicationComponent;
 import com.sergeydeveloper7.taximanager.di.components.DaggerApplicationComponent;
 import com.sergeydeveloper7.taximanager.di.modules.ApplicationModule;
+
 
 /**
  * Created by serg on 02.01.18.
@@ -18,6 +20,7 @@ public class TaxiManagerApplication extends MultiDexApplication {
     public void onCreate() {
         super.onCreate();
         this.initializeInjector();
+        Initializer.initializeRealm(this);
     }
 
     private void initializeInjector() {
