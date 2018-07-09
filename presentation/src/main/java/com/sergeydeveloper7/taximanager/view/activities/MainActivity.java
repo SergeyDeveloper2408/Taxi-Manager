@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 
 import com.sergeydeveloper7.taximanager.R;
 import com.sergeydeveloper7.taximanager.utils.Const;
-import com.sergeydeveloper7.taximanager.view.fragments.MainScreenFragment;
+import com.sergeydeveloper7.taximanager.view.fragments.main.MainScreenFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

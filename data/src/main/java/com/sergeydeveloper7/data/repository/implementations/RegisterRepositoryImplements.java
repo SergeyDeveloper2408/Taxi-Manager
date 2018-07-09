@@ -1,9 +1,13 @@
-package com.sergeydeveloper7.data.repository;
+package com.sergeydeveloper7.data.repository.implementations;
 
 import com.sergeydeveloper7.data.db.models.Customer;
 import com.sergeydeveloper7.data.db.models.User;
+import com.sergeydeveloper7.data.errors.EmailExistException;
+import com.sergeydeveloper7.data.errors.PhoneNumberExistException;
 import com.sergeydeveloper7.data.models.CustomerModel;
 import com.sergeydeveloper7.data.models.UserModel;
+import com.sergeydeveloper7.data.repository.interfaces.RegisterRepository;
+import com.sergeydeveloper7.data.validation.RegisterValidation;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -14,12 +18,37 @@ import io.realm.RealmResults;
  * Created by serg on 05.02.18.
  */
 
-public class DbRegisterRepository {
+public class RegisterRepositoryImplements implements RegisterRepository {
 
     private Realm realm;
 
-    public DbRegisterRepository() {
+    public RegisterRepositoryImplements() {
         realm = Realm.getDefaultInstance();
+    }
+
+    public Observable<RegisterValidation> validateRegistration(UserModel userModel) {
+
+        return Observable.create((ObservableEmitter<RegisterValidation> e) -> {
+            RegisterValidation registerValidation = new RegisterValidation();
+            realm.executeTransactionAsync(
+                    realm -> {
+                        RealmResults<User> users = realm.where(User.class).findAll();
+                        for(int i = 0; i < users.size(); i++){
+                            if(users.get(i).getEmail().equalsIgnoreCase(userModel.getEmail())){
+                                registerValidation.setValid(false);
+                                registerValidation.setException(new EmailExistException());
+                            } else if(users.get(i).getPhoneNumber().equalsIgnoreCase(userModel.getPhoneNumber())){
+                                registerValidation.setValid(false);
+                                registerValidation.setException(new PhoneNumberExistException());
+                            }
+                        }
+                    },
+                    () -> {
+                        e.onComplete();
+                        e.onNext(registerValidation);
+                    },
+                    e::onError);
+        });
     }
 
     public Observable<UserModel> registerCustomer(UserModel userModel, CustomerModel customerModel) {

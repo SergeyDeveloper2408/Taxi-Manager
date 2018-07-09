@@ -5,8 +5,8 @@
     <string name="email_hint">email@example.com</string>
 
     <!-- Main Screen Constants -->
-    <string name="main_screen_email_address">email address</string>
-    <string name="main_screen_password">password</string>
+    <string name="main_screen_email_address">Email address</string>
+    <string name="main_screen_password">Password</string>
     <string name="main_screen_login">login</string>
     <string name="main_screen_forgot_password">forget your password?</string>
     <string name="main_screen_login_enter">login</string>
@@ -14,7 +14,8 @@
     <string name="main_screen_all_right_reserved">All Rights Reserved</string>
     <string name="main_screen_help">Help</string>
     <string name="main_screen_register_link">Don\'t a member yet?</string>
-
+    <string name="main_screen_invalid_credentials">Wrong login or password</string>
+    <string name="main_screen_invalid_email">Your email is invalid, please check it!</string>
 
     <!-- Register Screen Constants -->
     <string name="register_screen_choose_role">Step 1: Choose Your Role</string>
@@ -39,9 +40,17 @@
     <string name="register_screen_car_information_number">Number</string>
     <string name="title_activity_customer">CustomerActivity</string>
 
+    <!-- Register Screen Errors -->
+    <string name="register_screen_email_exist_error">Your email already exist, please enter another one</string>
+    <string name="register_screen_email_incorrect">Your email is incorrect, please enter another one</string>
+    <string name="register_screen_email_password_short">Password should be larger than 6 symbols</string>
+    <string name="register_screen_email_username_short">Username should be larger than 6 symbols</string>
+    <string name="register_screen_email_phone_number_short">Phone number should be larger than 6 symbols</string>
+    <string name="register_screen_phone_number_exist_error">Your phone number already exist, please enter another one</string>
+    <string name="register_screen_error">During the registration an error occurred, please try again.</string>
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
     <string name="action_settings">Settings</string>
 
     <!-- Customer Screen Constants -->

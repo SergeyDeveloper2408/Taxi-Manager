@@ -19,8 +19,8 @@ public class Const {
     public static final String REGISTER_FIELD_PASSWORD = "RegisterFieldPassword";
     public static final String REGISTER_FIELD_USERNAME = "RegisterFieldUsername";
     public static final String REGISTER_FIELD_PHONENUMBER = "RegisterFieldPhonenumber";
-    public static final String REGISTER_BUTTON_CUSTOMER = "RegisterButtonCustomer";
-    public static final String REGISTER_BUTTON_DRIVER = "RegisterButtonDriver";
+    public static final String REGISTER_BUTTON = "RegisterButton";
+    public static final String REGISTER_BUTTON_NEXT_STEP = "RegisterButtonNextStep";
     public static final String REGISTER_LABEL_PERSONAL = "RegisterPersonal";
     public static final String REGISTER_LABEL_CAR = "RegisterCar";
     public static final String REGISTER_FIELD_CAR_COLOR = "RegisterFieldCarColor";

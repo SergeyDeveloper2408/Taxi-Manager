@@ -1,4 +1,4 @@
-package com.sergeydeveloper7.data;
+package com.sergeydeveloper7.data.db;
 
 import android.content.Context;
 
@@ -9,7 +9,7 @@ import io.realm.RealmConfiguration;
  * Created by serg on 09.01.18.
  */
 
-public class Initializer {
+public class RealmInitializer {
 
     public static void initializeRealm(Context context){
         Realm.init(context);

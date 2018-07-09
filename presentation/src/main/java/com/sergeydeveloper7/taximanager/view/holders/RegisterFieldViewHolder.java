@@ -1,11 +1,11 @@
 package com.sergeydeveloper7.taximanager.view.holders;
 
 import android.content.Context;
+import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import com.sergeydeveloper7.taximanager.R;
 import com.sergeydeveloper7.taximanager.utils.Const;
@@ -19,8 +19,8 @@ import butterknife.ButterKnife;
 
 public class RegisterFieldViewHolder extends RecyclerView.ViewHolder {
 
-    @BindView(R.id.registerFieldLabelTextView) public TextView registerFieldLabelTextView;
-    @BindView(R.id.registerFieldEnterInformationEditText) public EditText registerFieldEnterInformationEditText;
+    @BindView(R.id.registerFieldLabelTextInputLayout)   public TextInputLayout   registerFieldLabelTextInputLayout;
+    @BindView(R.id.registerFieldLabelTextInputEditText) public TextInputEditText registerFieldLabelTextInputEditText;
 
     public RegisterFieldViewHolder(View itemView) {
         super(itemView);
@@ -30,35 +30,28 @@ public class RegisterFieldViewHolder extends RecyclerView.ViewHolder {
     public void bindViews(Context context, String index){
         switch (index){
             case Const.REGISTER_FIELD_EMAIL:
-                registerFieldLabelTextView.setText(context.getString(R.string.main_screen_email_address));
-                registerFieldEnterInformationEditText.setHint(context.getString(R.string.register_screen_email_hint));
+                registerFieldLabelTextInputLayout.setHint(context.getString(R.string.main_screen_email_address));
                 break;
             case Const.REGISTER_FIELD_PASSWORD:
-                registerFieldLabelTextView.setText(context.getString(R.string.register_screen_password));
-                registerFieldEnterInformationEditText.setHint(context.getString(R.string.register_screen_password_hint));
-                registerFieldEnterInformationEditText.setInputType(InputType.TYPE_CLASS_TEXT |
+                registerFieldLabelTextInputLayout.setHint(context.getString(R.string.register_screen_password));
+                registerFieldLabelTextInputEditText.setInputType(InputType.TYPE_CLASS_TEXT |
                         InputType.TYPE_TEXT_VARIATION_PASSWORD);
                 break;
             case Const.REGISTER_FIELD_USERNAME:
-                registerFieldLabelTextView.setText(context.getString(R.string.register_screen_username));
-                registerFieldEnterInformationEditText.setHint(context.getString(R.string.register_screen_username_hint));
+                registerFieldLabelTextInputLayout.setHint(context.getString(R.string.register_screen_username));
                 break;
             case Const.REGISTER_FIELD_PHONENUMBER:
-                registerFieldLabelTextView.setText(context.getString(R.string.register_screen_phonenumber));
-                registerFieldEnterInformationEditText.setHint(context.getString(R.string.register_screen_phone_hint));
-                registerFieldEnterInformationEditText.setInputType(InputType.TYPE_CLASS_PHONE);
+                registerFieldLabelTextInputLayout.setHint(context.getString(R.string.register_screen_phonenumber));
+                registerFieldLabelTextInputEditText.setInputType(InputType.TYPE_CLASS_PHONE);
                 break;
             case Const.REGISTER_FIELD_CAR_COLOR:
-                registerFieldLabelTextView.setText(context.getString(R.string.register_screen_car_information_color));
-                registerFieldEnterInformationEditText.setHint(context.getString(R.string.register_screen_car_color_hint));
+                registerFieldLabelTextInputLayout.setHint(context.getString(R.string.register_screen_car_information_color));
                 break;
             case Const.REGISTER_FIELD_CAR_MODEL:
-                registerFieldLabelTextView.setText(context.getString(R.string.register_screen_car_information_model));
-                registerFieldEnterInformationEditText.setHint(context.getString(R.string.register_screen_car_model_hint));
+                registerFieldLabelTextInputLayout.setHint(context.getString(R.string.register_screen_car_information_model));
                 break;
             case Const.REGISTER_FIELD_CAR_NUMBER:
-                registerFieldLabelTextView.setText(context.getString(R.string.register_screen_car_information_number));
-                registerFieldEnterInformationEditText.setHint(context.getString(R.string.register_screen_car_number_hint));
+                registerFieldLabelTextInputLayout.setHint(context.getString(R.string.register_screen_car_information_number));
                 break;
         }
     }

@@ -5,9 +5,12 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import com.google.gson.Gson;
+import com.sergeydeveloper7.data.errors.EmailExistException;
+import com.sergeydeveloper7.data.errors.PhoneNumberExistException;
 import com.sergeydeveloper7.data.models.CustomerModel;
 import com.sergeydeveloper7.data.models.UserModel;
-import com.sergeydeveloper7.data.repository.DbRegisterRepository;
+import com.sergeydeveloper7.data.repository.implementations.RegisterRepositoryImplements;
+import com.sergeydeveloper7.data.validation.RegisterValidation;
 import com.sergeydeveloper7.taximanager.utils.Const;
 import com.sergeydeveloper7.taximanager.view.basic.RegisterView;
 
@@ -23,18 +26,30 @@ public class RegisterPresenter implements BasePresenter {
 
     private Context context;
     private RegisterView view;
-    private DbRegisterRepository dbRepository;
+    private RegisterRepositoryImplements dbRepository;
     private boolean isViewDestroyed = false;
 
     public RegisterPresenter(RegisterView view, Context context) {
         this.view = view;
         this.context = context;
-        dbRepository = new DbRegisterRepository();
+        dbRepository = new RegisterRepositoryImplements();
     }
 
     public void registerCustomer(UserModel userModel, CustomerModel customerModel){
         view.showRegistrationProcessStart();
-        dbRepository.registerCustomer(userModel, customerModel)
+        dbRepository.validateRegistration(userModel)
+                .takeUntil((Predicate<RegisterValidation>) customer1 -> isViewDestroyed)
+                .flatMap(registerValidation -> {
+                    if(!registerValidation.isValid()){
+                        if(registerValidation.getException() instanceof EmailExistException){
+                            view.showEmailExistError();
+                        } else if(registerValidation.getException() instanceof PhoneNumberExistException){
+                            view.showPhoneNumberExistError();
+                        }
+                    } else userModel.setValid(true);
+                    return dbRepository.registerCustomer(userModel, customerModel);
+                })
+                .filter(UserModel::isValid)
                 .takeUntil((Predicate<UserModel>) customer1 -> isViewDestroyed)
                 .subscribe(new DisposableObserver<UserModel>() {
                                @Override
@@ -53,7 +68,7 @@ public class RegisterPresenter implements BasePresenter {
 
                                @Override
                                public void onComplete() {
-                                   view.showRegistrationProcessEnd();
+                                   view.showRegistrationProcessEnd(userModel);
                                }
                            });
 

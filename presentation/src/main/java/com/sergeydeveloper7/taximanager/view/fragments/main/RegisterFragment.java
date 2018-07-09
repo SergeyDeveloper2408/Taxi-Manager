@@ -1,11 +1,10 @@
-package com.sergeydeveloper7.taximanager.view.fragments;
+package com.sergeydeveloper7.taximanager.view.fragments.main;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SimpleItemAnimator;
@@ -17,6 +16,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.sergeydeveloper7.data.enums.ValidationError;
 import com.sergeydeveloper7.data.models.CarModel;
 import com.sergeydeveloper7.data.models.CustomerModel;
 import com.sergeydeveloper7.data.models.DriverModel;
@@ -50,34 +50,28 @@ public class RegisterFragment extends Fragment implements RegisterView {
     private CarModel            carModel;
     private RegisterPresenter   presenter;
 
-    private ArrayList<String>   customerIndex = new ArrayList<>(Arrays.asList(
-            Const.REGISTER_LABEL_PERSONAL,
+    private ArrayList<String>   index = new ArrayList<>(Arrays.asList(
             Const.REGISTER_FIELD_EMAIL,
             Const.REGISTER_FIELD_PASSWORD,
             Const.REGISTER_FIELD_USERNAME,
             Const.REGISTER_FIELD_PHONENUMBER,
-            Const.REGISTER_BUTTON_CUSTOMER));
+            Const.REGISTER_BUTTON));
 
     private ArrayList<String>   driverIndex = new ArrayList<>(Arrays.asList(
-            Const.REGISTER_LABEL_PERSONAL,
-            Const.REGISTER_FIELD_EMAIL,
-            Const.REGISTER_FIELD_PASSWORD,
-            Const.REGISTER_FIELD_USERNAME,
-            Const.REGISTER_FIELD_PHONENUMBER,
-            Const.REGISTER_LABEL_CAR,
             Const.REGISTER_FIELD_CAR_COLOR,
             Const.REGISTER_FIELD_CAR_MODEL,
             Const.REGISTER_FIELD_CAR_NUMBER,
-            Const.REGISTER_BUTTON_DRIVER));
+            Const.REGISTER_BUTTON_NEXT_STEP));
 
-    @BindView(R.id.chooseYourRoleTextView)     TextView chooseYourRoleTextView;
-    @BindView(R.id.containerRoleLayout)        LinearLayout containerRoleLayout;
+    @BindView(R.id.chooseYourRoleTextView)     TextView       chooseYourRoleTextView;
+    @BindView(R.id.containerRoleLayout)        LinearLayout   containerRoleLayout;
     @BindView(R.id.customerRoleRelativeLayout) RelativeLayout customerRoleRelativeLayout;
     @BindView(R.id.driverRoleRelativeLayout)   RelativeLayout driverRoleRelativeLayout;
-    @BindView(R.id.registerFieldsRecyclerView) RecyclerView registerFieldsRecyclerView;
-    @BindView(R.id.registerProgressBar)        ProgressBar registerProgressBar;
+    @BindView(R.id.registerFieldsRecyclerView) RecyclerView   registerFieldsRecyclerView;
+    @BindView(R.id.registerProgressBar)        ProgressBar    registerProgressBar;
+    @BindView(R.id.registerRelativeLayout)     RelativeLayout registerRelativeLayout;
 
-    @Inject Navigator         navigator;
+    @Inject Navigator navigator;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -92,10 +86,11 @@ public class RegisterFragment extends Fragment implements RegisterView {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_register, container, false);
         ButterKnife.bind(this, rootView);
+        setLeadsRecyclerView();
         return rootView;
     }
 
-    private void setLeadsRecyclerView(ArrayList<String> index){
+    private void setLeadsRecyclerView(){
         LinearLayoutManager layoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         registerFieldsRecyclerView.setHasFixedSize(false);
         registerFieldsRecyclerView.setLayoutManager(layoutManager);
@@ -121,23 +116,23 @@ public class RegisterFragment extends Fragment implements RegisterView {
     }
 
     public void registerDriver(){
-        //presenter.registerDriver(driver, car);
+        //presenter.registerDriver(userModel, driverModel, carModel);
     }
 
-    @OnClick(R.id.customerRoleRelativeLayout) void setRoleCustomer() {
+    @OnClick(R.id.customerRoleRelativeLayout)
+    void setRoleCustomer() {
         userModel = new UserModel();
         userModel.setRole(context.getString(R.string.register_screen_role_customer));
         customerModel = new CustomerModel();
-        setLeadsRecyclerView(customerIndex);
         setViewsVisibility();
     }
 
-    @OnClick(R.id.driverRoleRelativeLayout) void setRoleDriver() {
+    @OnClick(R.id.driverRoleRelativeLayout)
+    void setRoleDriver() {
         userModel = new UserModel();
         userModel.setRole(context.getString(R.string.register_screen_role_driver));
         driverModel = new DriverModel();
         carModel = new CarModel();
-        setLeadsRecyclerView(driverIndex);
         setViewsVisibility();
     }
 
@@ -148,19 +143,33 @@ public class RegisterFragment extends Fragment implements RegisterView {
     }
 
     @Override
-    public void showRegistrationProcessEnd() {
-        startCustomerScreen();
+    public void showRegistrationProcessEnd(UserModel userModel) {
+        if(userModel.getRole().equals(context.getString(R.string.register_screen_role_customer))){
+            this.navigator.startActivity(context, CustomerActivity.class);
+        }
     }
 
     @Override
     public void showRegistrationProcessError(Throwable throwable) {
-
+        containerRoleLayout.setVisibility(View.VISIBLE);
+        registerProgressBar.setVisibility(View.GONE);
+        Snackbar.make(registerRelativeLayout, context.getString(R.string.register_screen_error), Snackbar.LENGTH_LONG)
+                .show();
+        throwable.printStackTrace();
     }
 
-    private void startCustomerScreen(){
-        Intent intent = new Intent(context, CustomerActivity.class);
-        startActivity(intent);
-        ((Activity)context).finish();
+    @Override
+    public void showEmailExistError() {
+        containerRoleLayout.setVisibility(View.VISIBLE);
+        registerProgressBar.setVisibility(View.GONE);
+        adapter.getErrorMap().get(Const.REGISTER_FIELD_EMAIL).showError(ValidationError.EMAIL_EXIST);
+    }
+
+    @Override
+    public void showPhoneNumberExistError() {
+        containerRoleLayout.setVisibility(View.VISIBLE);
+        registerProgressBar.setVisibility(View.GONE);
+        adapter.getErrorMap().get(Const.REGISTER_FIELD_PHONENUMBER).showError(ValidationError.PHONENUMBER_EXIST);
     }
 
     public CarModel getCarModel() {

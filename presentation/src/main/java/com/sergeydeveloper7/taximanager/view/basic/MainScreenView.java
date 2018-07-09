@@ -6,6 +6,7 @@ package com.sergeydeveloper7.taximanager.view.basic;
 
 public interface MainScreenView {
     void showLogInProcessStart();
-    void showLogInProcessEnd();
+    void showLogInProcessEnd(String role);
+    void showLogInProcessUserNotFound();
     void showLogInProcessError(Throwable throwable);
 }

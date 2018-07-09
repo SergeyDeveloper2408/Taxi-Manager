@@ -15,15 +15,15 @@ public class UserModel {
 
     @SerializedName("email")
     @Expose
-    private String email;
+    private String email = "";
 
     @SerializedName("pass")
     @Expose
-    private String pass;
+    private String pass = "";
 
     @SerializedName("userName")
     @Expose
-    private String userName;
+    private String userName = "";
 
     @SerializedName("rating")
     @Expose
@@ -31,11 +31,13 @@ public class UserModel {
 
     @SerializedName("phoneNumber")
     @Expose
-    private String phoneNumber;
+    private String phoneNumber = "";
 
     @SerializedName("role")
     @Expose
-    private String role;
+    private String role = "";
+
+    transient private boolean isValid = false;
 
     public long getId() {
         return id;
@@ -91,5 +93,13 @@ public class UserModel {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public boolean isValid() {
+        return isValid;
+    }
+
+    public void setValid(boolean valid) {
+        isValid = valid;
     }
 }

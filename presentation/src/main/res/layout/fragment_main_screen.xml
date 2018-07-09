@@ -6,113 +6,103 @@
     android:layout_height="match_parent"
     android:background="@drawable/taxi_bg">
 
-    <TextView
-        android:id="@+id/emailAddressTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/marginNormal"
-        android:layout_marginTop="@dimen/mainScreenMarginTopLarge"
-        android:fontFamily="sans-serif"
-        android:textStyle="normal"
-        android:letterSpacing="0.14"
-        android:textAllCaps="true"
-        android:textColor="@color/materialYellowAdditional"
-        android:textSize="@dimen/textSizeSmaller"
-        android:text="@string/main_screen_email_address" />
-
-    <EditText
-        android:id="@+id/emailAddressEditText"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/mainScreenEditTextHeight"
-        android:layout_marginEnd="@dimen/marginNormal"
-        android:layout_marginTop="@dimen/marginSmall"
-        android:layout_marginStart="@dimen/marginNormal"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/emailAddressTextView"
-        android:paddingStart="@dimen/paddingNormal"
-        android:paddingEnd="@dimen/paddingNormal"
-        android:textSize="@dimen/textSizeMiddle"
-        android:ems="10"
-        android:textColor="@color/white"
-        android:inputType="textEmailAddress"
-        android:background="@drawable/rounded_background"/>
-
-    <TextView
-        android:id="@+id/passwordTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/marginNormal"
-        android:layout_below="@+id/emailAddressEditText"
-        android:layout_marginTop="@dimen/marginNormal"
-        android:fontFamily="sans-serif"
-        android:textStyle="normal"
-        android:letterSpacing="0.14"
-        android:textAllCaps="true"
-        android:textColor="@color/materialYellowAdditional"
-        android:textSize="@dimen/textSizeSmaller"
-        android:text="@string/main_screen_password" />
-
-    <EditText
-        android:id="@+id/passwordEditText"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/mainScreenEditTextHeight"
-        android:layout_marginEnd="@dimen/marginNormal"
-        android:layout_marginTop="@dimen/marginSmall"
-        android:layout_marginStart="@dimen/marginNormal"
-        android:paddingStart="@dimen/paddingNormal"
-        android:paddingEnd="@dimen/paddingNormal"
-        android:layout_centerHorizontal="true"
-        android:textSize="@dimen/textSizeMiddle"
-        android:ems="10"
-        android:textColor="@color/white"
-        android:layout_below="@+id/passwordTextView"
-        android:inputType="textPassword"
-        android:background="@drawable/rounded_background"/>
-
-    <Button
-        android:id="@+id/loginButton"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/mainScreenEditTextHeight"
-        android:layout_marginEnd="@dimen/marginNormal"
-        android:layout_marginTop="@dimen/marginNormal"
-        android:layout_marginStart="@dimen/marginNormal"
-        android:layout_below="@+id/passwordEditText"
-        android:text="@string/main_screen_login_enter"
-        android:textSize="@dimen/textSizeMiddle"
-        android:textColor="@color/black"
-        android:fontFamily="sans-serif"
-        android:letterSpacing="0.24"
-        android:textAllCaps="true"
-        android:gravity="center"
-        android:background="@drawable/login_button_background"/>
-
     <RelativeLayout
-        android:id="@+id/registerLinkRelativeLayout"
-        android:layout_width="wrap_content"
+        android:id="@+id/contentRelativeLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/loginButton"
-        android:layout_marginTop="@dimen/marginNormal"
-        android:layout_centerHorizontal="true">
+        android:layout_marginTop="@dimen/mainScreenMarginTopLarge">
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/loginEmailTextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/marginNormal"
+            android:layout_marginStart="@dimen/marginNormal"
+            android:theme="@style/TextLabel">
 
-        <TextView
-            android:id="@+id/registerLinkTextView"
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/loginEmailTextInputEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/main_screen_email_address"
+                android:textColor="@color/white"
+                />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/loginPasswordTextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/marginNormal"
+            android:layout_marginStart="@dimen/marginNormal"
+            android:layout_below="@+id/loginEmailTextInputLayout"
+            android:theme="@style/TextLabel">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/loginPasswordTextInputEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/main_screen_password"
+                android:textColor="@color/white"
+                />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/loginButton"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/mainScreenEditTextHeight"
+            android:layout_marginEnd="@dimen/marginNormal"
+            android:layout_marginTop="@dimen/marginNormal"
+            android:layout_marginStart="@dimen/marginNormal"
+            android:layout_below="@+id/loginPasswordTextInputLayout"
+            android:text="@string/main_screen_login_enter"
+            android:textSize="@dimen/textSizeMiddle"
+            android:textColor="@color/black"
+            android:fontFamily="sans-serif"
+            android:letterSpacing="0.24"
+            android:textAllCaps="true"
+            android:gravity="center"
+            android:background="@drawable/login_button_background"
+            />
+
+        <RelativeLayout
+            android:id="@+id/registerLinkRelativeLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:fontFamily="sans-serif"
-            android:letterSpacing="0.14"
-            android:text="@string/main_screen_register_link"
-            android:textColor="@color/materialYellow" />
+            android:layout_below="@+id/loginButton"
+            android:layout_marginTop="@dimen/marginNormal"
+            android:layout_centerHorizontal="true">
 
-        <View
-            android:id="@+id/separatorLinkView"
-            android:layout_width="@dimen/mainScreenLineViewWidth"
-            android:layout_height="2dp"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/registerLinkTextView"
-            android:layout_marginTop="@dimen/marginSmall"
-            android:background="@color/materialYellowAdditional" />
+            <TextView
+                android:id="@+id/registerLinkTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="sans-serif"
+                android:letterSpacing="0.14"
+                android:text="@string/main_screen_register_link"
+                android:textColor="@color/materialYellow"
+                />
+
+            <View
+                android:id="@+id/separatorLinkView"
+                android:layout_width="@dimen/mainScreenLineViewWidth"
+                android:layout_height="2dp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/registerLinkTextView"
+                android:layout_marginTop="@dimen/marginSmall"
+                android:background="@color/materialYellowAdditional"
+                />
+        </RelativeLayout>
     </RelativeLayout>
+
+    <ProgressBar
+        android:id="@+id/loginProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"/>
 
     <TextView
         android:id="@+id/textViewHelp"
@@ -124,6 +114,7 @@
         android:fontFamily="sans-serif"
         android:letterSpacing="0.14"
         android:text="@string/main_screen_all_right_reserved"
-        android:textColor="@color/materialYellow" />
+        android:textColor="@color/materialYellow"
+        />
 
 </RelativeLayout>
