@@ -9,7 +9,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,11 +18,12 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.sergeydeveloper7.data.models.UserModel;
 import com.sergeydeveloper7.taximanager.R;
+import com.sergeydeveloper7.taximanager.utils.Const;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class CustomerActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class CustomerActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private TextView          navHeaderMainTitleTextView;
     private TextView          navHeaderSecondaryTitleTextView;
@@ -39,22 +39,33 @@ public class CustomerActivity extends AppCompatActivity implements NavigationVie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer);
+        initViews();
+    }
+
+    private void initViews(){
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
-        userModel = new Gson().fromJson(sharedPreferences.getString("user", null), UserModel.class);
+
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        userModel = new Gson().fromJson(sharedPreferences.getString("user", null),
+                UserModel.class);
+
         fab.setOnClickListener((View view) -> {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
         });
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-        navHeaderMainTitleTextView = navigationView.getHeaderView(0).findViewById(R.id.navHeaderMainTitleTextView);
-        navHeaderSecondaryTitleTextView = navigationView.getHeaderView(0).findViewById(R.id.navHeaderSecondaryTitleTextView);
+        navHeaderMainTitleTextView = navigationView.getHeaderView(0)
+                .findViewById(R.id.navHeaderMainTitleTextView);
+        navHeaderSecondaryTitleTextView = navigationView.getHeaderView(0)
+                .findViewById(R.id.navHeaderSecondaryTitleTextView);
 
         navHeaderMainTitleTextView.setText(userModel.getUserName());
         navHeaderSecondaryTitleTextView.setText(userModel.getEmail());
@@ -100,9 +111,20 @@ public class CustomerActivity extends AppCompatActivity implements NavigationVie
 
         } else if (id == R.id.nav_manage) {
 
+        } else if (id == R.id.nav_logout) {
+            logout();
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void logout(){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.putBoolean(Const.SHARED_PREFERENCE_IS_USER_LOGIN, false);
+        editor.apply();
+        this.navigator.startActivity(this, MainActivity.class);
+        finish();
     }
 }

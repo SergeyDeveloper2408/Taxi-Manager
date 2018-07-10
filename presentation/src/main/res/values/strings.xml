@@ -58,5 +58,7 @@
     <string name="customers_screen_no_bids">No Bids</string>
     <string name="customers_screen_active_bids">Active Bids</string>
     <string name="customers_screen_completed_bids">Completed Bids</string>
+    <string name="customers_screen_navigation_menu_logout">Log Out</string>
+
 
 </resources>

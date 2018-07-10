@@ -8,6 +8,10 @@ import com.sergeydeveloper7.data.models.CustomerModel;
 import com.sergeydeveloper7.data.models.UserModel;
 import com.sergeydeveloper7.data.repository.interfaces.RegisterRepository;
 import com.sergeydeveloper7.data.validation.RegisterValidation;
+import com.sergeydeveloper7.domain.Util;
+
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -44,7 +48,6 @@ public class RegisterRepositoryImplements implements RegisterRepository {
                         }
                     },
                     () -> {
-                        e.onComplete();
                         e.onNext(registerValidation);
                     },
                     e::onError);
@@ -65,7 +68,15 @@ public class RegisterRepositoryImplements implements RegisterRepository {
                             }
                             User user = realm.createObject(User.class, userID);
                             user.setEmail(userModel.getEmail());
-                            user.setPass(userModel.getPass());
+                            try {
+                                user.setPass(Util.SHA1(userModel.getPass()));
+                            } catch (NoSuchAlgorithmException e1) {
+                                user.setPass(userModel.getPass());
+                                e1.printStackTrace();
+                            } catch (UnsupportedEncodingException e1) {
+                                user.setPass(userModel.getPass());
+                                e1.printStackTrace();
+                            }
                             user.setUserName(userModel.getUserName());
                             user.setRole(userModel.getRole());
                             user.setRating(0);
@@ -82,8 +93,8 @@ public class RegisterRepositoryImplements implements RegisterRepository {
                             customer.setUserName(customerModel.getUserName());
                         },
                         () -> {
-                            e.onComplete();
                             e.onNext(userModel);
+                            e.onComplete();
 
                             RealmResults<User> users = realm.where(User.class).findAll();
                             System.out.println("========= Table Users =========");

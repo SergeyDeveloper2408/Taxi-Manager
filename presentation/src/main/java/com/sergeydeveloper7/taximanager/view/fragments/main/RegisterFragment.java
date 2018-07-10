@@ -172,6 +172,7 @@ public class RegisterFragment extends Fragment implements RegisterView {
         adapter.getErrorMap().get(Const.REGISTER_FIELD_PHONENUMBER).showError(ValidationError.PHONENUMBER_EXIST);
     }
 
+
     public CarModel getCarModel() {
         return carModel;
     }

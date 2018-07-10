@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.sergeydeveloper7.data.enums.ValidationError;
-import com.sergeydeveloper7.domain.Util;
 import com.sergeydeveloper7.taximanager.R;
 import com.sergeydeveloper7.taximanager.interfaces.ShowRegistrationError;
 import com.sergeydeveloper7.taximanager.utils.Const;
@@ -19,8 +18,6 @@ import com.sergeydeveloper7.taximanager.view.holders.RegisterButtonViewHolder;
 import com.sergeydeveloper7.taximanager.view.holders.RegisterFieldViewHolder;
 import com.sergeydeveloper7.taximanager.view.holders.RegisterLabelViewHolder;
 
-import java.io.UnsupportedEncodingException;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -82,13 +79,7 @@ public class RegisterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                             break;
                         case Const.REGISTER_FIELD_PASSWORD:
                             if(!s.toString().isEmpty()){
-                                try {
-                                    fragment.getUserModel().setPass(Util.SHA1(s.toString()));
-                                } catch (NoSuchAlgorithmException e) {
-                                    e.printStackTrace();
-                                } catch (UnsupportedEncodingException e) {
-                                    e.printStackTrace();
-                                }
+                                fragment.getUserModel().setPass(s.toString());
                             }
                             break;
                         case Const.REGISTER_FIELD_USERNAME:
@@ -139,6 +130,8 @@ public class RegisterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
     }
 
+
+
     private boolean checkPersonalFields(){
         boolean isValidFields = false;
         if(fragment.getUserModel().getEmail().isEmpty()){
@@ -179,7 +172,7 @@ public class RegisterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             } else if(validationError.equals(ValidationError.EMAIL_EXIST)){
                 viewHolder.registerFieldLabelTextInputLayout.setError(context.getString(R.string.register_screen_email_exist_error));
             } else if(validationError.equals(ValidationError.EMAIL_INCORRECT)){
-                viewHolder.registerFieldLabelTextInputLayout.setError(context.getString(R.string.register_screen_email_incorrect));
+                viewHolder.registerFieldLabelTextInputLayout.setError(context.getString(R.string.main_screen_invalid_email));
             } else if(validationError.equals(ValidationError.PASSWORD_EMPTY)){
                 viewHolder.registerFieldLabelTextInputLayout.setError(context.getString(R.string.register_screen_password_hint));
             } else if(validationError.equals(ValidationError.PASSWORD_SHORT)){

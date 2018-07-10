@@ -14,6 +14,7 @@ import com.sergeydeveloper7.data.validation.RegisterValidation;
 import com.sergeydeveloper7.taximanager.utils.Const;
 import com.sergeydeveloper7.taximanager.view.basic.RegisterView;
 
+import io.reactivex.Observable;
 import io.reactivex.functions.Predicate;
 import io.reactivex.observers.DisposableObserver;
 
@@ -46,10 +47,16 @@ public class RegisterPresenter implements BasePresenter {
                         } else if(registerValidation.getException() instanceof PhoneNumberExistException){
                             view.showPhoneNumberExistError();
                         }
-                    } else userModel.setValid(true);
-                    return dbRepository.registerCustomer(userModel, customerModel);
+                        return Observable.just(userModel);
+                    } else {
+                        userModel.setValid(true);
+                        return dbRepository.registerCustomer(userModel, customerModel);
+                    }
                 })
-                .filter(UserModel::isValid)
+                .filter(userModel1 -> {
+                    System.out.println(String.valueOf(userModel1.isValid()));
+                    return userModel1.isValid();
+                })
                 .takeUntil((Predicate<UserModel>) customer1 -> isViewDestroyed)
                 .subscribe(new DisposableObserver<UserModel>() {
                                @Override

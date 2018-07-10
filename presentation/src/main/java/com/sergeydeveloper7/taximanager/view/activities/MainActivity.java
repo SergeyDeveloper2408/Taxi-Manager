@@ -1,6 +1,8 @@
 package com.sergeydeveloper7.taximanager.view.activities;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatDelegate;
@@ -10,6 +12,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.google.gson.Gson;
+import com.sergeydeveloper7.data.models.UserModel;
 import com.sergeydeveloper7.taximanager.R;
 import com.sergeydeveloper7.taximanager.utils.Const;
 import com.sergeydeveloper7.taximanager.view.fragments.main.MainScreenFragment;
@@ -19,11 +23,15 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity {
 
-    private static final String TAG = MainActivity.class.getSimpleName();
+    private static final String            TAG = MainActivity.class.getSimpleName();
+    private              ActionBar         mActionBar;
+    private              SharedPreferences sharedPreferences;
+    private              UserModel         user;
+    private              boolean           isUserLogin = false;
+
     @BindView(R.id.toolbarMain) Toolbar      toolbar;
     @BindView(R.id.mainAppBar)  AppBarLayout appBarLayout;
     @BindView(R.id.container)   LinearLayout container;
-    private ActionBar mActionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,11 +39,7 @@ public class MainActivity extends BaseActivity {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
-        setSupportActionBar(toolbar);
-        mActionBar = getSupportActionBar();
-        toolbar.setVisibility(View.GONE);
-        this.navigator.startFragmentNoBackStack(this, new MainScreenFragment(), Const.MAIN_SCREEN_FRAGMENT_ID);
+        initViews();
     }
 
     @Override
@@ -61,5 +65,30 @@ public class MainActivity extends BaseActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void initViews(){
+        ButterKnife.bind(this);
+        setSupportActionBar(toolbar);
+        mActionBar = getSupportActionBar();
+        toolbar.setVisibility(View.GONE);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        user = new Gson().fromJson(sharedPreferences.getString("user", null),
+                UserModel.class);
+        isUserLogin = sharedPreferences.getBoolean(Const.SHARED_PREFERENCE_IS_USER_LOGIN, false);
+        checkSignIn();
+    }
+
+    private void checkSignIn() {
+        if(isUserLogin){
+            if(user.getRole().equals(getString(R.string.register_screen_role_customer))){
+                this.navigator.startActivity(this, CustomerActivity.class);
+            } else {
+
+            }
+        } else {
+            this.navigator.startFragmentNoBackStack(this, new MainScreenFragment(),
+                    Const.MAIN_SCREEN_FRAGMENT_ID);
+        }
     }
 }

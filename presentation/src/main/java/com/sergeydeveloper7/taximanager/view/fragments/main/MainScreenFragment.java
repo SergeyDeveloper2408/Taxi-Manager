@@ -60,6 +60,7 @@ public class MainScreenFragment extends Fragment implements View.OnClickListener
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context = getActivity();
+
         ((MainActivity)getActivity()).getApplicationComponent().inject(this);
         presenter = new MainScreenPresenter(this, context);
     }
@@ -126,7 +127,7 @@ public class MainScreenFragment extends Fragment implements View.OnClickListener
     @Override
     public void showLogInProcessEnd(String role) {
         if(role.equals(context.getString(R.string.register_screen_role_customer))){
-            this.navigator.startActivity(context, CustomerActivity.class);
+            navigator.startActivity(context, CustomerActivity.class);
         } else {
 
         }

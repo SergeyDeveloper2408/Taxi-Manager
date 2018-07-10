@@ -35,7 +35,8 @@ public class Navigator {
     }
 
     public void startActivity(Context context, Class clazz){
-        Intent intent = new Intent(context, clazz);
+        Intent intent = new Intent(context, clazz)
+            .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         context.startActivity(intent);
     }
 
