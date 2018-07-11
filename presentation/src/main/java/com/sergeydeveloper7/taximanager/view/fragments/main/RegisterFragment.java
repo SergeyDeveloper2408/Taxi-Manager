@@ -26,6 +26,7 @@ import com.sergeydeveloper7.taximanager.navigation.Navigator;
 import com.sergeydeveloper7.taximanager.presenter.RegisterPresenter;
 import com.sergeydeveloper7.taximanager.utils.Const;
 import com.sergeydeveloper7.taximanager.view.activities.CustomerActivity;
+import com.sergeydeveloper7.taximanager.view.activities.DriverActivity;
 import com.sergeydeveloper7.taximanager.view.activities.MainActivity;
 import com.sergeydeveloper7.taximanager.view.adapters.RegisterAdapter;
 import com.sergeydeveloper7.taximanager.view.basic.RegisterView;
@@ -61,7 +62,7 @@ public class RegisterFragment extends Fragment implements RegisterView {
             Const.REGISTER_FIELD_CAR_COLOR,
             Const.REGISTER_FIELD_CAR_MODEL,
             Const.REGISTER_FIELD_CAR_NUMBER,
-            Const.REGISTER_BUTTON_NEXT_STEP));
+            Const.REGISTER_BUTTON));
 
     @BindView(R.id.chooseYourRoleTextView)     TextView       chooseYourRoleTextView;
     @BindView(R.id.containerRoleLayout)        LinearLayout   containerRoleLayout;
@@ -111,12 +112,24 @@ public class RegisterFragment extends Fragment implements RegisterView {
         registerFieldsRecyclerView.setVisibility(View.VISIBLE);
     }
 
-    public void registerCustomer(){
-        presenter.registerCustomer(userModel, customerModel);
+    private void showLoading(){
+        containerRoleLayout.setVisibility(View.GONE);
+        registerProgressBar.setVisibility(View.VISIBLE);
     }
 
-    public void registerDriver(){
-        //presenter.registerDriver(userModel, driverModel, carModel);
+    private void hideLoading(){
+        containerRoleLayout.setVisibility(View.VISIBLE);
+        registerProgressBar.setVisibility(View.GONE);
+    }
+
+    public void validateUser(){
+        presenter.validateUser(userModel);
+    }
+
+    public void showCarFillingInformation(){
+        index.clear();
+        index.addAll(driverIndex);
+        adapter.notifyDataSetChanged();
     }
 
     @OnClick(R.id.customerRoleRelativeLayout)
@@ -133,26 +146,27 @@ public class RegisterFragment extends Fragment implements RegisterView {
         userModel.setRole(context.getString(R.string.register_screen_role_driver));
         driverModel = new DriverModel();
         carModel = new CarModel();
+        index.set(index.size()-1, Const.REGISTER_BUTTON_NEXT_STEP);
         setViewsVisibility();
     }
 
     @Override
-    public void showRegistrationProcessStart() {
-        containerRoleLayout.setVisibility(View.GONE);
-        registerProgressBar.setVisibility(View.VISIBLE);
+    public void showLoadingProcessStart() {
+        showLoading();
     }
 
     @Override
-    public void showRegistrationProcessEnd(UserModel userModel) {
-        if(userModel.getRole().equals(context.getString(R.string.register_screen_role_customer))){
+    public void showLoadingProcessEnd() {
+        if(userModel.getRole().equals(context.getString(R.string.register_screen_role_customer)))
             this.navigator.startActivity(context, CustomerActivity.class);
-        }
+        else
+            this.navigator.startActivity(context, DriverActivity.class);
+
     }
 
     @Override
     public void showRegistrationProcessError(Throwable throwable) {
-        containerRoleLayout.setVisibility(View.VISIBLE);
-        registerProgressBar.setVisibility(View.GONE);
+        hideLoading();
         Snackbar.make(registerRelativeLayout, context.getString(R.string.register_screen_error), Snackbar.LENGTH_LONG)
                 .show();
         throwable.printStackTrace();
@@ -160,18 +174,25 @@ public class RegisterFragment extends Fragment implements RegisterView {
 
     @Override
     public void showEmailExistError() {
-        containerRoleLayout.setVisibility(View.VISIBLE);
-        registerProgressBar.setVisibility(View.GONE);
+        hideLoading();
         adapter.getErrorMap().get(Const.REGISTER_FIELD_EMAIL).showError(ValidationError.EMAIL_EXIST);
     }
 
     @Override
     public void showPhoneNumberExistError() {
-        containerRoleLayout.setVisibility(View.VISIBLE);
-        registerProgressBar.setVisibility(View.GONE);
+        hideLoading();
         adapter.getErrorMap().get(Const.REGISTER_FIELD_PHONENUMBER).showError(ValidationError.PHONENUMBER_EXIST);
     }
 
+    @Override
+    public void setValidation(boolean validation) {
+        if(validation){
+            if(userModel.getRole().equals(context.getString(R.string.register_screen_role_customer))){
+                presenter.registerCustomer(userModel, customerModel);
+            } else
+                presenter.registerDriver(userModel, driverModel, carModel);
+        }
+    }
 
     public CarModel getCarModel() {
         return carModel;

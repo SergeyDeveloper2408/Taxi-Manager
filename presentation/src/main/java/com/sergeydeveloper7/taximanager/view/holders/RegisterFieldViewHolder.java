@@ -28,6 +28,7 @@ public class RegisterFieldViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void bindViews(Context context, String index){
+        registerFieldLabelTextInputEditText.setText("");
         switch (index){
             case Const.REGISTER_FIELD_EMAIL:
                 registerFieldLabelTextInputLayout.setHint(context.getString(R.string.main_screen_email_address));

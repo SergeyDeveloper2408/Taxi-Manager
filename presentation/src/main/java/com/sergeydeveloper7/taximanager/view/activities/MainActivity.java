@@ -83,6 +83,7 @@ public class MainActivity extends BaseActivity {
         if(isUserLogin){
             if(user.getRole().equals(getString(R.string.register_screen_role_customer))){
                 this.navigator.startActivity(this, CustomerActivity.class);
+                finish();
             } else {
 
             }

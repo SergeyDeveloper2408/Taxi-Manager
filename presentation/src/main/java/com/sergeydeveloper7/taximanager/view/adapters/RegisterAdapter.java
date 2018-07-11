@@ -7,7 +7,6 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.sergeydeveloper7.data.enums.ValidationError;
 import com.sergeydeveloper7.taximanager.R;
@@ -113,14 +112,20 @@ public class RegisterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             });
         } else if(holder instanceof RegisterButtonViewHolder){
             RegisterButtonViewHolder viewHolder = (RegisterButtonViewHolder) holder;
+            viewHolder.bindViews(context, index.get(viewHolder.getAdapterPosition()));
             viewHolder.registerButton.setOnClickListener((View v) -> {
-                if(checkPersonalFields()){
+                if(index.get(viewHolder.getAdapterPosition()).equals(Const.REGISTER_BUTTON_NEXT_STEP)){
+                    if(checkPersonalFields()){
+                        fragment.showCarFillingInformation();
+                    }
+                } else {
                     if(fragment.getUserModel().getRole().equals(context.getString(R.string.register_screen_role_driver))) {
                         if(checkCarFields()){
-                            fragment.registerDriver();
+                            fragment.validateUser();
                         }
                     } else {
-                        fragment.registerCustomer();
+                        if(checkPersonalFields())
+                            fragment.validateUser();
                     }
                 }
             });
@@ -129,8 +134,6 @@ public class RegisterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             viewHolder.bindViews(context, index.get(viewHolder.getAdapterPosition()));
         }
     }
-
-
 
     private boolean checkPersonalFields(){
         boolean isValidFields = false;
@@ -157,11 +160,11 @@ public class RegisterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private boolean checkCarFields(){
         boolean isValidFields = false;
         if(fragment.getCarModel().getColor().isEmpty()){
-            Toast.makeText(context, context.getString(R.string.register_screen_car_color_hint), Toast.LENGTH_SHORT).show();
+            getErrorMap().get(Const.REGISTER_FIELD_EMAIL).showError(ValidationError.CAR_COLOR_EMPTY);
         } else if(fragment.getCarModel().getModel().isEmpty()){
-            Toast.makeText(context, context.getString(R.string.register_screen_car_model_hint), Toast.LENGTH_SHORT).show();
+            getErrorMap().get(Const.REGISTER_FIELD_EMAIL).showError(ValidationError.CAR_MODEL_EMPTY);
         } else if(fragment.getCarModel().getNumber().isEmpty()){
-            Toast.makeText(context, context.getString(R.string.register_screen_car_number_hint), Toast.LENGTH_SHORT).show();
+            getErrorMap().get(Const.REGISTER_FIELD_EMAIL).showError(ValidationError.CAR_NUMBER_EMPTY);
         } else isValidFields = true;
         return isValidFields;
     }
@@ -187,6 +190,12 @@ public class RegisterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 viewHolder.registerFieldLabelTextInputLayout.setError(context.getString(R.string.register_screen_email_phone_number_short));
             } else if(validationError.equals(ValidationError.PHONENUMBER_EXIST)){
                 viewHolder.registerFieldLabelTextInputLayout.setError(context.getString(R.string.register_screen_phone_number_exist_error));
+            } else if(validationError.equals(ValidationError.CAR_COLOR_EMPTY)){
+                viewHolder.registerFieldLabelTextInputLayout.setError(context.getString(R.string.register_screen_car_color_hint));
+            } else if(validationError.equals(ValidationError.CAR_MODEL_EMPTY)){
+                viewHolder.registerFieldLabelTextInputLayout.setError(context.getString(R.string.register_screen_car_model_hint));
+            } else if(validationError.equals(ValidationError.CAR_NUMBER_EMPTY)){
+                viewHolder.registerFieldLabelTextInputLayout.setError(context.getString(R.string.register_screen_car_number_hint));
             }
     }
 

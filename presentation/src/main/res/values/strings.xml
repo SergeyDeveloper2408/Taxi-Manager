@@ -39,6 +39,7 @@
     <string name="register_screen_car_information_model">Model</string>
     <string name="register_screen_car_information_number">Number</string>
     <string name="title_activity_customer">CustomerActivity</string>
+    <string name="register_screen_button_next_step">next step</string>
 
     <!-- Register Screen Errors -->
     <string name="register_screen_email_exist_error">Your email already exist, please enter another one</string>
@@ -60,5 +61,8 @@
     <string name="customers_screen_completed_bids">Completed Bids</string>
     <string name="customers_screen_navigation_menu_logout">Log Out</string>
 
+    <!-- Driver Screen Constants -->
+    <string name="drivers_screen_state_free">free</string>
+    <string name="drivers_screen_state_busy">busy</string>
 
 </resources>

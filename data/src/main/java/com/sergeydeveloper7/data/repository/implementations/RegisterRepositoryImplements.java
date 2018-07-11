@@ -1,10 +1,14 @@
 package com.sergeydeveloper7.data.repository.implementations;
 
+import com.sergeydeveloper7.data.db.models.Car;
 import com.sergeydeveloper7.data.db.models.Customer;
+import com.sergeydeveloper7.data.db.models.Driver;
 import com.sergeydeveloper7.data.db.models.User;
 import com.sergeydeveloper7.data.errors.EmailExistException;
 import com.sergeydeveloper7.data.errors.PhoneNumberExistException;
+import com.sergeydeveloper7.data.models.CarModel;
 import com.sergeydeveloper7.data.models.CustomerModel;
+import com.sergeydeveloper7.data.models.DriverModel;
 import com.sergeydeveloper7.data.models.UserModel;
 import com.sergeydeveloper7.data.repository.interfaces.RegisterRepository;
 import com.sergeydeveloper7.data.validation.RegisterValidation;
@@ -47,9 +51,7 @@ public class RegisterRepositoryImplements implements RegisterRepository {
                             }
                         }
                     },
-                    () -> {
-                        e.onNext(registerValidation);
-                    },
+                    () -> e.onNext(registerValidation),
                     e::onError);
         });
     }
@@ -59,6 +61,7 @@ public class RegisterRepositoryImplements implements RegisterRepository {
         return Observable.create((ObservableEmitter<UserModel> e) -> {
                 realm.executeTransactionAsync(
                         realm -> {
+
                             //Register User
                             long userID;
                             try {
@@ -66,17 +69,20 @@ public class RegisterRepositoryImplements implements RegisterRepository {
                             } catch (Exception ex) {
                                 userID = 0L;
                             }
+
                             User user = realm.createObject(User.class, userID);
                             user.setEmail(userModel.getEmail());
+
                             try {
                                 user.setPass(Util.SHA1(userModel.getPass()));
-                            } catch (NoSuchAlgorithmException e1) {
+                            } catch (NoSuchAlgorithmException e1)  {
                                 user.setPass(userModel.getPass());
                                 e1.printStackTrace();
                             } catch (UnsupportedEncodingException e1) {
                                 user.setPass(userModel.getPass());
                                 e1.printStackTrace();
                             }
+
                             user.setUserName(userModel.getUserName());
                             user.setRole(userModel.getRole());
                             user.setRating(0);
@@ -89,40 +95,82 @@ public class RegisterRepositoryImplements implements RegisterRepository {
                             } catch (Exception ex) {
                                 customerID = 0L;
                             }
+
                             Customer customer = realm.createObject(Customer.class, customerID);
                             customer.setUserName(customerModel.getUserName());
                         },
                         () -> {
                             e.onNext(userModel);
                             e.onComplete();
-
-                            RealmResults<User> users = realm.where(User.class).findAll();
-                            System.out.println("========= Table Users =========");
-                            for(int i = 0; i < users.size(); i++){
-                                System.out.println("==================");
-                                System.out.println("i: " + i);
-                                System.out.println("id: " + users.get(i).getId());
-                                System.out.println("email: " + users.get(i).getEmail());
-                                System.out.println("pass: " + users.get(i).getPass());
-                                System.out.println("userName: " + users.get(i).getUserName());
-                                System.out.println("rating: " + users.get(i).getRating());
-                                System.out.println("phoneNumber: " + users.get(i).getPhoneNumber());
-                                System.out.println("==================");
-                            }
-
-                            RealmResults<Customer> customers = realm.where(Customer.class).findAll();
-                            System.out.println("========= Table Customers =========");
-                            for(int i = 0; i < users.size(); i++){
-                                System.out.println("==================");
-                                System.out.println("i: " + i);
-                                System.out.println("id: " + customers.get(i).getId());
-                                System.out.println("userName: " + customers.get(i).getUserName());
-                                System.out.println("==================");
-                            }
                         },
                         e::onError);
         });
-
     }
 
+    public Observable<UserModel> registerDriver(UserModel userModel, DriverModel driverModel, CarModel carModel) {
+
+        return Observable.create((ObservableEmitter<UserModel> e) -> {
+            realm.executeTransactionAsync(
+                    realm -> {
+
+                        //Register User
+                        long userID;
+                        try {
+                            userID = realm.where(User.class).max("id").intValue() + 1;
+                        } catch (Exception ex) {
+                            userID = 0L;
+                        }
+
+                        User user = realm.createObject(User.class, userID);
+                        user.setEmail(userModel.getEmail());
+
+                        try {
+                            user.setPass(Util.SHA1(userModel.getPass()));
+                        } catch (NoSuchAlgorithmException e1)  {
+                            user.setPass(userModel.getPass());
+                            e1.printStackTrace();
+                        } catch (UnsupportedEncodingException e1) {
+                            user.setPass(userModel.getPass());
+                            e1.printStackTrace();
+                        }
+
+                        user.setUserName(userModel.getUserName());
+                        user.setRole(userModel.getRole());
+                        user.setRating(0);
+                        user.setPhoneNumber(userModel.getPhoneNumber());
+
+                        //Register Driver
+                        long driverID;
+                        try {
+                            driverID = realm.where(Driver.class).max("id").intValue() + 1;
+                        } catch (Exception ex) {
+                            driverID = 0L;
+                        }
+
+                        Driver driver = realm.createObject(Driver.class, driverID);
+                        driver.setUserName(driverModel.getUserName());
+                        driver.setUserState("free");
+
+                        //Register Car
+                        long carID;
+                        try {
+                            carID = realm.where(Car.class).max("id").intValue() + 1;
+                        } catch (Exception ex) {
+                            carID = 0L;
+                        }
+
+                        Car car = realm.createObject(Car.class, carID);
+                        car.setColor(carModel.getColor());
+                        car.setModel(carModel.getModel());
+                        car.setNumber(carModel.getNumber());
+
+                        driver.setCar(car);
+                    },
+                    () -> {
+                        e.onNext(userModel);
+                        e.onComplete();
+                    },
+                    e::onError);
+        });
+    }
 }
