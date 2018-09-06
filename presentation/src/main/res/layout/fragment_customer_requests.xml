@@ -2,11 +2,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.sergeydeveloper7.taximanager.view.fragments.customer.CustomerRequestsFragment">
+    tools:context="com.sergeydeveloper7.taximanager.view.fragments.customer.CustomerRequestsFragment"
+    android:background="@color/colorMainPrimary">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:id="@+id/titleNoBids"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:text="@string/customers_screen_title_no_bids"
+        android:layout_gravity="center"/>
 
 </FrameLayout>

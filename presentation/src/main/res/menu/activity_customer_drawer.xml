@@ -5,24 +5,25 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import"/>
+            android:id="@+id/navigationCustomerWaitingBids"
+            android:icon="@drawable/ic_waiting_bids"
+            android:title="@string/customers_screen_waiting_bids"/>
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:id="@+id/navigationCustomerActiveBids"
+            android:icon="@drawable/ic_active_bids"
+            android:title="@string/customers_screen_active_bids"/>
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:id="@+id/navigationCustomerCompletedBids"
+            android:icon="@drawable/ic_completed_bids"
+            android:title="@string/customers_screen_completed_bids"/>
 
         <item
-            android:id="@+id/nav_logout"
+            android:id="@+id/navigationCustomerTools"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="@string/customers_screen_navigation_menu_tools" />
+
+        <item
+            android:id="@+id/navigationCustomerLogout"
             android:icon="@drawable/ic_logout"
             android:title="@string/customers_screen_navigation_menu_logout" />
     </group>

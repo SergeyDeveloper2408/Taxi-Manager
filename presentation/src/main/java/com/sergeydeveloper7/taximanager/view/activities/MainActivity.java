@@ -89,7 +89,7 @@ public class MainActivity extends BaseActivity {
             }
         } else {
             this.navigator.startFragmentNoBackStack(this, new MainScreenFragment(),
-                    Const.MAIN_SCREEN_FRAGMENT_ID);
+                    Const.MAIN_SCREEN_FRAGMENT_ID, R.id.main_frame);
         }
     }
 }

@@ -55,11 +55,13 @@
     <string name="action_settings">Settings</string>
 
     <!-- Customer Screen Constants -->
-    <string name="customers_screen_new_bids">Waiting Bids</string>
+    <string name="customers_screen_waiting_bids">Waiting Bids</string>
     <string name="customers_screen_no_bids">No Bids</string>
     <string name="customers_screen_active_bids">Active Bids</string>
     <string name="customers_screen_completed_bids">Completed Bids</string>
+    <string name="customers_screen_navigation_menu_tools">Tools</string>
     <string name="customers_screen_navigation_menu_logout">Log Out</string>
+    <string name="customers_screen_title_no_bids">No Bids</string>
 
     <!-- Driver Screen Constants -->
     <string name="drivers_screen_state_free">free</string>

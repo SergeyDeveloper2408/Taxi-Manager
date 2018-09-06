@@ -16,6 +16,9 @@ import com.sergeydeveloper7.data.validation.RegisterValidation;
 import com.sergeydeveloper7.taximanager.utils.Const;
 import com.sergeydeveloper7.taximanager.view.basic.RegisterView;
 
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Predicate;
 import io.reactivex.observers.DisposableObserver;
 
@@ -41,6 +44,8 @@ public class RegisterPresenter implements BasePresenter {
         view.showLoadingProcessStart();
         dbRepository.validateRegistration(userModel)
                 .takeUntil((Predicate<RegisterValidation>) validation -> isViewDestroyed)
+                .debounce(1000, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new DisposableObserver<RegisterValidation>() {
                     @Override
                     public void onNext(RegisterValidation registerValidation) {

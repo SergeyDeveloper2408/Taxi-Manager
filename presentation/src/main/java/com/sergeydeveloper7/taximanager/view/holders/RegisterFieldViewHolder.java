@@ -47,12 +47,15 @@ public class RegisterFieldViewHolder extends RecyclerView.ViewHolder {
                 break;
             case Const.REGISTER_FIELD_CAR_COLOR:
                 registerFieldLabelTextInputLayout.setHint(context.getString(R.string.register_screen_car_information_color));
+                registerFieldLabelTextInputEditText.setInputType(InputType.TYPE_CLASS_TEXT);
                 break;
             case Const.REGISTER_FIELD_CAR_MODEL:
                 registerFieldLabelTextInputLayout.setHint(context.getString(R.string.register_screen_car_information_model));
+                registerFieldLabelTextInputEditText.setInputType(InputType.TYPE_CLASS_TEXT);
                 break;
             case Const.REGISTER_FIELD_CAR_NUMBER:
                 registerFieldLabelTextInputLayout.setHint(context.getString(R.string.register_screen_car_information_number));
+                registerFieldLabelTextInputEditText.setInputType(InputType.TYPE_CLASS_TEXT);
                 break;
         }
     }

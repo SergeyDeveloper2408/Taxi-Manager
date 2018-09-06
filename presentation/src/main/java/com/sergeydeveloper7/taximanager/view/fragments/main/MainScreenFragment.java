@@ -113,7 +113,7 @@ public class MainScreenFragment extends Fragment implements View.OnClickListener
             case R.id.registerLinkRelativeLayout:
                 registerLinkTextView.setTextColor(context.getResources().getColor(R.color.white));
                 separatorLinkView.setBackgroundColor(context.getResources().getColor(R.color.white));
-                navigator.startFragmentWithBackStack(context, new RegisterFragment(), Const.REGISTER_FRAGMENT_ID);
+                navigator.startFragmentWithBackStack(context, new RegisterFragment(), Const.REGISTER_FRAGMENT_ID, R.id.main_frame);
                 break;
         }
     }

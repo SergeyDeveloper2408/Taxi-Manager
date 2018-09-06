@@ -19,6 +19,7 @@ import com.google.gson.Gson;
 import com.sergeydeveloper7.data.models.UserModel;
 import com.sergeydeveloper7.taximanager.R;
 import com.sergeydeveloper7.taximanager.utils.Const;
+import com.sergeydeveloper7.taximanager.view.fragments.customer.CustomerRequestsFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -69,6 +70,9 @@ public class CustomerActivity extends BaseActivity implements NavigationView.OnN
 
         navHeaderMainTitleTextView.setText(userModel.getUserName());
         navHeaderSecondaryTitleTextView.setText(userModel.getEmail());
+
+        this.navigator.startFragmentNoBackStack(this, new CustomerRequestsFragment(),
+                Const.CUSTOMERS_REQUESTS_FRAGMENT_ID, R.id.customersFrame);
     }
 
     @Override
@@ -103,20 +107,28 @@ public class CustomerActivity extends BaseActivity implements NavigationView.OnN
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_logout) {
+        if (id == R.id.navigationCustomerWaitingBids) {
+            startBidsScreen(getString(R.string.customers_screen_waiting_bids));
+        } else if (id == R.id.navigationCustomerActiveBids) {
+            startBidsScreen(getString(R.string.customers_screen_active_bids));
+        } else if (id == R.id.navigationCustomerCompletedBids) {
+            startBidsScreen(getString(R.string.customers_screen_completed_bids));
+        } else if (id == R.id.navigationCustomerTools) {
+            //TODO
+        } else if (id == R.id.navigationCustomerLogout) {
             logout();
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void startBidsScreen(String bidsType){
+        Bundle args = new Bundle();
+        args.putString(bidsType, "");
+        this.navigator.startFragmentNoBackStackWithBundle(this,
+                new CustomerRequestsFragment(), Const.CUSTOMERS_REQUESTS_FRAGMENT_ID,
+                R.id.customersFrame, args);
     }
 
     private void logout(){
