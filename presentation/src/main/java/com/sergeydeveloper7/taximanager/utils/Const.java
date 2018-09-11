@@ -13,7 +13,7 @@ public class Const {
     //Fragment identifiers constants
     public static final String MAIN_SCREEN_FRAGMENT_ID = "MainScreenFragment";
     public static final String REGISTER_FRAGMENT_ID = "RegisterFragment";
-    public static final String CUSTOMERS_REQUESTS_FRAGMENT_ID = "CustomersRequestsFragment";
+    public static final String CUSTOMERS_BIDS_FRAGMENT_ID = "CustomersRequestsFragment";
 
     //Register fragment constants
     public static final String REGISTER_FIELD_EMAIL = "RegisterFieldEmail";

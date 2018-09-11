@@ -38,7 +38,7 @@
     <string name="register_screen_car_information_color">Color</string>
     <string name="register_screen_car_information_model">Model</string>
     <string name="register_screen_car_information_number">Number</string>
-    <string name="title_activity_customer">CustomerActivity</string>
+    <string name="title_activity_customer">Customer\'s Home</string>
     <string name="register_screen_button_next_step">next step</string>
 
     <!-- Register Screen Errors -->
@@ -50,11 +50,14 @@
     <string name="register_screen_phone_number_exist_error">Your phone number already exist, please enter another one</string>
     <string name="register_screen_error">During the registration an error occurred, please try again.</string>
 
+    <!-- Home Screen Constants -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_settings">Settings</string>
+    <string name="home_todo">You are in home page, please go to \nanother page by tap on drawer\'s item.</string>
 
     <!-- Customer Screen Constants -->
+    <string name="customers_screen_bids">Bids</string>
     <string name="customers_screen_waiting_bids">Waiting Bids</string>
     <string name="customers_screen_no_bids">No Bids</string>
     <string name="customers_screen_active_bids">Active Bids</string>
@@ -62,6 +65,7 @@
     <string name="customers_screen_navigation_menu_tools">Tools</string>
     <string name="customers_screen_navigation_menu_logout">Log Out</string>
     <string name="customers_screen_title_no_bids">No Bids</string>
+    <string name="customers_screen_spinners_hint">Choose bids you want to see</string>
 
     <!-- Driver Screen Constants -->
     <string name="drivers_screen_state_free">free</string>

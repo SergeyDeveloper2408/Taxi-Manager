@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/spinnerItemsTitle"
+    android:singleLine="true"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingLeft="40dp"
-    android:background="@android:color/darker_gray"
-    android:orientation="vertical" />
+    android:layout_height="@dimen/spinnerItemSize"
+    android:ellipsize="marquee"
+    android:textColor="@color/black"
+    android:background="@drawable/spinners_textview_background"
+    android:padding="0dp"
+    android:layout_margin="0dp"
+    style="?android:attr/spinnerDropDownItemStyle" />
+
+
+

@@ -1,0 +1,39 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.sergeydeveloper7.taximanager.view.fragments.customer.CustomerBidsFragment"
+    android:background="@color/colorMainPrimary">
+
+    <TextView
+        android:id="@+id/bidsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/white"
+        />
+
+    <fr.ganfra.materialspinner.MaterialSpinner
+        android:id="@+id/customersBidsSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:ms_hint="@string/customers_screen_spinners_hint"
+        app:ms_hintColor="@color/grey"
+        app:ms_arrowColor="@color/white"
+        app:ms_baseColor="@color/white"
+        app:ms_highlightColor="@color/white"/>
+
+    <TextView
+        android:id="@+id/titleNoBids"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textColor="@color/white"
+        android:text="@string/customers_screen_title_no_bids"
+        />
+</RelativeLayout>

@@ -5,17 +5,9 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/navigationCustomerWaitingBids"
+            android:id="@+id/navigationCustomerBids"
             android:icon="@drawable/ic_waiting_bids"
-            android:title="@string/customers_screen_waiting_bids"/>
-        <item
-            android:id="@+id/navigationCustomerActiveBids"
-            android:icon="@drawable/ic_active_bids"
-            android:title="@string/customers_screen_active_bids"/>
-        <item
-            android:id="@+id/navigationCustomerCompletedBids"
-            android:icon="@drawable/ic_completed_bids"
-            android:title="@string/customers_screen_completed_bids"/>
+            android:title="@string/customers_screen_bids"/>
 
         <item
             android:id="@+id/navigationCustomerTools"

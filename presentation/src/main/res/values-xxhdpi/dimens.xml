@@ -17,6 +17,7 @@
 
     <!-- customer screen sizes -->
     <dimen name="personIconSize">100dp</dimen>
+    <dimen name="spinnerItemSize">50dp</dimen>
 
     <!-- main margins -->
     <dimen name="marginLarge">25dp</dimen>
