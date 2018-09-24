@@ -1,0 +1,76 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.sergeydeveloper7.taximanager.view.fragments.customer.CustomerProfileFragment"
+    android:background="@color/lightGray">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/customerProfilePhoto"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="40dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/default_customers_avatar"
+        app:civ_border_color="@color/materialYellowAdditional"
+        app:civ_border_width="5dp"/>
+
+    <TextView
+        android:id="@+id/customerProfileLabelName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/customerProfilePhoto"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="30dp"
+        android:text="@string/customer_screen_profile_label_name"
+        android:textColor="@color/grayColor"/>
+
+    <TextView
+        android:id="@+id/customerProfileName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/customerProfileLabelName"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="30dp"
+        android:text="Customer" />
+
+    <TextView
+        android:id="@+id/customerProfileLabelEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/customerProfileName"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="30dp"
+        android:text="@string/customer_screen_profile_label_email"
+        android:textColor="@color/grayColor"/>
+
+    <TextView
+        android:id="@+id/customerProfileEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/customerProfileLabelEmail"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="30dp"
+        android:text="customer@example.com" />
+
+    <TextView
+        android:id="@+id/customerProfileLabelPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/customerProfileEmail"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="30dp"
+        android:text="@string/customer_screen_profile_label_phone"
+        android:textColor="@color/grayColor"/>
+
+    <TextView
+        android:id="@+id/customerProfilePhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/customerProfileLabelPhone"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="30dp"
+        android:text="0501122334" />
+
+</RelativeLayout>

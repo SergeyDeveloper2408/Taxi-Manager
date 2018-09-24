@@ -5,12 +5,12 @@
         android:id="@+id/action_waiting_bids"
         android:enabled="true"
         android:icon="@drawable/ic_waiting_bids"
-        android:title="@string/customers_screen_waiting_bids"
+        android:title="@string/customer_screen_waiting_bids"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_active_bids"
         android:enabled="true"
         android:icon="@drawable/ic_active_bids"
-        android:title="@string/customers_screen_active_bids"
+        android:title="@string/customer_screen_active_bids"
         app:showAsAction="ifRoom" />
 </menu>

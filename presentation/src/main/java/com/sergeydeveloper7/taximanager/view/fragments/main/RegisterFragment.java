@@ -25,9 +25,9 @@ import com.sergeydeveloper7.taximanager.R;
 import com.sergeydeveloper7.taximanager.navigation.Navigator;
 import com.sergeydeveloper7.taximanager.presenter.RegisterPresenter;
 import com.sergeydeveloper7.taximanager.utils.Const;
-import com.sergeydeveloper7.taximanager.view.activities.CustomerActivity;
-import com.sergeydeveloper7.taximanager.view.activities.DriverActivity;
-import com.sergeydeveloper7.taximanager.view.activities.MainActivity;
+import com.sergeydeveloper7.taximanager.view.activities.customer.CustomerActivity;
+import com.sergeydeveloper7.taximanager.view.activities.driver.DriverActivity;
+import com.sergeydeveloper7.taximanager.view.activities.main.MainActivity;
 import com.sergeydeveloper7.taximanager.view.adapters.RegisterAdapter;
 import com.sergeydeveloper7.taximanager.view.basic.RegisterView;
 

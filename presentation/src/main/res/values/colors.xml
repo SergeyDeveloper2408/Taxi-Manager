@@ -8,15 +8,16 @@
 
     <color name="menuLineColor">#66ffffff</color>
     <color name="bottomMenuColor">#002236</color>
-    <color name="buttonColor">#80647680</color>
+    <color name="grayColor">#4a4a4a</color>
     <color name="searchColor">#647680</color>
     <color name="white">#FFFFFFFF</color>
     <color name="newLeadsColor">#eeeeee</color>
     <color name="searchButtonColor">#cccccc</color>
     <color name="whiteSemiTransparent">#80000000</color>
     <color name="black">#FF000000</color>
-    <color name="grey">#FF939393</color>
-    <color name="greyText">#FFD8D8D8</color>
+    <color name="gray">#FF939393</color>
+    <color name="lightGray">#f1f1f1</color>
+    <color name="grayText">#00D8D8D8</color>
     <color name="whiteTransparent">#40FFFFFF</color>
     <color name="facebookColor">#FF3C5A9A</color>
     <color name="facebookColorClick">#FF3C1AFF</color>
@@ -24,6 +25,7 @@
     <color name="loginColor">#FF75F3B6</color>
     <color name="registerHost">#c9c9c9</color>
     <color name="materialYellow">#fcff00</color>
+    <color name="yellowDarker">#EAB100</color>
     <color name="materialYellowAdditional">#ffcc00</color>
 
     <color name="mainBackground">#f9f9f9</color>

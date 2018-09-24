@@ -1,23 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/loginRelativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/taxi_bg">
+    android:background="@drawable/background">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="300dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        app:srcCompat="@drawable/taxi_logo" />
 
     <RelativeLayout
         android:id="@+id/contentRelativeLayout"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/mainScreenMarginTopLarge">
+        android:layout_marginTop="@dimen/mainScreenMarginTopLarge"
+        android:layout_centerHorizontal="true">
+
         <android.support.design.widget.TextInputLayout
             android:id="@+id/loginEmailTextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/marginNormal"
             android:layout_marginStart="@dimen/marginNormal"
-            android:theme="@style/TextLabel">
+            android:theme="@style/TextInputYellow">
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/loginEmailTextInputEditText"
@@ -36,13 +48,14 @@
             android:layout_marginEnd="@dimen/marginNormal"
             android:layout_marginStart="@dimen/marginNormal"
             android:layout_below="@+id/loginEmailTextInputLayout"
-            android:theme="@style/TextLabel">
+            android:theme="@style/TextInputYellow">
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/loginPasswordTextInputEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/main_screen_password"
+                android:inputType="textPassword"
                 android:textColor="@color/white"
                 />
 
@@ -50,7 +63,7 @@
 
         <Button
             android:id="@+id/loginButton"
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="@dimen/mainScreenEditTextHeight"
             android:layout_marginEnd="@dimen/marginNormal"
             android:layout_marginTop="@dimen/marginNormal"
@@ -63,6 +76,7 @@
             android:letterSpacing="0.24"
             android:textAllCaps="true"
             android:gravity="center"
+            android:layout_centerHorizontal="true"
             android:background="@drawable/login_button_background"
             />
 
@@ -82,7 +96,7 @@
                 android:fontFamily="sans-serif"
                 android:letterSpacing="0.14"
                 android:text="@string/main_screen_register_link"
-                android:textColor="@color/materialYellow"
+                android:textColor="@android:color/white"
                 />
 
             <View
@@ -92,7 +106,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_below="@+id/registerLinkTextView"
                 android:layout_marginTop="@dimen/marginSmall"
-                android:background="@color/materialYellowAdditional"
+                android:background="#e6b629"
                 />
         </RelativeLayout>
     </RelativeLayout>
@@ -114,7 +128,7 @@
         android:fontFamily="sans-serif"
         android:letterSpacing="0.14"
         android:text="@string/main_screen_all_right_reserved"
-        android:textColor="@color/materialYellow"
+        android:textColor="@android:color/white"
         />
 
 </RelativeLayout>

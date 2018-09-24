@@ -1,4 +1,4 @@
-package com.sergeydeveloper7.taximanager.view.activities;
+package com.sergeydeveloper7.taximanager.view.activities.driver;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.sergeydeveloper7.taximanager.R;
+import com.sergeydeveloper7.taximanager.view.activities.base.BaseActivity;
 
 public class DriverActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {

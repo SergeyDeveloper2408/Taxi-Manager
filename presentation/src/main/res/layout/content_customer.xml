@@ -6,12 +6,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.sergeydeveloper7.taximanager.view.activities.CustomerActivity"
+    tools:context="com.sergeydeveloper7.taximanager.view.activities.customer.CustomerActivity"
     tools:showIn="@layout/app_bar_customer"
-    android:background="@color/colorMainPrimary">
+    android:background="@color/lightGray">
 
     <FrameLayout
-        android:id="@+id/customersFrame"
+        android:id="@+id/customerFrame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".activities.CustomerActivity">
@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:textColor="@color/white"
+        android:textColor="@color/grayColor"
         android:text="@string/home_todo"
         />
 

@@ -1,4 +1,4 @@
-package com.sergeydeveloper7.taximanager.view.holders;
+package com.sergeydeveloper7.taximanager.view.holders.register;
 
 import android.content.Context;
 import android.support.design.widget.TextInputEditText;

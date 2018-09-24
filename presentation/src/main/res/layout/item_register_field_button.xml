@@ -15,7 +15,7 @@
         android:layout_marginBottom="@dimen/marginNormal"
         android:text="@string/main_screen_register_enter"
         android:textSize="@dimen/textSizeMiddle"
-        android:textColor="@color/black"
+        android:textColor="@color/grayColor"
         android:fontFamily="sans-serif"
         android:letterSpacing="0.24"
         android:textAllCaps="true"

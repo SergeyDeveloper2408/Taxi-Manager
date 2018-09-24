@@ -1,4 +1,4 @@
-package com.sergeydeveloper7.taximanager.view.activities;
+package com.sergeydeveloper7.taximanager.view.activities.customer;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -10,7 +10,6 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -19,7 +18,11 @@ import com.google.gson.Gson;
 import com.sergeydeveloper7.data.models.UserModel;
 import com.sergeydeveloper7.taximanager.R;
 import com.sergeydeveloper7.taximanager.utils.Const;
+import com.sergeydeveloper7.taximanager.view.activities.base.BaseActivity;
+import com.sergeydeveloper7.taximanager.view.activities.main.MainActivity;
+import com.sergeydeveloper7.taximanager.view.activities.preferences.SettingsActivity;
 import com.sergeydeveloper7.taximanager.view.fragments.customer.CustomerBidsFragment;
+import com.sergeydeveloper7.taximanager.view.fragments.customer.CustomerProfileFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -57,40 +60,32 @@ public class CustomerActivity extends BaseActivity implements NavigationView.OnN
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.customer, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        int id = item.getItemId();
-
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
 
         int id = item.getItemId();
 
-        if (id == R.id.navigationCustomerBids) {
+        if (id == R.id.navigationCustomerMyProfile) {
+            startProfileScreen();
+        } else if (id == R.id.navigationCustomerBids) {
             startBidsScreen();
         } else if (id == R.id.navigationCustomerTools) {
-            //TODO
+            startToolsScreen();
         } else if (id == R.id.navigationCustomerLogout) {
             logout();
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void openDrawer(){
+        drawerLayout.openDrawer(GravityCompat.START);
+    }
+
+    public Toolbar getToolbar() {
+        return toolbar;
     }
 
     private void initViews(){
@@ -122,12 +117,27 @@ public class CustomerActivity extends BaseActivity implements NavigationView.OnN
         fab.setVisibility(View.GONE);
     }
 
+    private void startProfileScreen(){
+        fab.setVisibility(View.GONE);
+        titleTodo.setVisibility(View.GONE);
+        toolbar.setTitle(getString(R.string.customer_screen_navigation_menu_my_profile));
+        this.navigator.startFragmentNoBackStack(this, new CustomerProfileFragment(),
+                Const.CUSTOMER_PROFILE_FRAGMENT_ID, R.id.customerFrame);
+    }
+
+    private void startToolsScreen(){
+        fab.setVisibility(View.GONE);
+        titleTodo.setVisibility(View.GONE);
+        toolbar.setTitle(getString(R.string.customer_screen_navigation_menu_tools));
+        this.navigator.startActivity(this, SettingsActivity.class);
+    }
+
     private void startBidsScreen(){
         fab.setVisibility(View.VISIBLE);
         titleTodo.setVisibility(View.GONE);
-        toolbar.setTitle(getString(R.string.customers_screen_bids));
+        toolbar.setTitle(getString(R.string.customer_screen_bids));
         this.navigator.startFragmentNoBackStack(this, new CustomerBidsFragment(),
-                Const.CUSTOMERS_BIDS_FRAGMENT_ID, R.id.customersFrame);
+                Const.CUSTOMER_BIDS_FRAGMENT_ID, R.id.customerFrame);
     }
 
     private void logout(){

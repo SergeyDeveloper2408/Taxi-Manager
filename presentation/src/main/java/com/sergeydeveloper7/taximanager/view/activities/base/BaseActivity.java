@@ -1,4 +1,4 @@
-package com.sergeydeveloper7.taximanager.view.activities;
+package com.sergeydeveloper7.taximanager.view.activities.base;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,7 +11,7 @@ import javax.inject.Inject;
 
 public class BaseActivity extends AppCompatActivity {
 
-    @Inject Navigator      navigator;
+    public @Inject Navigator      navigator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

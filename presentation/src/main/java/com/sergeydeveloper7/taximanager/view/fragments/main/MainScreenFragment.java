@@ -2,6 +2,8 @@ package com.sergeydeveloper7.taximanager.view.fragments.main;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -20,8 +22,8 @@ import com.sergeydeveloper7.taximanager.R;
 import com.sergeydeveloper7.taximanager.navigation.Navigator;
 import com.sergeydeveloper7.taximanager.presenter.MainScreenPresenter;
 import com.sergeydeveloper7.taximanager.utils.Const;
-import com.sergeydeveloper7.taximanager.view.activities.CustomerActivity;
-import com.sergeydeveloper7.taximanager.view.activities.MainActivity;
+import com.sergeydeveloper7.taximanager.view.activities.customer.CustomerActivity;
+import com.sergeydeveloper7.taximanager.view.activities.main.MainActivity;
 import com.sergeydeveloper7.taximanager.view.basic.MainScreenView;
 
 import java.io.UnsupportedEncodingException;
@@ -60,7 +62,6 @@ public class MainScreenFragment extends Fragment implements View.OnClickListener
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context = getActivity();
-
         ((MainActivity)getActivity()).getApplicationComponent().inject(this);
         presenter = new MainScreenPresenter(this, context);
     }
@@ -71,6 +72,8 @@ public class MainScreenFragment extends Fragment implements View.OnClickListener
         View rootView = inflater.inflate(R.layout.fragment_main_screen, container, false);
         ButterKnife.bind(this, rootView);
         registerLinkRelativeLayout.setOnClickListener(this);
+        loginProgressBar.getIndeterminateDrawable()
+                .setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
         return rootView;
     }
 

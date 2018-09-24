@@ -16,7 +16,7 @@
 
     <!-- register screen sizes -->
     <dimen name="registerScreenMarginTopImage">70dp</dimen>
-    <dimen name="registerScreenMarginTopText">170dp</dimen>
+    <dimen name="registerScreenMarginTopText">230dp</dimen>
 
     <!-- main margins -->
     <dimen name="marginLarge">25dp</dimen>

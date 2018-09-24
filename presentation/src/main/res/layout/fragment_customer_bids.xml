@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.sergeydeveloper7.taximanager.view.fragments.customer.CustomerBidsFragment"
-    android:background="@color/colorMainPrimary">
+    android:background="@color/lightGray">
 
     <TextView
         android:id="@+id/bidsTitle"
@@ -22,11 +22,19 @@
         android:layout_marginTop="20dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        app:ms_hint="@string/customers_screen_spinners_hint"
-        app:ms_hintColor="@color/grey"
-        app:ms_arrowColor="@color/white"
-        app:ms_baseColor="@color/white"
-        app:ms_highlightColor="@color/white"/>
+        app:ms_hint="@string/customer_screen_spinners_hint"
+        app:ms_hintColor="@color/grayColor"
+        app:ms_arrowColor="@color/grayColor"
+        app:ms_baseColor="@color/grayColor"
+        app:ms_highlightColor="@color/grayColor"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/customersBidsRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/marginNormal"
+        android:layout_below="@+id/customersBidsSpinner"
+        android:visibility="gone"/>
 
     <TextView
         android:id="@+id/titleNoBids"
@@ -34,6 +42,14 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:textColor="@color/white"
-        android:text="@string/customers_screen_title_no_bids"
+        android:text="@string/customer_screen_title_no_bids"
+        android:visibility="gone"
         />
+
+    <ProgressBar
+        android:id="@+id/customersBidsProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"/>
 </RelativeLayout>

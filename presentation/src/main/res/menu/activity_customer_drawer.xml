@@ -4,20 +4,26 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/navigationCustomerMyProfile"
+            android:icon="@drawable/ic_person"
+            android:title="@string/customer_screen_navigation_menu_my_profile"/>
+
         <item
             android:id="@+id/navigationCustomerBids"
             android:icon="@drawable/ic_waiting_bids"
-            android:title="@string/customers_screen_bids"/>
+            android:title="@string/customer_screen_bids"/>
 
         <item
             android:id="@+id/navigationCustomerTools"
             android:icon="@drawable/ic_menu_manage"
-            android:title="@string/customers_screen_navigation_menu_tools" />
+            android:title="@string/customer_screen_navigation_menu_tools" />
 
         <item
             android:id="@+id/navigationCustomerLogout"
             android:icon="@drawable/ic_logout"
-            android:title="@string/customers_screen_navigation_menu_logout" />
+            android:title="@string/customer_screen_navigation_menu_logout" />
     </group>
 
 </menu>

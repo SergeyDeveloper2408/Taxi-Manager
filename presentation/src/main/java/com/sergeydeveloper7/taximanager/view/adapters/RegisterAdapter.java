@@ -13,9 +13,9 @@ import com.sergeydeveloper7.taximanager.R;
 import com.sergeydeveloper7.taximanager.interfaces.ShowRegistrationError;
 import com.sergeydeveloper7.taximanager.utils.Const;
 import com.sergeydeveloper7.taximanager.view.fragments.main.RegisterFragment;
-import com.sergeydeveloper7.taximanager.view.holders.RegisterButtonViewHolder;
-import com.sergeydeveloper7.taximanager.view.holders.RegisterFieldViewHolder;
-import com.sergeydeveloper7.taximanager.view.holders.RegisterLabelViewHolder;
+import com.sergeydeveloper7.taximanager.view.holders.register.RegisterButtonViewHolder;
+import com.sergeydeveloper7.taximanager.view.holders.register.RegisterFieldViewHolder;
+import com.sergeydeveloper7.taximanager.view.holders.register.RegisterLabelViewHolder;
 
 import java.util.ArrayList;
 import java.util.HashMap;

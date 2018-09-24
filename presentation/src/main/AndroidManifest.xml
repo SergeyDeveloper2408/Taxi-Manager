@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.sergeydeveloper7.taximanager">
 
     <application
@@ -10,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppThemeNoActionBar">
-        <activity android:name=".view.activities.BaseActivity">
+
+        <activity android:name=".view.activities.base.BaseActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.activities.MainActivity"
+            android:name=".view.activities.main.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Launcher"
             android:windowSoftInputMode="adjustPan">
@@ -29,7 +31,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.activities.CustomerActivity"
+            android:name=".view.activities.customer.CustomerActivity"
             android:label="@string/title_activity_customer"
             android:theme="@style/AppThemeNoActionBar">
             <intent-filter>
@@ -38,7 +40,11 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.activities.DriverActivity" />
+        <activity android:name=".view.activities.driver.DriverActivity" />
+        <activity
+            android:name=".view.activities.preferences.SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:theme="@style/AppTheme"/>
     </application>
 
 </manifest>
