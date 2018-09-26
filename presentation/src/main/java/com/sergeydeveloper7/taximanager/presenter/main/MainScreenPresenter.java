@@ -1,4 +1,4 @@
-package com.sergeydeveloper7.taximanager.presenter;
+package com.sergeydeveloper7.taximanager.presenter.main;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -6,9 +6,10 @@ import android.preference.PreferenceManager;
 
 import com.google.gson.Gson;
 import com.sergeydeveloper7.data.models.UserModel;
-import com.sergeydeveloper7.data.repository.implementations.LoginRepositoryImplements;
+import com.sergeydeveloper7.data.repository.implementations.main.LoginRepositoryImplements;
+import com.sergeydeveloper7.taximanager.presenter.base.BasePresenter;
 import com.sergeydeveloper7.taximanager.utils.Const;
-import com.sergeydeveloper7.taximanager.view.basic.MainScreenView;
+import com.sergeydeveloper7.taximanager.view.basic.main.MainScreenView;
 
 import io.reactivex.functions.Predicate;
 import io.reactivex.observers.DisposableObserver;
@@ -20,11 +21,11 @@ import io.reactivex.observers.DisposableObserver;
 
 public class MainScreenPresenter implements BasePresenter {
 
-    private Context           context;
-    private MainScreenView    view;
+    private Context                   context;
+    private MainScreenView            view;
     private LoginRepositoryImplements dbLoginRepository;
-    private boolean           isViewDestroyed = false;
-    private UserModel         userModel;
+    private boolean                   isViewDestroyed = false;
+    private UserModel                 userModel;
 
     public MainScreenPresenter(MainScreenView view, Context context) {
         this.view = view;

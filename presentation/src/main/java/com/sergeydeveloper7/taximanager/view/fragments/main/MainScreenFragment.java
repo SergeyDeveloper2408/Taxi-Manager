@@ -1,7 +1,6 @@
 package com.sergeydeveloper7.taximanager.view.fragments.main;
 
 import android.app.Fragment;
-import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -17,14 +16,15 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.sergeydeveloper7.data.utils.UtilMethods;
 import com.sergeydeveloper7.domain.Util;
 import com.sergeydeveloper7.taximanager.R;
 import com.sergeydeveloper7.taximanager.navigation.Navigator;
-import com.sergeydeveloper7.taximanager.presenter.MainScreenPresenter;
+import com.sergeydeveloper7.taximanager.presenter.main.MainScreenPresenter;
 import com.sergeydeveloper7.taximanager.utils.Const;
 import com.sergeydeveloper7.taximanager.view.activities.customer.CustomerActivity;
 import com.sergeydeveloper7.taximanager.view.activities.main.MainActivity;
-import com.sergeydeveloper7.taximanager.view.basic.MainScreenView;
+import com.sergeydeveloper7.taximanager.view.basic.main.MainScreenView;
 
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
@@ -39,7 +39,7 @@ import butterknife.OnTextChanged;
 public class MainScreenFragment extends Fragment implements View.OnClickListener, MainScreenView {
 
     private static final String TAG = MainScreenFragment.class.getSimpleName();
-    private Context             context;
+    private MainActivity        mainActivity;
     private String              email = "";
     private String              password = "";
     private MainScreenPresenter presenter;
@@ -61,9 +61,9 @@ public class MainScreenFragment extends Fragment implements View.OnClickListener
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        context = getActivity();
-        ((MainActivity)getActivity()).getApplicationComponent().inject(this);
-        presenter = new MainScreenPresenter(this, context);
+        mainActivity = (MainActivity) getActivity();
+        mainActivity.getApplicationComponent().inject(this);
+        presenter = new MainScreenPresenter(this, mainActivity);
     }
 
     @Override
@@ -71,10 +71,13 @@ public class MainScreenFragment extends Fragment implements View.OnClickListener
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main_screen, container, false);
         ButterKnife.bind(this, rootView);
-        registerLinkRelativeLayout.setOnClickListener(this);
-        loginProgressBar.getIndeterminateDrawable()
-                .setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
         return rootView;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initializeViews();
     }
 
     @OnTextChanged(R.id.loginEmailTextInputEditText)
@@ -93,12 +96,10 @@ public class MainScreenFragment extends Fragment implements View.OnClickListener
 
     @OnClick(R.id.loginButton)
     void login() {
-        if(email.isEmpty()){
-            loginEmailTextInputLayout.setError(context.getString(R.string.register_screen_email_hint));
-        } else if(!email.contains("@")){
-            loginEmailTextInputLayout.setError(context.getString(R.string.main_screen_invalid_email));
+        if(!UtilMethods.isValidEmail(email)){
+            loginEmailTextInputLayout.setError(getString(R.string.main_screen_invalid_email));
         } else if(password.isEmpty()){
-            loginPasswordTextInputLayout.setError(context.getString(R.string.register_screen_password_hint));
+            loginPasswordTextInputLayout.setError(getString(R.string.register_screen_password_hint));
         } else {
             try {
                 presenter.login(email, Util.SHA1(password));
@@ -114,9 +115,9 @@ public class MainScreenFragment extends Fragment implements View.OnClickListener
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.registerLinkRelativeLayout:
-                registerLinkTextView.setTextColor(context.getResources().getColor(R.color.white));
-                separatorLinkView.setBackgroundColor(context.getResources().getColor(R.color.white));
-                navigator.startFragmentWithBackStack(context, new RegisterFragment(), Const.REGISTER_FRAGMENT_ID, R.id.main_frame);
+                registerLinkTextView.setTextColor(getResources().getColor(R.color.white));
+                separatorLinkView.setBackgroundColor(getResources().getColor(R.color.white));
+                navigator.startFragmentWithBackStack(mainActivity, new RegisterFragment(), Const.REGISTER_FRAGMENT_ID, R.id.main_frame);
                 break;
         }
     }
@@ -129,8 +130,8 @@ public class MainScreenFragment extends Fragment implements View.OnClickListener
 
     @Override
     public void showLogInProcessEnd(String role) {
-        if(role.equals(context.getString(R.string.register_screen_role_customer))){
-            navigator.startActivity(context, CustomerActivity.class);
+        if(role.equals(getString(R.string.register_screen_role_customer))){
+            navigator.startActivity(mainActivity, CustomerActivity.class);
         } else {
 
         }
@@ -140,7 +141,7 @@ public class MainScreenFragment extends Fragment implements View.OnClickListener
     public void showLogInProcessUserNotFound() {
         contentRelativeLayout.setVisibility(View.VISIBLE);
         loginProgressBar.setVisibility(View.GONE);
-        Snackbar.make(loginRelativeLayout, context.getString(R.string.main_screen_invalid_credentials), Snackbar.LENGTH_LONG)
+        Snackbar.make(loginRelativeLayout, getString(R.string.main_screen_invalid_credentials), Snackbar.LENGTH_LONG)
                 .show();
     }
 
@@ -148,5 +149,11 @@ public class MainScreenFragment extends Fragment implements View.OnClickListener
     public void showLogInProcessError(Throwable throwable) {
         contentRelativeLayout.setVisibility(View.VISIBLE);
         loginProgressBar.setVisibility(View.GONE);
+    }
+
+    private void initializeViews(){
+        registerLinkRelativeLayout.setOnClickListener(this);
+        loginProgressBar.getIndeterminateDrawable()
+                .setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
     }
 }

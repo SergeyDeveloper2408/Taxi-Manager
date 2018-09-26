@@ -41,14 +41,7 @@
     <string name="title_activity_customer">Customer\'s Home</string>
     <string name="register_screen_button_next_step">next step</string>
 
-    <!-- Register Screen Errors -->
-    <string name="register_screen_email_exist_error">Your email already exist, please enter another one</string>
-    <string name="register_screen_email_incorrect">Your email is incorrect, please enter another one</string>
-    <string name="register_screen_email_password_short">Password should be larger than 6 symbols</string>
-    <string name="register_screen_email_username_short">Username should be larger than 6 symbols</string>
-    <string name="register_screen_email_phone_number_short">Phone number should be larger than 6 symbols</string>
-    <string name="register_screen_phone_number_exist_error">Your phone number already exist, please enter another one</string>
-    <string name="register_screen_error">During the registration an error occurred, please try again.</string>
+
 
     <!-- Home Screen Constants -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -74,6 +67,7 @@
     <string name="customer_screen_profile_edit">Edit</string>
     <string name="customer_screen_profile_save">Save</string>
     <string name="customer_screen_profile_edit_profile">Edit Profile</string>
+    <string name="customer_screen_edited_profile_success">Edited profile success!</string>
 
     <!-- Driver Screen Constants -->
     <string name="driver_screen_state_free">free</string>
@@ -116,7 +110,17 @@
     <string name="key_vibrate">key_vibrate</string>
     <string name="key_send_feedback">key_send_feedback</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- Error Constants -->
+    <string name="no_data_error">No data loaded, please check</string>
+    <string name="process_error">During the process an error occurred, please try again.</string>
+
+    <!-- Register Screen Errors -->
+    <string name="register_screen_email_exist_error">Your email already exist, please enter another one</string>
+    <string name="register_screen_email_incorrect">Your email is incorrect, please enter another one</string>
+    <string name="register_screen_email_password_short">Password should be larger than 6 symbols</string>
+    <string name="register_screen_email_username_short">Username should be larger than 6 symbols</string>
+    <string name="register_screen_email_phone_number_short">Phone number should be larger than 6 symbols</string>
+    <string name="register_screen_phone_number_exist_error">Your phone number already exist, please enter another one</string>
+    <string name="register_screen_error">During the registration an error occurred, please try again.</string>
 
 </resources>

@@ -1,4 +1,4 @@
-package com.sergeydeveloper7.taximanager.presenter;
+package com.sergeydeveloper7.taximanager.presenter.base;
 
 /**
  * Created by serg on 02.01.18.

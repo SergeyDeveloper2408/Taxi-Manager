@@ -1,4 +1,4 @@
-package com.sergeydeveloper7.data.repository.implementations;
+package com.sergeydeveloper7.data.repository.implementations.main;
 
 import com.sergeydeveloper7.data.db.models.Car;
 import com.sergeydeveloper7.data.db.models.Customer;
@@ -10,8 +10,8 @@ import com.sergeydeveloper7.data.models.CarModel;
 import com.sergeydeveloper7.data.models.CustomerModel;
 import com.sergeydeveloper7.data.models.DriverModel;
 import com.sergeydeveloper7.data.models.UserModel;
-import com.sergeydeveloper7.data.repository.interfaces.RegisterRepository;
-import com.sergeydeveloper7.data.validation.RegisterValidation;
+import com.sergeydeveloper7.data.repository.basic.main.RegisterRepository;
+import com.sergeydeveloper7.data.validation.Validation;
 import com.sergeydeveloper7.domain.Util;
 
 import java.io.UnsupportedEncodingException;
@@ -34,10 +34,10 @@ public class RegisterRepositoryImplements implements RegisterRepository {
         realm = Realm.getDefaultInstance();
     }
 
-    public Observable<RegisterValidation> validateRegistration(UserModel userModel) {
+    public Observable<Validation> validateRegistration(UserModel userModel) {
 
-        return Observable.create((ObservableEmitter<RegisterValidation> e) -> {
-            RegisterValidation registerValidation = new RegisterValidation();
+        return Observable.create((ObservableEmitter<Validation> e) -> {
+            Validation registerValidation = new Validation();
             realm.executeTransactionAsync(
                     realm -> {
                         RealmResults<User> users = realm.where(User.class).findAll();

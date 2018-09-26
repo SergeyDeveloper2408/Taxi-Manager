@@ -80,12 +80,20 @@ public class CustomerActivity extends BaseActivity implements NavigationView.OnN
         return true;
     }
 
-    public void openDrawer(){
-        drawerLayout.openDrawer(GravityCompat.START);
+    public void setToolbarTitle(String title){
+        toolbar.setTitle(title);
     }
 
-    public Toolbar getToolbar() {
-        return toolbar;
+    public void setNavigationActionMenu(){
+        toolbar.setNavigationIcon(R.drawable.ic_menu);
+        toolbar.setNavigationOnClickListener(v
+                -> drawerLayout.openDrawer(GravityCompat.START));
+    }
+
+    public void setNavigationActionBackArrow(){
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
+        toolbar.setNavigationOnClickListener(v
+                -> onBackPressed());
     }
 
     private void initViews(){
@@ -120,7 +128,6 @@ public class CustomerActivity extends BaseActivity implements NavigationView.OnN
     private void startProfileScreen(){
         fab.setVisibility(View.GONE);
         titleTodo.setVisibility(View.GONE);
-        toolbar.setTitle(getString(R.string.customer_screen_navigation_menu_my_profile));
         this.navigator.startFragmentNoBackStack(this, new CustomerProfileFragment(),
                 Const.CUSTOMER_PROFILE_FRAGMENT_ID, R.id.customerFrame);
     }
@@ -128,14 +135,12 @@ public class CustomerActivity extends BaseActivity implements NavigationView.OnN
     private void startToolsScreen(){
         fab.setVisibility(View.GONE);
         titleTodo.setVisibility(View.GONE);
-        toolbar.setTitle(getString(R.string.customer_screen_navigation_menu_tools));
         this.navigator.startActivity(this, SettingsActivity.class);
     }
 
     private void startBidsScreen(){
         fab.setVisibility(View.VISIBLE);
         titleTodo.setVisibility(View.GONE);
-        toolbar.setTitle(getString(R.string.customer_screen_bids));
         this.navigator.startFragmentNoBackStack(this, new CustomerBidsFragment(),
                 Const.CUSTOMER_BIDS_FRAGMENT_ID, R.id.customerFrame);
     }

@@ -1,4 +1,4 @@
-package com.sergeydeveloper7.data.repository.interfaces;
+package com.sergeydeveloper7.data.repository.basic.main;
 
 import com.sergeydeveloper7.data.models.UserModel;
 

@@ -4,7 +4,7 @@ package com.sergeydeveloper7.data.validation;
  * Created by serg on 21.03.18.
  */
 
-public class RegisterValidation {
+public class Validation {
 
     private boolean isValid = true;
     private Exception exception;

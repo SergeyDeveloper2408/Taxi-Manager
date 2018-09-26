@@ -19,6 +19,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.sergeydeveloper7.taximanager.R;
+import com.sergeydeveloper7.taximanager.view.activities.customer.CustomerActivity;
 import com.sergeydeveloper7.taximanager.view.adapters.CustomerBidsAdapter;
 
 import java.util.ArrayList;
@@ -31,7 +32,7 @@ public class CustomerBidsFragment extends Fragment {
 
     private ArrayList<String>    spinnerItems = new ArrayList<>();
     private ArrayAdapter<String> spinnersAdapter;
-    private Context              context;
+    private CustomerActivity     customerActivity;
     private CustomerBidsAdapter  recyclersAdapter;
     private ArrayList<String>    bidsList = new ArrayList<>();
 
@@ -43,17 +44,7 @@ public class CustomerBidsFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        context = getActivity();
-        bidsList.add("");
-        bidsList.add("");
-        bidsList.add("");
-        bidsList.add("");
-        bidsList.add("");
-        bidsList.add("");
-        bidsList.add("");
-        bidsList.add("");
-        bidsList.add("");
-        bidsList.add("");
+        customerActivity = (CustomerActivity) getActivity();
     }
 
     @Override
@@ -61,16 +52,28 @@ public class CustomerBidsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_customer_bids, container, false);
         ButterKnife.bind(this, rootView);
-        customersBidsProgressBar.getIndeterminateDrawable()
-                .setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
         return rootView;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        initializeSpinner();
+        initializeViews();
         setBidsRecyclerView();
+    }
+
+    public void initializeViews(){
+        customerActivity.setToolbarTitle(getString(R.string.customer_screen_bids));
+        customersBidsProgressBar.getIndeterminateDrawable()
+                .setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+        initializeSpinner();
+    }
+
+    private void initializeSpinner(){
+        addSpinnersItems();
+        spinnersAdapter = new ArrayAdapter<>(getActivity(), R.layout.hint_item, spinnerItems);
+        spinnersAdapter.setDropDownViewResource(R.layout.dropdown_hint_item);
+        customersBidsSpinner.setAdapter(spinnersAdapter);
 
         customersBidsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -99,15 +102,8 @@ public class CustomerBidsFragment extends Fragment {
         });
     }
 
-    private void initializeSpinner(){
-        addSpinnersItems();
-        spinnersAdapter = new ArrayAdapter<>(getActivity(), R.layout.hint_item, spinnerItems);
-        spinnersAdapter.setDropDownViewResource(R.layout.dropdown_hint_item);
-        customersBidsSpinner.setAdapter(spinnersAdapter);
-    }
-
     private void setBidsRecyclerView(){
-        LinearLayoutManager layoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(customerActivity, LinearLayoutManager.VERTICAL, false);
         customersBidsRecyclerView.setHasFixedSize(false);
         customersBidsRecyclerView.setLayoutManager(layoutManager);
         customersBidsRecyclerView.setItemViewCacheSize(50);
@@ -116,15 +112,26 @@ public class CustomerBidsFragment extends Fragment {
         if (animator instanceof SimpleItemAnimator) {
             ((SimpleItemAnimator) animator).setSupportsChangeAnimations(false);
         }
-        recyclersAdapter = new CustomerBidsAdapter(context, bidsList);
+        recyclersAdapter = new CustomerBidsAdapter(customerActivity, bidsList);
         customersBidsRecyclerView.setAdapter(recyclersAdapter);
     }
 
     private void addSpinnersItems(){
-        spinnerItems.add(context.getString(R.string.customer_screen_waiting_bids));
-        spinnerItems.add(context.getString(R.string.customer_screen_active_bids));
-        spinnerItems.add(context.getString(R.string.customer_screen_completed_bids));
-        spinnerItems.add(context.getString(R.string.customer_screen_canceled_bids));
+        spinnerItems.add(getString(R.string.customer_screen_waiting_bids));
+        spinnerItems.add(getString(R.string.customer_screen_active_bids));
+        spinnerItems.add(getString(R.string.customer_screen_completed_bids));
+        spinnerItems.add(getString(R.string.customer_screen_canceled_bids));
+
+        bidsList.add("");
+        bidsList.add("");
+        bidsList.add("");
+        bidsList.add("");
+        bidsList.add("");
+        bidsList.add("");
+        bidsList.add("");
+        bidsList.add("");
+        bidsList.add("");
+        bidsList.add("");
     }
 
 }

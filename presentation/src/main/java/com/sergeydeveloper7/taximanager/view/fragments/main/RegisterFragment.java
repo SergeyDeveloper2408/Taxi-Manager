@@ -1,7 +1,6 @@
 package com.sergeydeveloper7.taximanager.view.fragments.main;
 
 import android.app.Fragment;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -23,13 +22,13 @@ import com.sergeydeveloper7.data.models.DriverModel;
 import com.sergeydeveloper7.data.models.UserModel;
 import com.sergeydeveloper7.taximanager.R;
 import com.sergeydeveloper7.taximanager.navigation.Navigator;
-import com.sergeydeveloper7.taximanager.presenter.RegisterPresenter;
+import com.sergeydeveloper7.taximanager.presenter.main.RegisterPresenter;
 import com.sergeydeveloper7.taximanager.utils.Const;
 import com.sergeydeveloper7.taximanager.view.activities.customer.CustomerActivity;
 import com.sergeydeveloper7.taximanager.view.activities.driver.DriverActivity;
 import com.sergeydeveloper7.taximanager.view.activities.main.MainActivity;
 import com.sergeydeveloper7.taximanager.view.adapters.RegisterAdapter;
-import com.sergeydeveloper7.taximanager.view.basic.RegisterView;
+import com.sergeydeveloper7.taximanager.view.basic.main.RegisterView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -43,7 +42,7 @@ import butterknife.OnClick;
 public class RegisterFragment extends Fragment implements RegisterView {
 
     private static final String TAG = RegisterFragment.class.getSimpleName();
-    private Context             context;
+    private MainActivity        mainActivity;
     private RegisterAdapter     adapter;
     private UserModel           userModel;
     private CustomerModel       customerModel;
@@ -77,9 +76,9 @@ public class RegisterFragment extends Fragment implements RegisterView {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        context = getActivity();
-        ((MainActivity)getActivity()).getApplicationComponent().inject(this);
-        presenter = new RegisterPresenter(this, context);
+        mainActivity = (MainActivity)getActivity();
+        mainActivity.getApplicationComponent().inject(this);
+        presenter = new RegisterPresenter(this, mainActivity);
     }
 
     @Override
@@ -87,39 +86,13 @@ public class RegisterFragment extends Fragment implements RegisterView {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_register, container, false);
         ButterKnife.bind(this, rootView);
-        setLeadsRecyclerView();
         return rootView;
     }
 
-    private void setLeadsRecyclerView(){
-        LinearLayoutManager layoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
-        registerFieldsRecyclerView.setHasFixedSize(false);
-        registerFieldsRecyclerView.setLayoutManager(layoutManager);
-        registerFieldsRecyclerView.setItemViewCacheSize(50);
-        registerFieldsRecyclerView.setDrawingCacheEnabled(true);
-        RecyclerView.ItemAnimator animator = registerFieldsRecyclerView.getItemAnimator();
-        if (animator instanceof SimpleItemAnimator) {
-            ((SimpleItemAnimator) animator).setSupportsChangeAnimations(false);
-        }
-        adapter = new RegisterAdapter(context, index, this);
-        registerFieldsRecyclerView.setAdapter(adapter);
-    }
-
-    private void setViewsVisibility(){
-        chooseYourRoleTextView.setText(context.getString(R.string.register_screen_fill_information));
-        customerRoleRelativeLayout.setVisibility(View.GONE);
-        driverRoleRelativeLayout.setVisibility(View.GONE);
-        registerFieldsRecyclerView.setVisibility(View.VISIBLE);
-    }
-
-    private void showLoading(){
-        containerRoleLayout.setVisibility(View.GONE);
-        registerProgressBar.setVisibility(View.VISIBLE);
-    }
-
-    private void hideLoading(){
-        containerRoleLayout.setVisibility(View.VISIBLE);
-        registerProgressBar.setVisibility(View.GONE);
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        setLeadsRecyclerView();
     }
 
     public void validateUser(){
@@ -135,7 +108,7 @@ public class RegisterFragment extends Fragment implements RegisterView {
     @OnClick(R.id.customerRoleRelativeLayout)
     void setRoleCustomer() {
         userModel = new UserModel();
-        userModel.setRole(context.getString(R.string.register_screen_role_customer));
+        userModel.setRole(getString(R.string.register_screen_role_customer));
         customerModel = new CustomerModel();
         setViewsVisibility();
     }
@@ -143,7 +116,7 @@ public class RegisterFragment extends Fragment implements RegisterView {
     @OnClick(R.id.driverRoleRelativeLayout)
     void setRoleDriver() {
         userModel = new UserModel();
-        userModel.setRole(context.getString(R.string.register_screen_role_driver));
+        userModel.setRole(getString(R.string.register_screen_role_driver));
         driverModel = new DriverModel();
         carModel = new CarModel();
         index.set(index.size()-1, Const.REGISTER_BUTTON_NEXT_STEP);
@@ -157,17 +130,17 @@ public class RegisterFragment extends Fragment implements RegisterView {
 
     @Override
     public void showLoadingProcessEnd() {
-        if(userModel.getRole().equals(context.getString(R.string.register_screen_role_customer)))
-            this.navigator.startActivity(context, CustomerActivity.class);
+        if(userModel.getRole().equals(getString(R.string.register_screen_role_customer)))
+            this.navigator.startActivity(mainActivity, CustomerActivity.class);
         else
-            this.navigator.startActivity(context, DriverActivity.class);
+            this.navigator.startActivity(mainActivity, DriverActivity.class);
 
     }
 
     @Override
     public void showRegistrationProcessError(Throwable throwable) {
         hideLoading();
-        Snackbar.make(registerRelativeLayout, context.getString(R.string.register_screen_error), Snackbar.LENGTH_LONG)
+        Snackbar.make(registerRelativeLayout, getString(R.string.register_screen_error), Snackbar.LENGTH_LONG)
                 .show();
         throwable.printStackTrace();
     }
@@ -187,7 +160,7 @@ public class RegisterFragment extends Fragment implements RegisterView {
     @Override
     public void setValidation(boolean validation) {
         if(validation){
-            if(userModel.getRole().equals(context.getString(R.string.register_screen_role_customer))){
+            if(userModel.getRole().equals(getString(R.string.register_screen_role_customer))){
                 presenter.registerCustomer(userModel, customerModel);
             } else
                 presenter.registerDriver(userModel, driverModel, carModel);
@@ -208,5 +181,36 @@ public class RegisterFragment extends Fragment implements RegisterView {
 
     public CustomerModel getCustomerModel() {
         return customerModel;
+    }
+
+    private void setLeadsRecyclerView(){
+        LinearLayoutManager layoutManager = new LinearLayoutManager(mainActivity, LinearLayoutManager.VERTICAL, false);
+        registerFieldsRecyclerView.setHasFixedSize(false);
+        registerFieldsRecyclerView.setLayoutManager(layoutManager);
+        registerFieldsRecyclerView.setItemViewCacheSize(50);
+        registerFieldsRecyclerView.setDrawingCacheEnabled(true);
+        RecyclerView.ItemAnimator animator = registerFieldsRecyclerView.getItemAnimator();
+        if (animator instanceof SimpleItemAnimator) {
+            ((SimpleItemAnimator) animator).setSupportsChangeAnimations(false);
+        }
+        adapter = new RegisterAdapter(mainActivity, index, this);
+        registerFieldsRecyclerView.setAdapter(adapter);
+    }
+
+    private void setViewsVisibility(){
+        chooseYourRoleTextView.setText(getString(R.string.register_screen_fill_information));
+        customerRoleRelativeLayout.setVisibility(View.GONE);
+        driverRoleRelativeLayout.setVisibility(View.GONE);
+        registerFieldsRecyclerView.setVisibility(View.VISIBLE);
+    }
+
+    private void showLoading(){
+        containerRoleLayout.setVisibility(View.GONE);
+        registerProgressBar.setVisibility(View.VISIBLE);
+    }
+
+    private void hideLoading(){
+        containerRoleLayout.setVisibility(View.VISIBLE);
+        registerProgressBar.setVisibility(View.GONE);
     }
 }

@@ -1,10 +1,10 @@
-package com.sergeydeveloper7.data.repository.implementations;
+package com.sergeydeveloper7.data.repository.implementations.main;
 
 import com.sergeydeveloper7.data.db.models.Customer;
 import com.sergeydeveloper7.data.db.models.User;
 import com.sergeydeveloper7.data.mapper.UserMapper;
 import com.sergeydeveloper7.data.models.UserModel;
-import com.sergeydeveloper7.data.repository.interfaces.LoginRepository;
+import com.sergeydeveloper7.data.repository.basic.main.LoginRepository;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -17,7 +17,7 @@ import io.realm.RealmResults;
 
 public class LoginRepositoryImplements implements LoginRepository {
 
-    private Realm realm;
+    private Realm     realm;
     private UserModel userModel = new UserModel();
 
     public LoginRepositoryImplements() {

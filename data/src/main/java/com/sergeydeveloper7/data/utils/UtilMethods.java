@@ -1,5 +1,8 @@
 package com.sergeydeveloper7.data.utils;
 
+import android.text.TextUtils;
+import android.util.Patterns;
+
 import com.sergeydeveloper7.data.db.models.Car;
 import com.sergeydeveloper7.data.db.models.Customer;
 import com.sergeydeveloper7.data.db.models.Driver;
@@ -9,6 +12,7 @@ import io.realm.Realm;
 import io.realm.RealmResults;
 
 public class UtilMethods {
+
     public static void showTables(Realm realm){
         RealmResults<User> users = realm.where(User.class).findAll();
         System.out.println("========= Table Users =========");
@@ -57,6 +61,11 @@ public class UtilMethods {
             System.out.println("number: " + cars.get(i).getNumber());
             System.out.println("==================");
         }
+    }
+
+
+    public static boolean isValidEmail(CharSequence target) {
+        return (!TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches());
     }
 
 }
