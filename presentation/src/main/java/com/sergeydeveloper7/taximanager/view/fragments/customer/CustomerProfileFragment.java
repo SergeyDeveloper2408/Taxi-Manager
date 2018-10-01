@@ -15,8 +15,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
-import com.sergeydeveloper7.data.models.UserModel;
-import com.sergeydeveloper7.data.utils.UtilMethods;
+import com.sergeydeveloper7.data.models.general.UserModel;
 import com.sergeydeveloper7.taximanager.R;
 import com.sergeydeveloper7.taximanager.navigation.Navigator;
 import com.sergeydeveloper7.taximanager.utils.Const;

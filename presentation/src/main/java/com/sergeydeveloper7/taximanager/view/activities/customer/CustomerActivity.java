@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -15,13 +14,14 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
-import com.sergeydeveloper7.data.models.UserModel;
+import com.sergeydeveloper7.data.models.general.UserModel;
 import com.sergeydeveloper7.taximanager.R;
 import com.sergeydeveloper7.taximanager.utils.Const;
 import com.sergeydeveloper7.taximanager.view.activities.base.BaseActivity;
 import com.sergeydeveloper7.taximanager.view.activities.main.MainActivity;
 import com.sergeydeveloper7.taximanager.view.activities.preferences.SettingsActivity;
 import com.sergeydeveloper7.taximanager.view.fragments.customer.CustomerBidsFragment;
+import com.sergeydeveloper7.taximanager.view.fragments.customer.CustomerNewBidFragment;
 import com.sergeydeveloper7.taximanager.view.fragments.customer.CustomerProfileFragment;
 
 import butterknife.BindView;
@@ -111,10 +111,7 @@ public class CustomerActivity extends BaseActivity implements NavigationView.OnN
     }
 
     private void setViewsProperties(){
-        fab.setOnClickListener((View view) -> {
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
-        });
+        fab.setOnClickListener((View view) -> startCustomerNewBidScreen());
 
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
@@ -136,6 +133,13 @@ public class CustomerActivity extends BaseActivity implements NavigationView.OnN
         fab.setVisibility(View.GONE);
         titleTodo.setVisibility(View.GONE);
         this.navigator.startActivity(this, SettingsActivity.class);
+    }
+
+    private void startCustomerNewBidScreen(){
+        fab.setVisibility(View.GONE);
+        titleTodo.setVisibility(View.GONE);
+        navigator.startFragmentWithBackStack(this, new CustomerNewBidFragment(),
+                Const.CUSTOMER_NEW_BID_FRAGMENT_ID, R.id.customerFrame);
     }
 
     private void startBidsScreen(){

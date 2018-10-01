@@ -16,6 +16,7 @@ public class Const {
     public static final String CUSTOMER_BIDS_FRAGMENT_ID = "CustomerRequestsFragment";
     public static final String CUSTOMER_PROFILE_FRAGMENT_ID = "CustomerProfileFragment";
     public static final String CUSTOMER_EDIT_PROFILE_FRAGMENT_ID = "CustomerEditProfileFragment";
+    public static final String CUSTOMER_NEW_BID_FRAGMENT_ID = "CustomerNewBidFragment";
 
     //Register fragment constants
     public static final String REGISTER_FIELD_EMAIL = "RegisterFieldEmail";

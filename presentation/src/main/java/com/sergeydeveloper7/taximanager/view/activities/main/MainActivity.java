@@ -12,7 +12,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.google.gson.Gson;
-import com.sergeydeveloper7.data.models.UserModel;
+import com.sergeydeveloper7.data.models.general.UserModel;
 import com.sergeydeveloper7.taximanager.R;
 import com.sergeydeveloper7.taximanager.utils.Const;
 import com.sergeydeveloper7.taximanager.view.activities.customer.CustomerActivity;

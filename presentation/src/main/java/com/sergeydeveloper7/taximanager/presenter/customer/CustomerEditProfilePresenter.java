@@ -5,9 +5,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import com.google.gson.Gson;
-import com.sergeydeveloper7.data.errors.EmailExistException;
-import com.sergeydeveloper7.data.errors.PhoneNumberExistException;
-import com.sergeydeveloper7.data.models.UserModel;
+import com.sergeydeveloper7.data.models.general.UserModel;
 import com.sergeydeveloper7.data.repository.implementations.customer.ChangeCustomerDataRepositoryImplements;
 import com.sergeydeveloper7.data.validation.Validation;
 import com.sergeydeveloper7.taximanager.R;

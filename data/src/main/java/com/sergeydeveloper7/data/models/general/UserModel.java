@@ -1,4 +1,4 @@
-package com.sergeydeveloper7.data.models;
+package com.sergeydeveloper7.data.models.general;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

@@ -41,8 +41,6 @@
     <string name="title_activity_customer">Customer\'s Home</string>
     <string name="register_screen_button_next_step">next step</string>
 
-
-
     <!-- Home Screen Constants -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -50,6 +48,7 @@
     <string name="home_todo">You are in home page, please go to \nanother page by tap on drawer\'s item.</string>
 
     <!-- Customer Screen Constants -->
+    <string name="customer_screen_new_bid">New Bid</string>
     <string name="customer_screen_bids">Bids</string>
     <string name="customer_screen_waiting_bids">Waiting Bids</string>
     <string name="customer_screen_no_bids">No Bids</string>
@@ -68,6 +67,14 @@
     <string name="customer_screen_profile_save">Save</string>
     <string name="customer_screen_profile_edit_profile">Edit Profile</string>
     <string name="customer_screen_edited_profile_success">Edited profile success!</string>
+
+    <string name="customer_screen_new_bid_from">From</string>
+    <string name="customer_screen_new_bid_to">To</string>
+    <string name="customer_screen_new_bid_distance" formatted="false">%s Km</string>
+    <string name="customer_screen_new_bid_cost" formatted="false">%s $</string>
+    <string name="customer_screen_new_bid_time_full" formatted="false">%s hours %s minutes</string>
+    <string name="customer_screen_new_bid_time" formatted="false">%s minutes</string>
+
 
     <!-- Driver Screen Constants -->
     <string name="driver_screen_state_free">free</string>

@@ -1,7 +1,7 @@
 package com.sergeydeveloper7.data.mapper;
 
 import com.sergeydeveloper7.data.db.models.User;
-import com.sergeydeveloper7.data.models.UserModel;
+import com.sergeydeveloper7.data.models.general.UserModel;
 
 /**
  * Created by serg on 29.03.18.

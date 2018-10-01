@@ -24,7 +24,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.jakewharton.rxbinding2.widget.RxTextView;
-import com.sergeydeveloper7.data.models.UserModel;
+import com.sergeydeveloper7.data.models.general.UserModel;
 import com.sergeydeveloper7.data.utils.UtilMethods;
 import com.sergeydeveloper7.taximanager.R;
 import com.sergeydeveloper7.taximanager.presenter.customer.CustomerEditProfilePresenter;

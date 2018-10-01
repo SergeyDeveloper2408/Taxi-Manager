@@ -19,6 +19,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".view.activities.main.MainActivity"
             android:screenOrientation="portrait"
@@ -30,6 +31,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".view.activities.customer.CustomerActivity"
             android:label="@string/title_activity_customer"
@@ -40,11 +42,18 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
         <activity android:name=".view.activities.driver.DriverActivity" />
+
         <activity
             android:name=".view.activities.preferences.SettingsActivity"
             android:label="@string/title_activity_settings"
             android:theme="@style/AppTheme"/>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCYkR6aeqwTUwJrfrkYMFNcHL-8lFvwUrc"/>
+
     </application>
 
 </manifest>

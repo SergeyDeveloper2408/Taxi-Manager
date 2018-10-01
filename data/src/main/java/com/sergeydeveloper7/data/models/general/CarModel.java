@@ -1,4 +1,4 @@
-package com.sergeydeveloper7.data.models;
+package com.sergeydeveloper7.data.models.general;
 
 /**
  * Created by serg on 11.01.18.

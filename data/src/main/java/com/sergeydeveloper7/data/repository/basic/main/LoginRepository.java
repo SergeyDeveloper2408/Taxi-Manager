@@ -1,6 +1,6 @@
 package com.sergeydeveloper7.data.repository.basic.main;
 
-import com.sergeydeveloper7.data.models.UserModel;
+import com.sergeydeveloper7.data.models.general.UserModel;
 
 import io.reactivex.Observable;
 

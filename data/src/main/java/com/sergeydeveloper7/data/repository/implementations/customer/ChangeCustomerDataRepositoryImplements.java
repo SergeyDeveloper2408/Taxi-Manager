@@ -4,7 +4,7 @@ import com.sergeydeveloper7.data.db.models.User;
 import com.sergeydeveloper7.data.errors.EmailExistException;
 import com.sergeydeveloper7.data.errors.PhoneNumberExistException;
 import com.sergeydeveloper7.data.mapper.UserMapper;
-import com.sergeydeveloper7.data.models.UserModel;
+import com.sergeydeveloper7.data.models.general.UserModel;
 import com.sergeydeveloper7.data.repository.basic.customer.ChangeCustomerDataRepository;
 import com.sergeydeveloper7.data.validation.Validation;
 

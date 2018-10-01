@@ -16,10 +16,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.sergeydeveloper7.data.enums.ValidationError;
-import com.sergeydeveloper7.data.models.CarModel;
-import com.sergeydeveloper7.data.models.CustomerModel;
-import com.sergeydeveloper7.data.models.DriverModel;
-import com.sergeydeveloper7.data.models.UserModel;
+import com.sergeydeveloper7.data.models.general.CarModel;
+import com.sergeydeveloper7.data.models.general.CustomerModel;
+import com.sergeydeveloper7.data.models.general.DriverModel;
+import com.sergeydeveloper7.data.models.general.UserModel;
 import com.sergeydeveloper7.taximanager.R;
 import com.sergeydeveloper7.taximanager.navigation.Navigator;
 import com.sergeydeveloper7.taximanager.presenter.main.RegisterPresenter;

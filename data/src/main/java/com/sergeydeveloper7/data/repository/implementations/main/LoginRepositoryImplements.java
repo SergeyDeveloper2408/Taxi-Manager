@@ -3,7 +3,7 @@ package com.sergeydeveloper7.data.repository.implementations.main;
 import com.sergeydeveloper7.data.db.models.Customer;
 import com.sergeydeveloper7.data.db.models.User;
 import com.sergeydeveloper7.data.mapper.UserMapper;
-import com.sergeydeveloper7.data.models.UserModel;
+import com.sergeydeveloper7.data.models.general.UserModel;
 import com.sergeydeveloper7.data.repository.basic.main.LoginRepository;
 
 import io.reactivex.Observable;
