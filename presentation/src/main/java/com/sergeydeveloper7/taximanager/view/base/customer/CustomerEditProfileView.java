@@ -1,4 +1,4 @@
-package com.sergeydeveloper7.taximanager.view.basic.customer;
+package com.sergeydeveloper7.taximanager.view.base.customer;
 
 public interface CustomerEditProfileView {
 

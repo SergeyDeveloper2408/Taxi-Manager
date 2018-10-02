@@ -10,8 +10,10 @@ import io.realm.annotations.Required;
 
 public class Customer extends RealmObject {
 
-    @PrimaryKey private long id;
-    @Required private String userName;
+    @PrimaryKey
+    private long id;
+
+    private long userID;
 
     public long getId() {
         return id;
@@ -21,12 +23,11 @@ public class Customer extends RealmObject {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public long getUserID() {
+        return userID;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUserID(long userID) {
+        this.userID = userID;
     }
-
 }

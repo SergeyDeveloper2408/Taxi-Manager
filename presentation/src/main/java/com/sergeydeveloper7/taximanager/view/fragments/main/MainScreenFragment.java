@@ -24,7 +24,7 @@ import com.sergeydeveloper7.taximanager.presenter.main.MainScreenPresenter;
 import com.sergeydeveloper7.taximanager.utils.Const;
 import com.sergeydeveloper7.taximanager.view.activities.customer.CustomerActivity;
 import com.sergeydeveloper7.taximanager.view.activities.main.MainActivity;
-import com.sergeydeveloper7.taximanager.view.basic.main.MainScreenView;
+import com.sergeydeveloper7.taximanager.view.base.main.MainScreenView;
 
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
@@ -44,19 +44,50 @@ public class MainScreenFragment extends Fragment implements View.OnClickListener
     private String              password = "";
     private MainScreenPresenter presenter;
 
-    @BindView(R.id.loginEmailTextInputLayout)      TextInputLayout   loginEmailTextInputLayout;
-    @BindView(R.id.loginEmailTextInputEditText)    TextInputEditText loginEmailTextInputEditText;
-    @BindView(R.id.loginPasswordTextInputLayout)   TextInputLayout   loginPasswordTextInputLayout;
-    @BindView(R.id.loginPasswordTextInputEditText) TextInputEditText loginPasswordTextInputEditText;
-    @BindView(R.id.loginRelativeLayout)            RelativeLayout    loginRelativeLayout;
-    @BindView(R.id.registerLinkRelativeLayout)     RelativeLayout    registerLinkRelativeLayout;
-    @BindView(R.id.contentRelativeLayout)          RelativeLayout    contentRelativeLayout;
-    @BindView(R.id.registerLinkTextView)           TextView          registerLinkTextView;
-    @BindView(R.id.separatorLinkView)              View              separatorLinkView;
-    @BindView(R.id.loginButton)                    Button            loginButton;
-    @BindView(R.id.loginProgressBar)               ProgressBar       loginProgressBar;
 
-    @Inject Navigator navigator;
+    //Text Input Layouts
+    @BindView(R.id.loginEmailTextInputLayout)
+    TextInputLayout loginEmailTextInputLayout;
+
+    @BindView(R.id.loginPasswordTextInputLayout)
+    TextInputLayout loginPasswordTextInputLayout;
+
+    //Text Input Edit Texts
+    @BindView(R.id.loginEmailTextInputEditText)
+    TextInputEditText loginEmailTextInputEditText;
+
+    @BindView(R.id.loginPasswordTextInputEditText)
+    TextInputEditText loginPasswordTextInputEditText;
+
+    //Layouts
+    @BindView(R.id.loginRelativeLayout)
+    RelativeLayout loginRelativeLayout;
+
+    @BindView(R.id.registerLinkRelativeLayout)
+    RelativeLayout registerLinkRelativeLayout;
+
+    @BindView(R.id.contentRelativeLayout)
+    RelativeLayout contentRelativeLayout;
+
+    //Text Views
+    @BindView(R.id.registerLinkTextView)
+    TextView registerLinkTextView;
+
+    //Views
+    @BindView(R.id.separatorLinkView)
+    View separatorLinkView;
+
+    //Buttons
+    @BindView(R.id.loginButton)
+    Button loginButton;
+
+    //Progress Bars
+    @BindView(R.id.loginProgressBar)
+    ProgressBar loginProgressBar;
+
+    //Dependency Injection
+    @Inject
+    Navigator navigator;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -69,7 +100,8 @@ public class MainScreenFragment extends Fragment implements View.OnClickListener
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_main_screen, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_main_screen, container,
+                false);
         ButterKnife.bind(this, rootView);
         return rootView;
     }
@@ -117,7 +149,8 @@ public class MainScreenFragment extends Fragment implements View.OnClickListener
             case R.id.registerLinkRelativeLayout:
                 registerLinkTextView.setTextColor(getResources().getColor(R.color.white));
                 separatorLinkView.setBackgroundColor(getResources().getColor(R.color.white));
-                navigator.startFragmentWithBackStack(mainActivity, new RegisterFragment(), Const.REGISTER_FRAGMENT_ID, R.id.main_frame);
+                navigator.startFragmentWithBackStack(mainActivity, new RegisterFragment(),
+                        Const.REGISTER_FRAGMENT_ID, R.id.main_frame);
                 break;
         }
     }

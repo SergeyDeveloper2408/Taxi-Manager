@@ -29,7 +29,7 @@ import com.sergeydeveloper7.data.utils.UtilMethods;
 import com.sergeydeveloper7.taximanager.R;
 import com.sergeydeveloper7.taximanager.presenter.customer.CustomerEditProfilePresenter;
 import com.sergeydeveloper7.taximanager.view.activities.customer.CustomerActivity;
-import com.sergeydeveloper7.taximanager.view.basic.customer.CustomerEditProfileView;
+import com.sergeydeveloper7.taximanager.view.base.customer.CustomerEditProfileView;
 
 import java.util.concurrent.TimeUnit;
 
@@ -246,7 +246,8 @@ public class CustomerEditProfileFragment extends Fragment implements CustomerEdi
         editCustomerProfilePhoneNumberProgressBar.setVisibility(View.GONE);
         verifyPhoneNumberResultImageView.setVisibility(View.GONE);
         Snackbar.make(customerEditProfileMainLayout,
-                R.string.process_error, Snackbar.LENGTH_LONG).show();
+                R.string.process_error, Snackbar.LENGTH_LONG)
+                .show();
     }
 
     @Override
@@ -257,7 +258,7 @@ public class CustomerEditProfileFragment extends Fragment implements CustomerEdi
 
     private void changeData(){
         user.setUserName(newUserName);
-        user.setEmail(newEmailAddress);
+        user.setEmailAddress(newEmailAddress);
         user.setPhoneNumber(newPhoneNumber);
         presenter.changeData(user);
     }
@@ -288,7 +289,7 @@ public class CustomerEditProfileFragment extends Fragment implements CustomerEdi
         newUserName = !TextUtils.isEmpty(user.getUserName()) ? user.getUserName()
                 : getString(R.string.no_data_error);
 
-        newEmailAddress =  !TextUtils.isEmpty(user.getEmail()) ? user.getEmail()
+        newEmailAddress =  !TextUtils.isEmpty(user.getEmailAddress()) ? user.getEmailAddress()
                 : getString(R.string.no_data_error);
 
         newPhoneNumber = !TextUtils.isEmpty(user.getPhoneNumber()) ? user.getPhoneNumber()
@@ -329,7 +330,7 @@ public class CustomerEditProfileFragment extends Fragment implements CustomerEdi
 
         if(!UtilMethods.isValidEmail(newEmailAddress))
             showInvalidEmailAddressError();
-        else if(newEmailAddress.equals(user.getEmail())){
+        else if(newEmailAddress.equals(user.getEmailAddress())){
             editCustomerProfileEmailProgressBar.setVisibility(View.GONE);
             verifyEmailResultImageView.setVisibility(View.GONE);
 
@@ -352,7 +353,7 @@ public class CustomerEditProfileFragment extends Fragment implements CustomerEdi
             editCustomerProfilePhoneNumberProgressBar.setVisibility(View.GONE);
             verifyPhoneNumberResultImageView.setVisibility(View.GONE);
 
-             if(newEmailAddress.equals(user.getEmail()))
+             if(newEmailAddress.equals(user.getEmailAddress()))
                  save.setVisible(false);
         } else
             checkIfPhoneNumberExist();

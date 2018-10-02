@@ -10,12 +10,23 @@ import io.realm.annotations.Required;
 
 public class User extends RealmObject {
 
-    @PrimaryKey private long id;
-    @Required private String email;
-    @Required private String pass;
-    @Required private String userName;
-    @Required private String role;
+    @PrimaryKey
+    private long id;
+
+    @Required
+    private String emailAddress;
+
+    @Required
+    private String password;
+
+    @Required
+    private String userName;
+
+    @Required
+    private String role;
+
     private int    rating;
+
     private String phoneNumber;
 
     public long getId() {
@@ -26,20 +37,20 @@ public class User extends RealmObject {
         this.id = id;
     }
 
-    public String getEmail() {
-        return email;
+    public String getEmailAddress() {
+        return emailAddress;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
     }
 
-    public String getPass() {
-        return pass;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPass(String pass) {
-        this.pass = pass;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getUserName() {

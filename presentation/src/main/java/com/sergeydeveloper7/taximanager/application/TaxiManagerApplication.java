@@ -2,7 +2,7 @@ package com.sergeydeveloper7.taximanager.application;
 
 import android.support.multidex.MultiDexApplication;
 
-import com.sergeydeveloper7.data.db.RealmInitializer;
+import com.sergeydeveloper7.data.db.initialize.RealmInitializer;
 import com.sergeydeveloper7.taximanager.di.components.ApplicationComponent;
 import com.sergeydeveloper7.taximanager.di.components.DaggerApplicationComponent;
 import com.sergeydeveloper7.taximanager.di.modules.ApplicationModule;

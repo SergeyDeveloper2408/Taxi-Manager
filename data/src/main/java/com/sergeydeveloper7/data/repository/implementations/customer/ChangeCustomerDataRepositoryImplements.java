@@ -1,7 +1,7 @@
 package com.sergeydeveloper7.data.repository.implementations.customer;
 
 import com.sergeydeveloper7.data.db.models.User;
-import com.sergeydeveloper7.data.errors.EmailExistException;
+import com.sergeydeveloper7.data.errors.EmailAddressExistException;
 import com.sergeydeveloper7.data.errors.PhoneNumberExistException;
 import com.sergeydeveloper7.data.mapper.UserMapper;
 import com.sergeydeveloper7.data.models.general.UserModel;
@@ -32,9 +32,9 @@ public class ChangeCustomerDataRepositoryImplements implements ChangeCustomerDat
                     realm -> {
                         RealmResults<User> users = realm.where(User.class).findAll();
                         for(int i = 0; i < users.size(); i++){
-                            if(users.get(i).getEmail().equalsIgnoreCase(emailAddress)){
+                            if(users.get(i).getEmailAddress().equalsIgnoreCase(emailAddress)){
                                 registerValidation.setValid(false);
-                                registerValidation.setException(new EmailExistException());
+                                registerValidation.setException(new EmailAddressExistException());
                             }
                         }
                     },
@@ -69,7 +69,7 @@ public class ChangeCustomerDataRepositoryImplements implements ChangeCustomerDat
                     realm -> {
                         User user = realm.where(User.class).equalTo("id", editedUser.getId()).findFirst();
                         user.setUserName(editedUser.getUserName());
-                        user.setEmail(editedUser.getEmail());
+                        user.setEmailAddress(editedUser.getEmailAddress());
                         user.setPhoneNumber(editedUser.getPhoneNumber());
                         userModel = UserMapper.mapUser(user);
                     },

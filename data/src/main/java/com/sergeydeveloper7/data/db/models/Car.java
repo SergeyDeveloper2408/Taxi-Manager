@@ -10,10 +10,17 @@ import io.realm.annotations.Required;
 
 public class Car extends RealmObject {
 
-    @PrimaryKey private long id;
-    @Required private String color;
-    @Required private String model;
-    @Required private String number;
+    @PrimaryKey
+    private long id;
+
+    @Required
+    private String color;
+
+    @Required
+    private String model;
+
+    @Required
+    private String number;
 
     public long getId() {
         return id;

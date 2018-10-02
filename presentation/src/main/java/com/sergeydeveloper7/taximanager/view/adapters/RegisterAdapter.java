@@ -73,24 +73,24 @@ public class RegisterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
                     switch (index.get(viewHolder.getAdapterPosition())){
-                        case Const.REGISTER_FIELD_EMAIL:
-                            fragment.getUserModel().setEmail(s.toString());
+                        case Const.REGISTER_FIELD_EMAIL_ADDRESS:
+                            fragment.getUserModel().setEmailAddress(s.toString());
+                            if(fragment.getUserModel().getRole().equals(
+                                    context.getString(R.string.register_screen_role_customer))){
+                                fragment.getCustomerModel().setEmailAddress(s.toString());
+                            } else {
+                                fragment.getDriverModel().setEmailAddress(s.toString());
+                            }
                             break;
                         case Const.REGISTER_FIELD_PASSWORD:
                             if(!s.toString().isEmpty()){
-                                fragment.getUserModel().setPass(s.toString());
+                                fragment.getUserModel().setPassword(s.toString());
                             }
                             break;
                         case Const.REGISTER_FIELD_USERNAME:
-                            if(fragment.getUserModel().getRole().equals(context.getString(R.string.register_screen_role_customer))){
-                                fragment.getUserModel().setUserName(s.toString());
-                                fragment.getCustomerModel().setUserName(s.toString());
-                            } else {
-                                fragment.getUserModel().setUserName(s.toString());
-                                fragment.getDriverModel().setUserName(s.toString());
-                            }
+                            fragment.getUserModel().setUserName(s.toString());
                             break;
-                        case Const.REGISTER_FIELD_PHONENUMBER:
+                        case Const.REGISTER_FIELD_PHONE_NUMBER:
                                 fragment.getUserModel().setPhoneNumber(s.toString());
                             break;
                         case Const.REGISTER_FIELD_CAR_COLOR:
@@ -137,22 +137,22 @@ public class RegisterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     private boolean checkPersonalFields(){
         boolean isValidFields = false;
-        if(fragment.getUserModel().getEmail().isEmpty()){
-            getErrorMap().get(Const.REGISTER_FIELD_EMAIL).showError(ValidationError.EMAIL_EMPTY);
-        } else if(!fragment.getUserModel().getEmail().contains("@")){
-            getErrorMap().get(Const.REGISTER_FIELD_EMAIL).showError(ValidationError.EMAIL_INCORRECT);
-        } else if(fragment.getUserModel().getPass().isEmpty()){
+        if(fragment.getUserModel().getEmailAddress().isEmpty()){
+            getErrorMap().get(Const.REGISTER_FIELD_EMAIL_ADDRESS).showError(ValidationError.EMAIL_ADDRESS_EMPTY);
+        } else if(!fragment.getUserModel().getEmailAddress().contains("@")){
+            getErrorMap().get(Const.REGISTER_FIELD_EMAIL_ADDRESS).showError(ValidationError.EMAIL_ADDRESS_INCORRECT);
+        } else if(fragment.getUserModel().getPassword().isEmpty()){
             getErrorMap().get(Const.REGISTER_FIELD_PASSWORD).showError(ValidationError.PASSWORD_EMPTY);
-        } else if(fragment.getUserModel().getPass().length()<6){
+        } else if(fragment.getUserModel().getPassword().length()<6){
             getErrorMap().get(Const.REGISTER_FIELD_PASSWORD).showError(ValidationError.PASSWORD_SHORT);
         } else if(fragment.getUserModel().getUserName().isEmpty()){
             getErrorMap().get(Const.REGISTER_FIELD_USERNAME).showError(ValidationError.USERNAME_EMPTY);
         } else if(fragment.getUserModel().getUserName().length()<6){
             getErrorMap().get(Const.REGISTER_FIELD_USERNAME).showError(ValidationError.USERNAME_SHORT);
         } else if(fragment.getUserModel().getPhoneNumber().isEmpty()){
-            getErrorMap().get(Const.REGISTER_FIELD_PHONENUMBER).showError(ValidationError.PHONENUMBER_EMPTY);
+            getErrorMap().get(Const.REGISTER_FIELD_PHONE_NUMBER).showError(ValidationError.PHONE_NUMBER_EMPTY);
         } else if(fragment.getUserModel().getPhoneNumber().length()<6){
-            getErrorMap().get(Const.REGISTER_FIELD_PHONENUMBER).showError(ValidationError.PHONENUMBER_SHORT);
+            getErrorMap().get(Const.REGISTER_FIELD_PHONE_NUMBER).showError(ValidationError.PHONE_NUMBER_SHORT);
         } else isValidFields = true;
         return isValidFields;
     }
@@ -160,21 +160,21 @@ public class RegisterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private boolean checkCarFields(){
         boolean isValidFields = false;
         if(fragment.getCarModel().getColor().isEmpty()){
-            getErrorMap().get(Const.REGISTER_FIELD_EMAIL).showError(ValidationError.CAR_COLOR_EMPTY);
+            getErrorMap().get(Const.REGISTER_FIELD_EMAIL_ADDRESS).showError(ValidationError.CAR_COLOR_EMPTY);
         } else if(fragment.getCarModel().getModel().isEmpty()){
-            getErrorMap().get(Const.REGISTER_FIELD_EMAIL).showError(ValidationError.CAR_MODEL_EMPTY);
+            getErrorMap().get(Const.REGISTER_FIELD_EMAIL_ADDRESS).showError(ValidationError.CAR_MODEL_EMPTY);
         } else if(fragment.getCarModel().getNumber().isEmpty()){
-            getErrorMap().get(Const.REGISTER_FIELD_EMAIL).showError(ValidationError.CAR_NUMBER_EMPTY);
+            getErrorMap().get(Const.REGISTER_FIELD_EMAIL_ADDRESS).showError(ValidationError.CAR_NUMBER_EMPTY);
         } else isValidFields = true;
         return isValidFields;
     }
 
     private void showError(RegisterFieldViewHolder viewHolder, ValidationError validationError){
-            if(validationError.equals(ValidationError.EMAIL_EMPTY)){
+            if(validationError.equals(ValidationError.EMAIL_ADDRESS_EMPTY)){
                 viewHolder.registerFieldLabelTextInputLayout.setError(context.getString(R.string.register_screen_email_hint));
-            } else if(validationError.equals(ValidationError.EMAIL_EXIST)){
+            } else if(validationError.equals(ValidationError.EMAIL_ADDRESS_EXIST)){
                 viewHolder.registerFieldLabelTextInputLayout.setError(context.getString(R.string.register_screen_email_exist_error));
-            } else if(validationError.equals(ValidationError.EMAIL_INCORRECT)){
+            } else if(validationError.equals(ValidationError.EMAIL_ADDRESS_INCORRECT)){
                 viewHolder.registerFieldLabelTextInputLayout.setError(context.getString(R.string.main_screen_invalid_email));
             } else if(validationError.equals(ValidationError.PASSWORD_EMPTY)){
                 viewHolder.registerFieldLabelTextInputLayout.setError(context.getString(R.string.register_screen_password_hint));
@@ -184,11 +184,11 @@ public class RegisterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 viewHolder.registerFieldLabelTextInputLayout.setError(context.getString(R.string.register_screen_username_hint));
             } else if(validationError.equals(ValidationError.USERNAME_SHORT)){
                 viewHolder.registerFieldLabelTextInputLayout.setError(context.getString(R.string.register_screen_email_username_short));
-            } else if(validationError.equals(ValidationError.PHONENUMBER_EMPTY)){
+            } else if(validationError.equals(ValidationError.PHONE_NUMBER_EMPTY)){
                 viewHolder.registerFieldLabelTextInputLayout.setError(context.getString(R.string.register_screen_phone_hint));
-            } else if(validationError.equals(ValidationError.PHONENUMBER_SHORT)){
+            } else if(validationError.equals(ValidationError.PHONE_NUMBER_SHORT)){
                 viewHolder.registerFieldLabelTextInputLayout.setError(context.getString(R.string.register_screen_email_phone_number_short));
-            } else if(validationError.equals(ValidationError.PHONENUMBER_EXIST)){
+            } else if(validationError.equals(ValidationError.PHONE_NUMBER_EXIST)){
                 viewHolder.registerFieldLabelTextInputLayout.setError(context.getString(R.string.register_screen_phone_number_exist_error));
             } else if(validationError.equals(ValidationError.CAR_COLOR_EMPTY)){
                 viewHolder.registerFieldLabelTextInputLayout.setError(context.getString(R.string.register_screen_car_color_hint));

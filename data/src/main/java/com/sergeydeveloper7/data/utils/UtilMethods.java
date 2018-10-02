@@ -20,8 +20,8 @@ public class UtilMethods {
             System.out.println("==================");
             System.out.println("i: " + i);
             System.out.println("id: " + users.get(i).getId());
-            System.out.println("email: " + users.get(i).getEmail());
-            System.out.println("pass: " + users.get(i).getPass());
+            System.out.println("email: " + users.get(i).getEmailAddress());
+            System.out.println("pass: " + users.get(i).getPassword());
             System.out.println("userName: " + users.get(i).getUserName());
             System.out.println("rating: " + users.get(i).getRating());
             System.out.println("phoneNumber: " + users.get(i).getPhoneNumber());
@@ -34,7 +34,7 @@ public class UtilMethods {
             System.out.println("==================");
             System.out.println("i: " + i);
             System.out.println("id: " + customers.get(i).getId());
-            System.out.println("userName: " + customers.get(i).getUserName());
+            System.out.println("userID: " + customers.get(i).getUserID());
             System.out.println("==================");
         }
 
@@ -44,7 +44,7 @@ public class UtilMethods {
             System.out.println("==================");
             System.out.println("i: " + i);
             System.out.println("id: " + drivers.get(i).getId());
-            System.out.println("userName: " + drivers.get(i).getUserName());
+            System.out.println("userID: " + drivers.get(i).getUserID());
             System.out.println("userState: " + drivers.get(i).getUserState());
             System.out.println("carID: " + drivers.get(i).getCar().getId());
             System.out.println("==================");

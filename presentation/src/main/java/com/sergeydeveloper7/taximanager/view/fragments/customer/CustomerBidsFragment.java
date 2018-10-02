@@ -7,6 +7,7 @@ import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SimpleItemAnimator;
@@ -16,11 +17,13 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.sergeydeveloper7.taximanager.R;
 import com.sergeydeveloper7.taximanager.view.activities.customer.CustomerActivity;
 import com.sergeydeveloper7.taximanager.view.adapters.CustomerBidsAdapter;
+import com.sergeydeveloper7.taximanager.view.base.customer.CustomerBidsView;
 
 import java.util.ArrayList;
 
@@ -28,7 +31,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.ganfra.materialspinner.MaterialSpinner;
 
-public class CustomerBidsFragment extends Fragment {
+public class CustomerBidsFragment extends Fragment implements CustomerBidsView {
 
     private ArrayList<String>    spinnerItems = new ArrayList<>();
     private ArrayAdapter<String> spinnersAdapter;
@@ -36,10 +39,25 @@ public class CustomerBidsFragment extends Fragment {
     private CustomerBidsAdapter  recyclersAdapter;
     private ArrayList<String>    bidsList = new ArrayList<>();
 
-    @BindView(R.id.customersBidsRecyclerView) RecyclerView    customersBidsRecyclerView;
-    @BindView(R.id.customersBidsSpinner)      MaterialSpinner customersBidsSpinner;
-    @BindView(R.id.titleNoBids)               TextView        titleNoBids;
-    @BindView(R.id.customersBidsProgressBar)  ProgressBar     customersBidsProgressBar;
+    //RecyclerViews
+    @BindView(R.id.customersBidsRecyclerView)
+    RecyclerView customersBidsRecyclerView;
+
+    //Spinners
+    @BindView(R.id.customersBidsSpinner)
+    MaterialSpinner customersBidsSpinner;
+
+    //TextView
+    @BindView(R.id.titleNoBids)
+    TextView titleNoBids;
+
+    //ProgressBars
+    @BindView(R.id.customersBidsProgressBar)
+    ProgressBar customersBidsProgressBar;
+
+    //Layouts
+    @BindView(R.id.customerBidsMainLayout)
+    RelativeLayout customerBidsMainLayout;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -62,7 +80,27 @@ public class CustomerBidsFragment extends Fragment {
         setBidsRecyclerView();
     }
 
-    public void initializeViews(){
+    @Override
+    public void showFindBidsProcessStart() {
+        customersBidsProgressBar.setVisibility(View.VISIBLE);
+        customersBidsRecyclerView.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showFindBidsProcessEnd() {
+        customersBidsProgressBar.setVisibility(View.GONE);
+        customersBidsRecyclerView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void showFindBidsProcessError(Throwable throwable) {
+        customersBidsProgressBar.setVisibility(View.GONE);
+        customersBidsRecyclerView.setVisibility(View.VISIBLE);
+        Snackbar.make(customerBidsMainLayout, getString(R.string.process_error),
+                Snackbar.LENGTH_LONG).show();
+    }
+
+    private void initializeViews(){
         customerActivity.setToolbarTitle(getString(R.string.customer_screen_bids));
         customersBidsProgressBar.getIndeterminateDrawable()
                 .setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
@@ -70,7 +108,9 @@ public class CustomerBidsFragment extends Fragment {
     }
 
     private void initializeSpinner(){
+
         addSpinnersItems();
+
         spinnersAdapter = new ArrayAdapter<>(getActivity(), R.layout.hint_item, spinnerItems);
         spinnersAdapter.setDropDownViewResource(R.layout.dropdown_hint_item);
         customersBidsSpinner.setAdapter(spinnersAdapter);
@@ -79,19 +119,9 @@ public class CustomerBidsFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(id != 0){
-                    customersBidsProgressBar.setVisibility(View.VISIBLE);
-                    customersBidsRecyclerView.setVisibility(View.GONE);
-                    Handler handler = new Handler();
-                    handler.postDelayed(() -> {
-                        customersBidsProgressBar.setVisibility(View.GONE);
-                        customersBidsRecyclerView.setVisibility(View.VISIBLE);
-                    }, 1000);
+                    //TODO presenter.findBids(spinnerItems.get(position/id))
                 } else {
-                    customersBidsRecyclerView.setVisibility(View.GONE);
-                    customersBidsProgressBar.setVisibility(View.VISIBLE);
-                    Handler handler = new Handler();
-                    handler.postDelayed(() -> customersBidsProgressBar.setVisibility(View.GONE), 1000);
-
+                    titleNoBids.setText(getString(R.string.customer_screen_no_bids));
                 }
             }
 
@@ -121,17 +151,5 @@ public class CustomerBidsFragment extends Fragment {
         spinnerItems.add(getString(R.string.customer_screen_active_bids));
         spinnerItems.add(getString(R.string.customer_screen_completed_bids));
         spinnerItems.add(getString(R.string.customer_screen_canceled_bids));
-
-        bidsList.add("");
-        bidsList.add("");
-        bidsList.add("");
-        bidsList.add("");
-        bidsList.add("");
-        bidsList.add("");
-        bidsList.add("");
-        bidsList.add("");
-        bidsList.add("");
-        bidsList.add("");
     }
-
 }

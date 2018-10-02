@@ -10,9 +10,13 @@ import io.realm.annotations.Required;
 
 public class Driver extends RealmObject {
 
-    @PrimaryKey private long id;
-    @Required private String userName;
+    @PrimaryKey
+    private long id;
+
+    private long userID;
+
     private String userState;
+
     private Car    car;
 
     public long getId() {
@@ -23,12 +27,12 @@ public class Driver extends RealmObject {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public long getUserID() {
+        return userID;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUserID(long userID) {
+        this.userID = userID;
     }
 
     public String getUserState() {

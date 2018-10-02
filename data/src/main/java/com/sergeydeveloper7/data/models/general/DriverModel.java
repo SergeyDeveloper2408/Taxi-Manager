@@ -7,7 +7,7 @@ package com.sergeydeveloper7.data.models.general;
 public class DriverModel {
 
     private long id;
-    private String userName;
+    private String emailAddress;
     private String userState;
     private CarModel car;
 
@@ -19,12 +19,12 @@ public class DriverModel {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getEmailAddress() {
+        return emailAddress;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
     }
 
     public String getUserState() {

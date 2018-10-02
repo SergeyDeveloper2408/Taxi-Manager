@@ -30,7 +30,7 @@ public class RegisterFieldViewHolder extends RecyclerView.ViewHolder {
     public void bindViews(Context context, String index){
         registerFieldLabelTextInputEditText.setText("");
         switch (index){
-            case Const.REGISTER_FIELD_EMAIL:
+            case Const.REGISTER_FIELD_EMAIL_ADDRESS:
                 registerFieldLabelTextInputLayout.setHint(context.getString(R.string.main_screen_email_address));
                 break;
             case Const.REGISTER_FIELD_PASSWORD:
@@ -41,7 +41,7 @@ public class RegisterFieldViewHolder extends RecyclerView.ViewHolder {
             case Const.REGISTER_FIELD_USERNAME:
                 registerFieldLabelTextInputLayout.setHint(context.getString(R.string.register_screen_username));
                 break;
-            case Const.REGISTER_FIELD_PHONENUMBER:
+            case Const.REGISTER_FIELD_PHONE_NUMBER:
                 registerFieldLabelTextInputLayout.setHint(context.getString(R.string.register_screen_phonenumber));
                 registerFieldLabelTextInputEditText.setInputType(InputType.TYPE_CLASS_PHONE);
                 break;

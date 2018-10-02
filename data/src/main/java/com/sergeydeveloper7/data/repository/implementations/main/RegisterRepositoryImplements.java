@@ -4,7 +4,7 @@ import com.sergeydeveloper7.data.db.models.Car;
 import com.sergeydeveloper7.data.db.models.Customer;
 import com.sergeydeveloper7.data.db.models.Driver;
 import com.sergeydeveloper7.data.db.models.User;
-import com.sergeydeveloper7.data.errors.EmailExistException;
+import com.sergeydeveloper7.data.errors.EmailAddressExistException;
 import com.sergeydeveloper7.data.errors.PhoneNumberExistException;
 import com.sergeydeveloper7.data.models.general.CarModel;
 import com.sergeydeveloper7.data.models.general.CustomerModel;
@@ -42,10 +42,12 @@ public class RegisterRepositoryImplements implements RegisterRepository {
                     realm -> {
                         RealmResults<User> users = realm.where(User.class).findAll();
                         for(int i = 0; i < users.size(); i++){
-                            if(users.get(i).getEmail().equalsIgnoreCase(userModel.getEmail())){
+                            if(users.get(i).getEmailAddress().equalsIgnoreCase(
+                                    userModel.getEmailAddress())){
                                 registerValidation.setValid(false);
-                                registerValidation.setException(new EmailExistException());
-                            } else if(users.get(i).getPhoneNumber().equalsIgnoreCase(userModel.getPhoneNumber())){
+                                registerValidation.setException(new EmailAddressExistException());
+                            } else if(users.get(i).getPhoneNumber().equalsIgnoreCase(
+                                    userModel.getPhoneNumber())){
                                 registerValidation.setValid(false);
                                 registerValidation.setException(new PhoneNumberExistException());
                             }
@@ -56,7 +58,8 @@ public class RegisterRepositoryImplements implements RegisterRepository {
         });
     }
 
-    public Observable<UserModel> registerCustomer(UserModel userModel, CustomerModel customerModel) {
+    public Observable<UserModel> registerCustomer(UserModel userModel,
+                                                  CustomerModel customerModel) {
 
         return Observable.create((ObservableEmitter<UserModel> e) -> {
                 realm.executeTransactionAsync(
@@ -65,21 +68,22 @@ public class RegisterRepositoryImplements implements RegisterRepository {
                             //Register User
                             long userID;
                             try {
-                                userID = realm.where(User.class).max("id").intValue() + 1;
+                                userID = realm.where(User.class).max("id")
+                                        .intValue() + 1;
                             } catch (Exception ex) {
                                 userID = 0L;
                             }
 
                             User user = realm.createObject(User.class, userID);
-                            user.setEmail(userModel.getEmail());
+                            user.setEmailAddress(userModel.getEmailAddress());
 
                             try {
-                                user.setPass(Util.SHA1(userModel.getPass()));
+                                user.setPassword(Util.SHA1(userModel.getPassword()));
                             } catch (NoSuchAlgorithmException e1)  {
-                                user.setPass(userModel.getPass());
+                                user.setPassword(userModel.getPassword());
                                 e1.printStackTrace();
                             } catch (UnsupportedEncodingException e1) {
-                                user.setPass(userModel.getPass());
+                                user.setPassword(userModel.getPassword());
                                 e1.printStackTrace();
                             }
 
@@ -91,13 +95,14 @@ public class RegisterRepositoryImplements implements RegisterRepository {
                             //Register Customer
                             long customerID;
                             try {
-                                customerID = realm.where(Customer.class).max("id").intValue() + 1;
+                                customerID = realm.where(Customer.class).max("id")
+                                        .intValue() + 1;
                             } catch (Exception ex) {
                                 customerID = 0L;
                             }
 
                             Customer customer = realm.createObject(Customer.class, customerID);
-                            customer.setUserName(customerModel.getUserName());
+                            customer.setUserID(userModel.getId());
                         },
                         () -> {
                             e.onNext(userModel);
@@ -107,8 +112,8 @@ public class RegisterRepositoryImplements implements RegisterRepository {
         });
     }
 
-    public Observable<UserModel> registerDriver(UserModel userModel, DriverModel driverModel, CarModel carModel) {
-
+    public Observable<UserModel> registerDriver(UserModel userModel, DriverModel driverModel,
+                                                CarModel carModel) {
         return Observable.create((ObservableEmitter<UserModel> e) -> {
             realm.executeTransactionAsync(
                     realm -> {
@@ -116,21 +121,22 @@ public class RegisterRepositoryImplements implements RegisterRepository {
                         //Register User
                         long userID;
                         try {
-                            userID = realm.where(User.class).max("id").intValue() + 1;
+                            userID = realm.where(User.class).max("id")
+                                    .intValue() + 1;
                         } catch (Exception ex) {
                             userID = 0L;
                         }
 
                         User user = realm.createObject(User.class, userID);
-                        user.setEmail(userModel.getEmail());
+                        user.setEmailAddress(userModel.getEmailAddress());
 
                         try {
-                            user.setPass(Util.SHA1(userModel.getPass()));
+                            user.setPassword(Util.SHA1(userModel.getPassword()));
                         } catch (NoSuchAlgorithmException e1)  {
-                            user.setPass(userModel.getPass());
+                            user.setPassword(userModel.getPassword());
                             e1.printStackTrace();
                         } catch (UnsupportedEncodingException e1) {
-                            user.setPass(userModel.getPass());
+                            user.setPassword(userModel.getPassword());
                             e1.printStackTrace();
                         }
 
@@ -142,19 +148,21 @@ public class RegisterRepositoryImplements implements RegisterRepository {
                         //Register Driver
                         long driverID;
                         try {
-                            driverID = realm.where(Driver.class).max("id").intValue() + 1;
+                            driverID = realm.where(Driver.class).max("id")
+                                    .intValue() + 1;
                         } catch (Exception ex) {
                             driverID = 0L;
                         }
 
                         Driver driver = realm.createObject(Driver.class, driverID);
-                        driver.setUserName(driverModel.getUserName());
+                        driver.setUserID(userModel.getId());
                         driver.setUserState("free");
 
                         //Register Car
                         long carID;
                         try {
-                            carID = realm.where(Car.class).max("id").intValue() + 1;
+                            carID = realm.where(Car.class).max("id")
+                                    .intValue() + 1;
                         } catch (Exception ex) {
                             carID = 0L;
                         }

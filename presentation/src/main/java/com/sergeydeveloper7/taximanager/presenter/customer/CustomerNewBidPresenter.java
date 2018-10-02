@@ -2,28 +2,19 @@ package com.sergeydeveloper7.taximanager.presenter.customer;
 
 import android.content.Context;
 import android.os.Handler;
-import android.util.Log;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.sergeydeveloper7.data.models.map.basic.Distance;
-import com.sergeydeveloper7.data.models.map.basic.Route;
+import com.sergeydeveloper7.data.models.general.CustomerModel;
+import com.sergeydeveloper7.data.models.general.UserModel;
 import com.sergeydeveloper7.data.models.map.response.BasicModelResponse;
 import com.sergeydeveloper7.data.models.map.response.StepResponse;
-import com.sergeydeveloper7.data.repository.basic.customer.FindDirectionRepository;
 import com.sergeydeveloper7.data.repository.implementations.customer.FindDirectionRepositoryImplements;
 import com.sergeydeveloper7.taximanager.R;
 import com.sergeydeveloper7.taximanager.presenter.base.BasePresenter;
-import com.sergeydeveloper7.taximanager.view.basic.customer.CustomerNewBidView;
+import com.sergeydeveloper7.taximanager.view.base.customer.CustomerNewBidView;
 
-import java.io.IOException;
-import java.net.ConnectException;
-import java.net.SocketTimeoutException;
 import java.util.Random;
 
 import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 public class CustomerNewBidPresenter implements BasePresenter {
 
@@ -62,18 +53,22 @@ public class CustomerNewBidPresenter implements BasePresenter {
         duration.setText(String.format(context.getString(R.string.customer_screen_new_bid_time),
                 String.valueOf(duration.getValue())));
 
+        //Set cost
+        BasicModelResponse cost = new BasicModelResponse();
+        cost.setValue(distance.getValue()*2);
+        cost.setText(String.format(context.getString(R.string.customer_screen_new_bid_cost),
+                String.valueOf(distance.getValue())));
+
         //Set values
         stepResponse.setStartAddress(from);
         stepResponse.setEndAddress(to);
         stepResponse.setDistance(distance);
         stepResponse.setDuration(duration);
-        stepResponse.setCost(distance.getValue()*2);
+        stepResponse.setCost(cost);
 
         Handler handler = new Handler();
-        handler.postDelayed(() -> {
-            view.fakeShowFindDirectionProcessEnd(stepResponse);
-        }, 2000);
-
+        handler.postDelayed(()
+                -> view.fakeShowFindDirectionProcessEnd(stepResponse), 2000);
     }
 
     //TODO real method, needs to restore, when Google Directions API will be free.
@@ -118,6 +113,28 @@ public class CustomerNewBidPresenter implements BasePresenter {
 //                        view.showFindDirectionProcessError(throwable);
 //                });
 //    }
+
+    public void addNewBid(UserModel userModel, CustomerModel customerModel){
+//        view.showLoadingProcessStart();
+//        repository.registerCustomer(userModel, customerModel)
+//                .takeUntil((Predicate<UserModel>) userModel1 -> isViewDestroyed)
+//                .subscribe(new DisposableObserver<UserModel>() {
+//                    @Override
+//                    public void onNext(UserModel userModel) {
+//                        saveUser(userModel);
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//                        view.showRegistrationProcessError(e);
+//                    }
+//
+//                    @Override
+//                    public void onComplete() {
+//                        view.showLoadingProcessEnd();
+//                    }
+//                });
+    }
 
     @Override
     public void onCreate() {

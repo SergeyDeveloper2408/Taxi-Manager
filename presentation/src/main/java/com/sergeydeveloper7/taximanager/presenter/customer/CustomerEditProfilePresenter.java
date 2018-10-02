@@ -10,7 +10,7 @@ import com.sergeydeveloper7.data.repository.implementations.customer.ChangeCusto
 import com.sergeydeveloper7.data.validation.Validation;
 import com.sergeydeveloper7.taximanager.R;
 import com.sergeydeveloper7.taximanager.presenter.base.BasePresenter;
-import com.sergeydeveloper7.taximanager.view.basic.customer.CustomerEditProfileView;
+import com.sergeydeveloper7.taximanager.view.base.customer.CustomerEditProfileView;
 
 import java.util.concurrent.TimeUnit;
 

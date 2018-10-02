@@ -5,7 +5,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import com.google.gson.Gson;
-import com.sergeydeveloper7.data.errors.EmailExistException;
+import com.sergeydeveloper7.data.errors.EmailAddressExistException;
 import com.sergeydeveloper7.data.errors.PhoneNumberExistException;
 import com.sergeydeveloper7.data.models.general.CarModel;
 import com.sergeydeveloper7.data.models.general.CustomerModel;
@@ -15,7 +15,7 @@ import com.sergeydeveloper7.data.repository.implementations.main.RegisterReposit
 import com.sergeydeveloper7.data.validation.Validation;
 import com.sergeydeveloper7.taximanager.presenter.base.BasePresenter;
 import com.sergeydeveloper7.taximanager.utils.Const;
-import com.sergeydeveloper7.taximanager.view.basic.main.RegisterView;
+import com.sergeydeveloper7.taximanager.view.base.main.RegisterView;
 
 import java.util.concurrent.TimeUnit;
 
@@ -114,7 +114,7 @@ public class RegisterPresenter implements BasePresenter {
     }
 
     private void showException(Exception e){
-        if(e instanceof EmailExistException){
+        if(e instanceof EmailAddressExistException){
             view.showEmailExistError();
         } else if(e instanceof PhoneNumberExistException){
             view.showPhoneNumberExistError();

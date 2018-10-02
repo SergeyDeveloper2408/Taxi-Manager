@@ -1,4 +1,4 @@
-package com.sergeydeveloper7.taximanager.view.adapters.googlePlaces;
+package com.sergeydeveloper7.taximanager.view.adapters.googleplaces;
 
 import android.content.Context;
 import android.util.Log;
@@ -80,7 +80,7 @@ public class PlaceArrayAdapter extends ArrayAdapter<PlaceArrayAdapter.PlaceAutoc
             Log.i(TAG, "Query completed. Received " + autocompletePredictions.getCount()
                     + " predictions.");
             Iterator<AutocompletePrediction> iterator = autocompletePredictions.iterator();
-            ArrayList resultList = new ArrayList<>(autocompletePredictions.getCount());
+            ArrayList<PlaceAutocomplete> resultList = new ArrayList<>(autocompletePredictions.getCount());
             while (iterator.hasNext()) {
                 AutocompletePrediction prediction = iterator.next();
                 resultList.add(new PlaceAutocomplete(prediction.getPlaceId(),

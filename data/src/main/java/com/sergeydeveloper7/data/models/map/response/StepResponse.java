@@ -41,7 +41,7 @@ public class StepResponse {
     @Expose
     private PolylineResponse polyline;
 
-    private int cost;
+    private transient BasicModelResponse cost;
 
     public String getTravelMode() {
         return travelMode;
@@ -115,11 +115,11 @@ public class StepResponse {
         this.polyline = polyline;
     }
 
-    public int getCost() {
+    public BasicModelResponse getCost() {
         return cost;
     }
 
-    public void setCost(int cost) {
+    public void setCost(BasicModelResponse cost) {
         this.cost = cost;
     }
 }

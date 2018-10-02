@@ -1,8 +1,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/newBidMainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.sergeydeveloper7.taximanager.view.fragments.customer.CustomerNewBidFragment">
 
     <ImageView
@@ -25,7 +26,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/customer_screen_new_bid_from"
-            android:inputType="number"
             android:textColor="@color/grayColor"
             />
 
@@ -45,12 +45,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/customer_screen_new_bid_to"
-            android:inputType="number"
             android:textColor="@color/grayColor"
             />
 
     </android.support.design.widget.TextInputLayout>
 
+    <!-- Distance -->
     <ImageView
         android:id="@+id/newBidDistanceImageView"
         android:layout_width="50dp"
@@ -60,20 +60,31 @@
         android:layout_marginStart="40dp"
         app:srcCompat="@drawable/ic_road" />
 
+    <ProgressBar
+        android:id="@+id/newBidDistanceProgressBar"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_below="@+id/newBidDistanceImageView"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="3dp"
+        android:visibility="gone" />
+
     <TextView
         android:id="@+id/newBidDistanceTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/newBidDistanceImageView"
-        android:layout_marginStart="40dp"
-        android:textSize="@dimen/textSizeMiddle"
+        android:layout_alignStart="@+id/newBidDistanceImageView"
+        android:layout_marginTop="3dp"
+        android:layout_marginStart="6dp"
         android:fontFamily="sans-serif"
-        android:textStyle="bold"
-        android:textColor="@color/grayColor"
         android:letterSpacing="0.1"
-        android:text="777 KM"
-        />
+        android:text="0 KM"
+        android:textColor="@color/grayColor"
+        android:textSize="@dimen/textSizeMiddle"
+        android:textStyle="bold" />
 
+    <!-- Time -->
     <ImageView
         android:id="@+id/newBidTimeImageView"
         android:layout_width="50dp"
@@ -83,20 +94,30 @@
         android:layout_centerHorizontal="true"
         app:srcCompat="@drawable/ic_clock" />
 
+    <ProgressBar
+        android:id="@+id/newBidTimeProgressBar"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_below="@+id/newBidTimeImageView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="6dp"
+        android:visibility="gone" />
+
     <TextView
         android:id="@+id/newBidTimeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/newBidTimeImageView"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="3dp"
+        android:layout_marginTop="6dp"
         android:fontFamily="sans-serif"
         android:letterSpacing="0.1"
-        android:text="17 minutes"
+        android:text="0 minutes"
         android:textColor="@color/grayColor"
         android:textSize="@dimen/textSizeMiddle"
-        android:textStyle="bold" />
+        android:textStyle="bold"/>
 
+    <!-- Cost -->
     <ImageView
         android:id="@+id/newBidCostImageView"
         android:layout_width="50dp"
@@ -107,17 +128,27 @@
         android:layout_alignParentEnd="true"
         app:srcCompat="@drawable/ic_banknotes" />
 
+    <ProgressBar
+        android:id="@+id/newBidCostProgressBar"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_below="@+id/newBidCostImageView"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="55dp"
+        android:layout_marginTop="6dp"
+        android:visibility="gone" />
+
     <TextView
         android:id="@+id/newBidCostTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/newBidCostImageView"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="50dp"
-        android:layout_marginTop="3dp"
+        android:layout_alignStart="@+id/newBidCostImageView"
+        android:layout_marginTop="6dp"
+        android:layout_marginStart="15dp"
         android:fontFamily="sans-serif"
         android:letterSpacing="0.1"
-        android:text="17 $"
+        android:text="0 $"
         android:textColor="@color/grayColor"
         android:textSize="@dimen/textSizeMiddle"
         android:textStyle="bold" />
@@ -126,12 +157,12 @@
         android:id="@+id/newBidButtonFindPath"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/newBidTimeTextView"
-        android:layout_marginTop="30dp"
+        android:layout_below="@+id/newBidTimeImageView"
+        android:layout_marginTop="50dp"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
         android:layout_centerHorizontal="true"
-        android:text="Find Path"
+        android:text="@string/customer_screen_new_bid_find_path"
         android:background="@drawable/shape_background"
         app:spinning_bar_width="4dp"
         app:spinning_bar_color="#FFF"
@@ -145,20 +176,33 @@
         android:layout_marginTop="20dp"
         android:background="@color/materialYellowAdditional" />
 
-    <com.google.android.gms.maps.MapView
-        android:id="@+id/eventLocationMap"
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/newBidDivider"
-        android:visibility="gone"/>
+        android:layout_below="@+id/newBidDivider">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scaleX="1.0"
-        android:scaleY="1.0"
-        android:layout_below="@+id/newBidDivider"
-        app:srcCompat="@drawable/map_mock"/>
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/newBidLocationMap"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"/>
 
+        <ImageView
+            android:id="@+id/mapMock"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleX="1.0"
+            android:scaleY="1.0"
+            app:srcCompat="@drawable/map_mock"/>
+
+        <ProgressBar
+            android:id="@+id/newBidLocationProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone" />
+
+    </RelativeLayout>
 
 </RelativeLayout>

@@ -1,8 +1,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/customerBidsMainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.sergeydeveloper7.taximanager.view.fragments.customer.CustomerBidsFragment"
     android:background="@color/lightGray">
 
@@ -41,9 +42,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:textColor="@color/white"
+        android:textColor="@color/grayColor"
         android:text="@string/customer_screen_title_no_bids"
         android:visibility="gone"
+        />
+
+    <TextView
+        android:id="@+id/titleChooseTypeOfBids"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textColor="@color/grayColor"
+        android:text="@string/customer_screen_title_no_bids"
         />
 
     <ProgressBar

@@ -93,8 +93,8 @@ public class CustomerProfileFragment extends Fragment {
 
         customerProfileName.setText(!TextUtils.isEmpty(user.getUserName())
                 ? user.getUserName() : getString(R.string.no_data_error));
-        customerProfileEmail.setText(!TextUtils.isEmpty(user.getEmail())
-                ? user.getEmail() : getString(R.string.no_data_error));
+        customerProfileEmail.setText(!TextUtils.isEmpty(user.getEmailAddress())
+                ? user.getEmailAddress() : getString(R.string.no_data_error));
         customerProfilePhone.setText(!TextUtils.isEmpty(user.getPhoneNumber())
                 ? user.getPhoneNumber() : getString(R.string.no_data_error));
 

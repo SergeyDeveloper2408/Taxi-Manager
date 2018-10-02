@@ -118,7 +118,7 @@ public class CustomerActivity extends BaseActivity implements NavigationView.OnN
         navigationView.setNavigationItemSelectedListener(this);
 
         navHeaderMainTitleTextView.setText(userModel.getUserName());
-        navHeaderSecondaryTitleTextView.setText(userModel.getEmail());
+        navHeaderSecondaryTitleTextView.setText(userModel.getEmailAddress());
         fab.setVisibility(View.GONE);
     }
 

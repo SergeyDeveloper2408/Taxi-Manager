@@ -9,7 +9,7 @@ import com.sergeydeveloper7.data.models.general.UserModel;
 import com.sergeydeveloper7.data.repository.implementations.main.LoginRepositoryImplements;
 import com.sergeydeveloper7.taximanager.presenter.base.BasePresenter;
 import com.sergeydeveloper7.taximanager.utils.Const;
-import com.sergeydeveloper7.taximanager.view.basic.main.MainScreenView;
+import com.sergeydeveloper7.taximanager.view.base.main.MainScreenView;
 
 import io.reactivex.functions.Predicate;
 import io.reactivex.observers.DisposableObserver;

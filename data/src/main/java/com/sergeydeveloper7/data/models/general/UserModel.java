@@ -13,13 +13,13 @@ public class UserModel {
     @Expose
     private long id;
 
-    @SerializedName("email")
+    @SerializedName("emailAddress")
     @Expose
-    private String email = "";
+    private String emailAddress = "";
 
-    @SerializedName("pass")
+    @SerializedName("password")
     @Expose
-    private String pass = "";
+    private String password = "";
 
     @SerializedName("userName")
     @Expose
@@ -47,20 +47,20 @@ public class UserModel {
         this.id = id;
     }
 
-    public String getEmail() {
-        return email;
+    public String getEmailAddress() {
+        return emailAddress;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
     }
 
-    public String getPass() {
-        return pass;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPass(String pass) {
-        this.pass = pass;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getUserName() {

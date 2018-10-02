@@ -19,10 +19,10 @@ public class Const {
     public static final String CUSTOMER_NEW_BID_FRAGMENT_ID = "CustomerNewBidFragment";
 
     //Register fragment constants
-    public static final String REGISTER_FIELD_EMAIL = "RegisterFieldEmail";
+    public static final String REGISTER_FIELD_EMAIL_ADDRESS = "RegisterFieldEmailAddress";
     public static final String REGISTER_FIELD_PASSWORD = "RegisterFieldPassword";
     public static final String REGISTER_FIELD_USERNAME = "RegisterFieldUsername";
-    public static final String REGISTER_FIELD_PHONENUMBER = "RegisterFieldPhonenumber";
+    public static final String REGISTER_FIELD_PHONE_NUMBER = "RegisterFieldPhoneNumber";
     public static final String REGISTER_BUTTON = "RegisterButton";
     public static final String REGISTER_BUTTON_NEXT_STEP = "RegisterButtonNextStep";
     public static final String REGISTER_LABEL_PERSONAL = "RegisterPersonal";

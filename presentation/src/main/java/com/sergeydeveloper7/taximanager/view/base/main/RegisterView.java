@@ -1,4 +1,4 @@
-package com.sergeydeveloper7.taximanager.view.basic.main;
+package com.sergeydeveloper7.taximanager.view.base.main;
 
 /**
  * Created by serg on 11.01.18.

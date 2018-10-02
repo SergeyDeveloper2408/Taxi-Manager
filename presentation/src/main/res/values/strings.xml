@@ -2,7 +2,7 @@
 
     <!-- Generic Constants -->
     <string name="app_name">Taxi Manager</string>
-    <string name="email_hint">email@example.com</string>
+    <string name="email_hint">emailAddress@example.com</string>
 
     <!-- Main Screen Constants -->
     <string name="main_screen_email_address">Email address</string>
@@ -15,7 +15,7 @@
     <string name="main_screen_help">Help</string>
     <string name="main_screen_register_link">Don\'t a member yet?</string>
     <string name="main_screen_invalid_credentials">Wrong login or password</string>
-    <string name="main_screen_invalid_email">Your email is invalid, please check it!</string>
+    <string name="main_screen_invalid_email">Your email address is invalid, please check it!</string>
 
     <!-- Register Screen Constants -->
     <string name="register_screen_choose_role">Step 1: Choose Your Role</string>
@@ -26,7 +26,7 @@
     <string name="register_screen_password">Password</string>
     <string name="register_screen_username">Username</string>
     <string name="register_screen_phonenumber">Phone number</string>
-    <string name="register_screen_email_hint">Enter your email</string>
+    <string name="register_screen_email_hint">Enter your emailAddress</string>
     <string name="register_screen_password_hint">Enter your password</string>
     <string name="register_screen_username_hint">Enter your username</string>
     <string name="register_screen_phone_hint">Enter your phone</string>
@@ -45,7 +45,8 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_settings">Settings</string>
-    <string name="home_todo">You are in home page, please go to \nanother page by tap on drawer\'s item.</string>
+    <string name="home_todo">You are in home page, please go to\n
+        another page by tap on drawer\'s item.</string>
 
     <!-- Customer Screen Constants -->
     <string name="customer_screen_new_bid">New Bid</string>
@@ -58,7 +59,10 @@
     <string name="customer_screen_navigation_menu_my_profile">My Profile</string>
     <string name="customer_screen_navigation_menu_tools">Tools</string>
     <string name="customer_screen_navigation_menu_logout">Log Out</string>
-    <string name="customer_screen_title_no_bids">No Bids</string>
+    <string name="customer_screen_title_no_waiting_bids">No Waiting Bids</string>
+    <string name="customer_screen_title_no_active_bids">No Active Bids</string>
+    <string name="customer_screen_title_no_completed_bids">No Completed Bids</string>
+    <string name="customer_screen_title_no_canceled_bids">No Canceled Bids</string>
     <string name="customer_screen_spinners_hint">Choose bids you want to see</string>
     <string name="customer_screen_profile_label_name">Name:</string>
     <string name="customer_screen_profile_label_email">E-mail:</string>
@@ -70,11 +74,19 @@
 
     <string name="customer_screen_new_bid_from">From</string>
     <string name="customer_screen_new_bid_to">To</string>
+    <string name="customer_screen_new_bid_find_path">Find Path</string>
+    <string name="customer_screen_new_bid_choose_this_route">Choose this route</string>
     <string name="customer_screen_new_bid_distance" formatted="false">%s Km</string>
     <string name="customer_screen_new_bid_cost" formatted="false">%s $</string>
     <string name="customer_screen_new_bid_time_full" formatted="false">%s hours %s minutes</string>
     <string name="customer_screen_new_bid_time" formatted="false">%s minutes</string>
 
+
+    <string name="customer_screen_new_bid_from_empty_error">Your point \'From\' is empty,
+        please fill it.</string>
+
+    <string name="customer_screen_new_bid_to_empty_error">Your point \'To\' is empty,
+        please fill it.</string>
 
     <!-- Driver Screen Constants -->
     <string name="driver_screen_state_free">free</string>
@@ -92,7 +104,9 @@
     <string name="pref_title_notifications">Notifications</string>
     <string name="summary_choose_ringtone">Choose notification sound</string>
     <string name="pref_header_about">About</string>
-    <string name="summary_about">We are a team of like-minded people, specialized in development of Android App Development creating new trends across the app space. Glad to Help in anyway!</string>
+    <string name="summary_about">We are a team of like-minded people, specialized in development of
+        Android App Development creating new trends across the app space.
+        Glad to Help in anyway!</string>
     <string name="app_version">0.1</string>
     <string name="summary_support">Got any queries? We are happy to help!</string>
     <string name="title_send_feedback">Send Feedback</string>
@@ -104,7 +118,7 @@
     <string name="title_terms">Terms &amp; Conditions</string>
     <string name="url_terms">https://www.androidhive.info/terms-of-service/</string>
     <string name="title_version">Version</string>
-    <string name="choose_email_client">Choose email client</string>
+    <string name="choose_email_client">Choose emailAddress client</string>
     <string name="title_gallery_storage">Default Storage</string>
     <string name="title_new_notification_sound">New message notification</string>
     <string name="title_vibrate">Vibrate</string>
@@ -113,7 +127,8 @@
     <string name="key_gallery_name">key_gallery_name</string>
     <string name="key_upload_quality">key_upload_quality</string>
     <string name="notifications_new_message">notifications_new_message</string>
-    <string name="key_notifications_new_message_ringtone">key_notifications_new_message_ringtone</string>
+    <string name="key_notifications_new_message_ringtone">
+        key_notifications_new_message_ringtone</string>
     <string name="key_vibrate">key_vibrate</string>
     <string name="key_send_feedback">key_send_feedback</string>
 
@@ -122,12 +137,25 @@
     <string name="process_error">During the process an error occurred, please try again.</string>
 
     <!-- Register Screen Errors -->
-    <string name="register_screen_email_exist_error">Your email already exist, please enter another one</string>
-    <string name="register_screen_email_incorrect">Your email is incorrect, please enter another one</string>
-    <string name="register_screen_email_password_short">Password should be larger than 6 symbols</string>
-    <string name="register_screen_email_username_short">Username should be larger than 6 symbols</string>
-    <string name="register_screen_email_phone_number_short">Phone number should be larger than 6 symbols</string>
-    <string name="register_screen_phone_number_exist_error">Your phone number already exist, please enter another one</string>
-    <string name="register_screen_error">During the registration an error occurred, please try again.</string>
+    <string name="register_screen_email_exist_error">Your emailAddress already exist,
+        please enter another one</string>
+
+    <string name="register_screen_email_incorrect">Your emailAddress is incorrect,
+        please enter another one</string>
+
+    <string name="register_screen_email_password_short">Password should be larger than
+        6 symbols</string>
+
+    <string name="register_screen_email_username_short">Username should be larger than
+        6 symbols</string>
+
+    <string name="register_screen_email_phone_number_short">Phone number should be larger than
+        6 symbols</string>
+
+    <string name="register_screen_phone_number_exist_error">Your phone number already exist,
+        please enter another one</string>
+
+    <string name="register_screen_error">During the registration an error occurred,
+        please try again.</string>
 
 </resources>

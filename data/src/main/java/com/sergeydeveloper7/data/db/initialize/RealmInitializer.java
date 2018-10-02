@@ -1,4 +1,4 @@
-package com.sergeydeveloper7.data.db;
+package com.sergeydeveloper7.data.db.initialize;
 
 import android.content.Context;
 
