@@ -1,11 +1,9 @@
 package com.sergeydeveloper7.taximanager.view.fragments.customer;
 
 import android.app.Fragment;
-import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,7 +18,10 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.sergeydeveloper7.data.models.general.BidModel;
+import com.sergeydeveloper7.data.models.general.UserModel;
 import com.sergeydeveloper7.taximanager.R;
+import com.sergeydeveloper7.taximanager.presenter.customer.CustomerBidsPresenter;
 import com.sergeydeveloper7.taximanager.view.activities.customer.CustomerActivity;
 import com.sergeydeveloper7.taximanager.view.adapters.CustomerBidsAdapter;
 import com.sergeydeveloper7.taximanager.view.base.customer.CustomerBidsView;
@@ -33,11 +34,13 @@ import fr.ganfra.materialspinner.MaterialSpinner;
 
 public class CustomerBidsFragment extends Fragment implements CustomerBidsView {
 
-    private ArrayList<String>    spinnerItems = new ArrayList<>();
-    private ArrayAdapter<String> spinnersAdapter;
-    private CustomerActivity     customerActivity;
-    private CustomerBidsAdapter  recyclersAdapter;
-    private ArrayList<String>    bidsList = new ArrayList<>();
+    private ArrayList<String>     spinnerItems;
+    private ArrayAdapter<String>  spinnersAdapter;
+    private CustomerActivity      activity;
+    private CustomerBidsAdapter   recyclersAdapter;
+    private ArrayList<BidModel>   bidsList = new ArrayList<>();
+    private CustomerBidsPresenter presenter;
+    private UserModel             user;
 
     //RecyclerViews
     @BindView(R.id.customersBidsRecyclerView)
@@ -62,7 +65,7 @@ public class CustomerBidsFragment extends Fragment implements CustomerBidsView {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        customerActivity = (CustomerActivity) getActivity();
+        initializeComponents();
     }
 
     @Override
@@ -82,28 +85,69 @@ public class CustomerBidsFragment extends Fragment implements CustomerBidsView {
 
     @Override
     public void showFindBidsProcessStart() {
-        customersBidsProgressBar.setVisibility(View.VISIBLE);
+        titleNoBids.setVisibility(View.GONE);
+        customersBidsSpinner.setVisibility(View.GONE);
         customersBidsRecyclerView.setVisibility(View.GONE);
+        customersBidsProgressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
-    public void showFindBidsProcessEnd() {
-        customersBidsProgressBar.setVisibility(View.GONE);
-        customersBidsRecyclerView.setVisibility(View.VISIBLE);
+    public void showFindBidsProcessEnd(ArrayList<BidModel> bids) {
+        if(bids.isEmpty()){
+            customersBidsProgressBar.setVisibility(View.GONE);
+            customersBidsRecyclerView.setVisibility(View.GONE);
+            customersBidsSpinner.setVisibility(View.VISIBLE);
+            showNoBidsText();
+        } else {
+            bidsList.clear();
+            bidsList.addAll(bids);
+            recyclersAdapter.notifyDataSetChanged();
+            customersBidsProgressBar.setVisibility(View.GONE);
+            customersBidsSpinner.setVisibility(View.VISIBLE);
+            customersBidsRecyclerView.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
     public void showFindBidsProcessError(Throwable throwable) {
         customersBidsProgressBar.setVisibility(View.GONE);
+        titleNoBids.setVisibility(View.VISIBLE);
+        customersBidsSpinner.setVisibility(View.VISIBLE);
         customersBidsRecyclerView.setVisibility(View.VISIBLE);
         Snackbar.make(customerBidsMainLayout, getString(R.string.process_error),
                 Snackbar.LENGTH_LONG).show();
     }
 
+    private void showNoBidsText(){
+        titleNoBids.setVisibility(View.VISIBLE);
+        switch (customersBidsSpinner.getSelectedItemPosition()){
+            case 1:
+                titleNoBids.setText(getString(R.string.customer_screen_title_no_waiting_bids));
+                break;
+            case 2:
+                titleNoBids.setText(getString(R.string.customer_screen_title_no_active_bids));
+                break;
+            case 3:
+                titleNoBids.setText(getString(R.string.customer_screen_title_no_completed_bids));
+                break;
+            case 4:
+                titleNoBids.setText(getString(R.string.customer_screen_title_no_canceled_bids));
+                break;
+        }
+    }
+
+    private void initializeComponents(){
+        activity = (CustomerActivity) getActivity();
+        presenter = new CustomerBidsPresenter(activity, this);
+        user = activity.getUser();
+    }
+
     private void initializeViews(){
-        customerActivity.setToolbarTitle(getString(R.string.customer_screen_bids));
-        customersBidsProgressBar.getIndeterminateDrawable()
-                .setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+        activity.setToolbarTitle(getString(R.string.customer_screen_bids));
+        activity.showFloatingActionButton();
+
+        customersBidsProgressBar.getIndeterminateDrawable().setColorFilter(Color.GRAY,
+                PorterDuff.Mode.SRC_IN);
         initializeSpinner();
     }
 
@@ -116,12 +160,13 @@ public class CustomerBidsFragment extends Fragment implements CustomerBidsView {
         customersBidsSpinner.setAdapter(spinnersAdapter);
 
         customersBidsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(id != 0){
-                    //TODO presenter.findBids(spinnerItems.get(position/id))
+                    presenter.getBids(user.getId(), spinnerItems.get(position));
                 } else {
-                    titleNoBids.setText(getString(R.string.customer_screen_no_bids));
+                    titleNoBids.setText(getString(R.string.customer_screen_no_bids_choose));
                 }
             }
 
@@ -129,11 +174,12 @@ public class CustomerBidsFragment extends Fragment implements CustomerBidsView {
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
+
         });
     }
 
     private void setBidsRecyclerView(){
-        LinearLayoutManager layoutManager = new LinearLayoutManager(customerActivity, LinearLayoutManager.VERTICAL, false);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false);
         customersBidsRecyclerView.setHasFixedSize(false);
         customersBidsRecyclerView.setLayoutManager(layoutManager);
         customersBidsRecyclerView.setItemViewCacheSize(50);
@@ -142,11 +188,12 @@ public class CustomerBidsFragment extends Fragment implements CustomerBidsView {
         if (animator instanceof SimpleItemAnimator) {
             ((SimpleItemAnimator) animator).setSupportsChangeAnimations(false);
         }
-        recyclersAdapter = new CustomerBidsAdapter(customerActivity, bidsList);
+        recyclersAdapter = new CustomerBidsAdapter(activity, bidsList);
         customersBidsRecyclerView.setAdapter(recyclersAdapter);
     }
 
     private void addSpinnersItems(){
+        spinnerItems = new ArrayList<>();
         spinnerItems.add(getString(R.string.customer_screen_waiting_bids));
         spinnerItems.add(getString(R.string.customer_screen_active_bids));
         spinnerItems.add(getString(R.string.customer_screen_completed_bids));

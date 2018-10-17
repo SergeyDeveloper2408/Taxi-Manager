@@ -31,7 +31,7 @@ public class CustomerActivity extends BaseActivity implements NavigationView.OnN
 
     private TextView              navHeaderMainTitleTextView;
     private TextView              navHeaderSecondaryTitleTextView;
-    private UserModel             userModel;
+    private UserModel user;
     private SharedPreferences     sharedPreferences;
     private ActionBarDrawerToggle toggle;
 
@@ -84,6 +84,14 @@ public class CustomerActivity extends BaseActivity implements NavigationView.OnN
         toolbar.setTitle(title);
     }
 
+    public void showFloatingActionButton(){
+        fab.setVisibility(View.VISIBLE);
+    }
+
+    public void hideFloatingActionButton(){
+        fab.setVisibility(View.GONE);
+    }
+
     public void setNavigationActionMenu(){
         toolbar.setNavigationIcon(R.drawable.ic_menu);
         toolbar.setNavigationOnClickListener(v
@@ -96,9 +104,13 @@ public class CustomerActivity extends BaseActivity implements NavigationView.OnN
                 -> onBackPressed());
     }
 
+    public UserModel getUser() {
+        return user;
+    }
+
     private void initViews(){
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        userModel = new Gson().fromJson(sharedPreferences.getString("user", null),
+        user = new Gson().fromJson(sharedPreferences.getString("user", null),
                 UserModel.class);
 
         toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
@@ -117,13 +129,12 @@ public class CustomerActivity extends BaseActivity implements NavigationView.OnN
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-        navHeaderMainTitleTextView.setText(userModel.getUserName());
-        navHeaderSecondaryTitleTextView.setText(userModel.getEmailAddress());
+        navHeaderMainTitleTextView.setText(user.getUserName());
+        navHeaderSecondaryTitleTextView.setText(user.getEmailAddress());
         fab.setVisibility(View.GONE);
     }
 
     private void startProfileScreen(){
-        fab.setVisibility(View.GONE);
         titleTodo.setVisibility(View.GONE);
         this.navigator.startFragmentNoBackStack(this, new CustomerProfileFragment(),
                 Const.CUSTOMER_PROFILE_FRAGMENT_ID, R.id.customerFrame);
@@ -136,14 +147,12 @@ public class CustomerActivity extends BaseActivity implements NavigationView.OnN
     }
 
     private void startCustomerNewBidScreen(){
-        fab.setVisibility(View.GONE);
         titleTodo.setVisibility(View.GONE);
         navigator.startFragmentWithBackStack(this, new CustomerNewBidFragment(),
                 Const.CUSTOMER_NEW_BID_FRAGMENT_ID, R.id.customerFrame);
     }
 
     private void startBidsScreen(){
-        fab.setVisibility(View.VISIBLE);
         titleTodo.setVisibility(View.GONE);
         this.navigator.startFragmentNoBackStack(this, new CustomerBidsFragment(),
                 Const.CUSTOMER_BIDS_FRAGMENT_ID, R.id.customerFrame);

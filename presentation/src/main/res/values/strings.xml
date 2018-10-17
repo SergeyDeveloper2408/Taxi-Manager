@@ -53,6 +53,8 @@
     <string name="customer_screen_bids">Bids</string>
     <string name="customer_screen_waiting_bids">Waiting Bids</string>
     <string name="customer_screen_no_bids">No Bids</string>
+    <string name="customer_screen_no_bids_choose">Please choose type of bids you want
+        to see</string>
     <string name="customer_screen_active_bids">Active Bids</string>
     <string name="customer_screen_completed_bids">Completed Bids</string>
     <string name="customer_screen_canceled_bids">Canceled Bids</string>

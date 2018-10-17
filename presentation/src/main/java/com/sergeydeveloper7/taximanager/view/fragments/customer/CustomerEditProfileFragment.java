@@ -1,11 +1,9 @@
 package com.sergeydeveloper7.taximanager.view.fragments.customer;
 
 import android.app.Fragment;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
@@ -22,7 +20,6 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.sergeydeveloper7.data.models.general.UserModel;
 import com.sergeydeveloper7.data.utils.UtilMethods;
@@ -47,7 +44,6 @@ public class CustomerEditProfileFragment extends Fragment implements CustomerEdi
     private CustomerActivity             activity;
     private CustomerEditProfilePresenter presenter;
     private UserModel                    user;
-    private SharedPreferences            sharedPreferences;
     private MenuItem                     save;
     private String                       newUserName;
     private String                       newEmailAddress;
@@ -362,9 +358,7 @@ public class CustomerEditProfileFragment extends Fragment implements CustomerEdi
     private void initializeComponents(){
         activity = (CustomerActivity)getActivity();
         presenter = new CustomerEditProfilePresenter(this, activity);
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(activity);
-        user = new Gson().fromJson(sharedPreferences.getString("user", null),
-                UserModel.class);
+        user = activity.getUser();
 
     }
 

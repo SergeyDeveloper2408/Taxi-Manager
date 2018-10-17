@@ -21,7 +21,9 @@ import com.sergeydeveloper7.taximanager.view.base.customer.CustomerNewBidView;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Predicate;
 import io.reactivex.observers.DisposableObserver;
 import rx.Subscription;
@@ -44,14 +46,12 @@ public class CustomerBidsPresenter implements BasePresenter {
         view.showFindBidsProcessStart();
         repository.getBids(customersUserID, bidsState)
                 .takeUntil((Predicate<ArrayList<BidModel>>) customer1 -> isViewDestroyed)
+                .debounce(1000, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new DisposableObserver<ArrayList<BidModel>>() {
                     @Override
                     public void onNext(ArrayList<BidModel> bids) {
-                        if(bids.isEmpty()){
-
-                        } else {
-
-                        }
+                        view.showFindBidsProcessEnd(bids);
                     }
 
                     @Override

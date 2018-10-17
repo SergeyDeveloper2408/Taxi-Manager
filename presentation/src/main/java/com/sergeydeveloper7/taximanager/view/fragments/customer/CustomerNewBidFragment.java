@@ -32,6 +32,8 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.sergeydeveloper7.data.models.general.BidModel;
+import com.sergeydeveloper7.data.models.general.UserModel;
 import com.sergeydeveloper7.data.models.map.response.StepResponse;
 import com.sergeydeveloper7.taximanager.R;
 import com.sergeydeveloper7.taximanager.presenter.customer.CustomerNewBidPresenter;
@@ -47,16 +49,18 @@ import butterknife.OnTextChanged;
 
 public class CustomerNewBidFragment extends Fragment implements CustomerNewBidView,
         OnMapReadyCallback, GoogleApiClient.OnConnectionFailedListener,
-        GoogleApiClient.ConnectionCallbacks {
+        GoogleApiClient.ConnectionCallbacks, View.OnClickListener {
 
     private static final String     TAG = CustomerNewBidFragment.class.getSimpleName();
-    private CustomerActivity        customerActivity;
+    private CustomerActivity        activity;
     private GoogleMap               mGoogleMap;
     private CustomerNewBidPresenter presenter;
     private GoogleApiClient         googleApiClient;
     private PlaceArrayAdapter       placeArrayAdapter;
     private String                  pointFrom;
     private String                  pointTo;
+    private UserModel               user;
+    private BidModel                newBid;
 
     //Layouts
     @BindView(R.id.newBidMainLayout)
@@ -127,7 +131,7 @@ public class CustomerNewBidFragment extends Fragment implements CustomerNewBidVi
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        MapsInitializer.initialize(customerActivity);
+        MapsInitializer.initialize(activity);
         mGoogleMap = googleMap;
         mGoogleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         mGoogleMap.getUiSettings().setZoomControlsEnabled(true);
@@ -152,7 +156,7 @@ public class CustomerNewBidFragment extends Fragment implements CustomerNewBidVi
         Log.e(TAG, "Google Places API connection failed with error code: "
                 + connectionResult.getErrorCode());
 
-        Toast.makeText(customerActivity,
+        Toast.makeText(activity,
                 "Google Places API connection failed with error code:" +
                         connectionResult.getErrorCode(),
                 Toast.LENGTH_LONG).show();
@@ -161,7 +165,7 @@ public class CustomerNewBidFragment extends Fragment implements CustomerNewBidVi
     @Override
     public void fakeShowFindDirectionProcessStart() {
         newBidButtonFindPath.startAnimation();
-        setViewsVisibility(false);
+        hideViews();
     }
 
     @Override
@@ -170,7 +174,7 @@ public class CustomerNewBidFragment extends Fragment implements CustomerNewBidVi
                 .getColor(R.color.lightGray), BitmapFactory.decodeResource(
                 getResources(), R.drawable.ic_checkmark_green));
 
-        setViewsVisibility(true);
+        showViews();
 
         newBidDistanceTextView.setText(response.getDistance().getText());
         newBidTimeTextView.setText(response.getDuration().getText());
@@ -195,57 +199,9 @@ public class CustomerNewBidFragment extends Fragment implements CustomerNewBidVi
         restoreButtonText();
     }
 
-    private void setViewsVisibility(boolean visible){
-        if(visible){
-            newBidDistanceTextView.setVisibility(View.VISIBLE);
-            newBidTimeTextView.setVisibility(View.VISIBLE);
-            newBidCostTextView.setVisibility(View.VISIBLE);
-
-            mapMock.setVisibility(View.VISIBLE);
-
-            newBidDistanceProgressBar.setVisibility(View.GONE);
-            newBidTimeProgressBar.setVisibility(View.GONE);
-            newBidCostProgressBar.setVisibility(View.GONE);
-            newBidLocationProgressBar.setVisibility(View.GONE);
-        } else {
-            newBidDistanceTextView.setVisibility(View.GONE);
-            newBidTimeTextView.setVisibility(View.GONE);
-            newBidCostTextView.setVisibility(View.GONE);;
-
-            mapMock.setVisibility(View.GONE);
-
-            newBidDistanceProgressBar.setVisibility(View.VISIBLE);
-            newBidTimeProgressBar.setVisibility(View.VISIBLE);
-            newBidCostProgressBar.setVisibility(View.VISIBLE);
-            newBidLocationProgressBar.setVisibility(View.VISIBLE);
-        }
-    }
-
-    private void initializeComponents(){
-        customerActivity = (CustomerActivity) getActivity();
-
-        googleApiClient = new GoogleApiClient.Builder(customerActivity)
-                .addApi(Places.GEO_DATA_API)
-                .addConnectionCallbacks(this)
-                .build();
-        googleApiClient.connect();
-
-        placeArrayAdapter = new PlaceArrayAdapter(customerActivity,
-                android.R.layout.simple_list_item_1, null);
-    }
-
-    private void initializeViews(){
-        presenter = new CustomerNewBidPresenter(customerActivity, this);
-
-        customerActivity.setToolbarTitle(getString(R.string.customer_screen_new_bid));
-
-        if (newBidLocationMap != null) {
-            newBidLocationMap.onCreate(null);
-            newBidLocationMap.onResume();
-            newBidLocationMap.getMapAsync(this);
-        }
-
-        newBidButtonFindPath.setOnClickListener(v -> {
+    @Override
+    public void onClick(View v) {
+        if(v.getId() == R.id.newBidButtonFindPath){
             if(newBidButtonFindPath.getText().toString().equals(getString(
                     R.string.customer_screen_new_bid_find_path))){
                 if(!isPointsFieldsEmpty()){
@@ -258,7 +214,63 @@ public class CustomerNewBidFragment extends Fragment implements CustomerNewBidVi
                     R.string.customer_screen_new_bid_choose_this_route))){
                 //TODO
             }
-        });
+        }
+    }
+
+    private void fillNewBidParams(){
+
+    }
+
+    private void showViews(){
+        newBidDistanceTextView.setVisibility(View.VISIBLE);
+        newBidTimeTextView.setVisibility(View.VISIBLE);
+        newBidCostTextView.setVisibility(View.VISIBLE);
+
+        mapMock.setVisibility(View.VISIBLE);
+
+        newBidDistanceProgressBar.setVisibility(View.GONE);
+        newBidTimeProgressBar.setVisibility(View.GONE);
+        newBidCostProgressBar.setVisibility(View.GONE);
+        newBidLocationProgressBar.setVisibility(View.GONE);
+    }
+
+    private void hideViews(){
+        newBidDistanceTextView.setVisibility(View.GONE);
+        newBidTimeTextView.setVisibility(View.GONE);
+        newBidCostTextView.setVisibility(View.GONE);
+
+        mapMock.setVisibility(View.GONE);
+
+        newBidDistanceProgressBar.setVisibility(View.VISIBLE);
+        newBidTimeProgressBar.setVisibility(View.VISIBLE);
+        newBidCostProgressBar.setVisibility(View.VISIBLE);
+        newBidLocationProgressBar.setVisibility(View.VISIBLE);
+    }
+
+    private void initializeComponents(){
+        activity = (CustomerActivity) getActivity();
+
+        user = activity.getUser();
+
+        initializeGooglePlaces();
+
+        placeArrayAdapter = new PlaceArrayAdapter(activity,
+                android.R.layout.simple_list_item_1, null);
+    }
+
+    private void initializeViews(){
+        presenter = new CustomerNewBidPresenter(activity, this);
+
+        activity.setToolbarTitle(getString(R.string.customer_screen_new_bid));
+        activity.hideFloatingActionButton();
+
+        if (newBidLocationMap != null) {
+            newBidLocationMap.onCreate(null);
+            newBidLocationMap.onResume();
+            newBidLocationMap.getMapAsync(this);
+        }
+
+        newBidButtonFindPath.setOnClickListener(this);
 
         initializeTextInputAutoCompleteTextView(newBidPointFromTextInputEditText);
         initializeTextInputAutoCompleteTextView(newBidPointToTextInputEditText);
@@ -268,6 +280,14 @@ public class CustomerNewBidFragment extends Fragment implements CustomerNewBidVi
         }
 
         initializeProgressBars();
+    }
+
+    private void initializeGooglePlaces(){
+        googleApiClient = new GoogleApiClient.Builder(activity)
+                .addApi(Places.GEO_DATA_API)
+                .addConnectionCallbacks(this)
+                .build();
+        googleApiClient.connect();
     }
 
     private boolean isPointsFieldsEmpty(){

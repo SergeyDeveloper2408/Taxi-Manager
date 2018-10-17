@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.sergeydeveloper7.data.models.general.BidModel;
 import com.sergeydeveloper7.taximanager.R;
 import com.sergeydeveloper7.taximanager.view.holders.customer.BidViewHolder;
 
@@ -17,12 +18,12 @@ import java.util.ArrayList;
 
 public class CustomerBidsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private Context           context;
-    private ArrayList<String> index;
+    private Context             context;
+    private ArrayList<BidModel> items;
 
-    public CustomerBidsAdapter(Context context, ArrayList<String> index) {
+    public CustomerBidsAdapter(Context context, ArrayList<BidModel> items) {
         this.context = context;
-        this.index = index;
+        this.items = items;
     }
 
     @Override
@@ -37,7 +38,7 @@ public class CustomerBidsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public int getItemCount() {
-        return this.index == null ? 0 : this.index.size();
+        return this.items == null ? 0 : this.items.size();
     }
 
 }

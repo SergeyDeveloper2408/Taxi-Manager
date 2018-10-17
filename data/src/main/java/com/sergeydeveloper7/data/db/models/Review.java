@@ -5,16 +5,9 @@ import io.realm.annotations.Required;
 
 public class Review extends RealmObject {
 
-    @Required
-    private int customersRating;
-
-    @Required
-    private int driversRating;
-
-    @Required
+    private int    customersRating;
+    private int    driversRating;
     private String customersReview;
-
-    @Required
     private String driversReview;
 
     public int getCustomersRating() {

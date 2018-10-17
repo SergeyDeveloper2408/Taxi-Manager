@@ -1,5 +1,6 @@
 package com.sergeydeveloper7.data.repository.basic.customer;
 
+import com.sergeydeveloper7.data.models.general.BidModel;
 import com.sergeydeveloper7.data.models.map.response.FindDirectionResponse;
 
 
@@ -8,4 +9,5 @@ import rx.Observable;
 
 public interface FindDirectionRepository {
     Observable<Response<FindDirectionResponse>> findDirection(String from, String to);
+    Observable<BidModel> addNewBid(BidModel bidModel);
 }

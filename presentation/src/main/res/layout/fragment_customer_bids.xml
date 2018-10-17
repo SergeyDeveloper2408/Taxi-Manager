@@ -43,17 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:textColor="@color/grayColor"
-        android:text="@string/customer_screen_title_no_bids"
-        android:visibility="gone"
-        />
-
-    <TextView
-        android:id="@+id/titleChooseTypeOfBids"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:textColor="@color/grayColor"
-        android:text="@string/customer_screen_title_no_bids"
+        android:text="@string/customer_screen_no_bids_choose"
         />
 
     <ProgressBar

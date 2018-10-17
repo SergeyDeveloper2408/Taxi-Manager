@@ -28,7 +28,7 @@ import butterknife.ButterKnife;
 
 public class CustomerProfileFragment extends Fragment {
 
-    private CustomerActivity  customerActivity;
+    private CustomerActivity  activity;
     private UserModel         user;
     private SharedPreferences sharedPreferences;
 
@@ -83,13 +83,14 @@ public class CustomerProfileFragment extends Fragment {
     private void initializeViews(){
 
         //TODO Need to refresh when use back action
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(customerActivity);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(activity);
         user = new Gson().fromJson(sharedPreferences.getString("user", null),
                 UserModel.class);
 
-        customerActivity.setToolbarTitle(getString(
+        activity.setToolbarTitle(getString(
                 R.string.customer_screen_navigation_menu_my_profile));
-        customerActivity.setNavigationActionMenu();
+        activity.setNavigationActionMenu();
+        activity.hideFloatingActionButton();
 
         customerProfileName.setText(!TextUtils.isEmpty(user.getUserName())
                 ? user.getUserName() : getString(R.string.no_data_error));
@@ -101,15 +102,12 @@ public class CustomerProfileFragment extends Fragment {
     }
 
     private void initializeComponents(){
-        customerActivity = (CustomerActivity) getActivity();
-        customerActivity.getApplicationComponent().inject(this);
+        activity = (CustomerActivity) getActivity();
+        activity.getApplicationComponent().inject(this);
     }
 
     private void startEditProfileScreen(){
-        navigator.startFragmentWithBackStack(customerActivity, new CustomerEditProfileFragment(),
+        navigator.startFragmentWithBackStack(activity, new CustomerEditProfileFragment(),
                 Const.CUSTOMER_EDIT_PROFILE_FRAGMENT_ID, R.id.customerFrame);
     }
-
-
-
 }
